@@ -27,27 +27,28 @@ export default function Hero() {
           transform: `translateY(${scrollY * 0.5}px)`,
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
+        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
       </div>
 
       <div className="relative h-full flex items-center justify-center text-center px-4">
+        <div className="absolute inset-0 bg-black/30"></div>
         <div className="relative max-w-5xl mx-auto z-10">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-8 drop-shadow-[0_6px_8px_rgba(0,0,0,0.6)]">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-8 drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]">
             Quit Your Life. Design One That Actually Fits.
           </h1>
-          <p className="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]">
+          <p className="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
             Leave the old life behind and build the next one with intention.
           </p>
-          <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <button
               onClick={() => scrollToSection('my-story')}
-              className="min-w-[180px] px-10 py-5 bg-orange-500 hover:bg-orange-600 text-white font-semibold text-lg rounded-lg transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl"
+              className="px-10 py-5 bg-orange-500 hover:bg-orange-600 text-white font-semibold text-lg rounded-lg transition-all transform hover:scale-105 shadow-xl"
             >
               Start Here
             </button>
             <button
               onClick={() => scrollToSection('work-with-me')}
-              className="min-w-[180px] px-10 py-5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-lg rounded-lg transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl"
+              className="px-10 py-5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-lg rounded-lg transition-all transform hover:scale-105 shadow-xl"
             >
               Take the Leap
             </button>
@@ -59,31 +60,6 @@ export default function Hero() {
         <div className="w-6 h-10 border-2 border-white rounded-full flex items-start justify-center p-2">
           <div className="w-1 h-3 bg-white rounded-full"></div>
         </div>
-      </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-24">
-        <svg
-          className="w-full h-full"
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient id="dividerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#10b981" stopOpacity="0.3" />
-              <stop offset="50%" stopColor="#f97316" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#10b981" stopOpacity="0.3" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M0,60 C360,100 720,20 1440,60 L1440,120 L0,120 Z"
-            fill="url(#dividerGradient)"
-          />
-          <path
-            d="M0,70 C360,110 720,30 1440,70 L1440,120 L0,120 Z"
-            fill="white"
-          />
-        </svg>
       </div>
     </section>
   );
