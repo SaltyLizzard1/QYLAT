@@ -35,7 +35,7 @@ export default function Hero() {
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
             Quit Your Life. Design One That Actually Fits.
           </h1>
-          <p className="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto leading-relaxed">
             Leave the old life behind and build the next one with intention.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
