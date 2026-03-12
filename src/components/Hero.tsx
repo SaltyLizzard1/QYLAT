@@ -32,7 +32,7 @@ export default function Hero() {
 
       <div className="relative h-full flex items-center justify-center text-center px-4">
         <div className="max-w-5xl mx-auto">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
             Quit Your Life. Design One That Actually Fits.
           </h1>
           <p className="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto">
