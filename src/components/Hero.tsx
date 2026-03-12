@@ -2,12 +2,18 @@ import { useEffect, useState } from 'react';
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
     window.addEventListener('scroll', handleScroll);
+
+    const img = new Image();
+    img.src = '/rowan-heuvel-FCQ150fAR3I-unsplash.jpg';
+    img.onload = () => setImageLoaded(true);
+
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -21,7 +27,9 @@ export default function Hero() {
   return (
     <section id="hero" className="relative h-screen overflow-hidden">
       <div
-        className="absolute inset-0 bg-cover bg-center"
+        className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ${
+          imageLoaded ? 'opacity-100' : 'opacity-0'
+        }`}
         style={{
           backgroundImage: 'url(/rowan-heuvel-FCQ150fAR3I-unsplash.jpg)',
           transform: `translateY(${scrollY * 0.5}px)`,
@@ -29,6 +37,10 @@ export default function Hero() {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
       </div>
+
+      {!imageLoaded && (
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 animate-pulse"></div>
+      )}
 
       <div className="relative h-full flex items-center justify-center text-center px-4">
         <div className="relative max-w-5xl mx-auto z-10">
