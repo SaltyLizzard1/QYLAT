@@ -1,6 +1,45 @@
 import { Check, X } from 'lucide-react';
+import { useState, useEffect } from 'react';
+
+declare global {
+  interface Window {
+    Calendly?: {
+      initPopupWidget: (options: { url: string }) => void;
+    };
+  }
+}
 
 export default function WorkWithMe() {
+  const [calendlyReady, setCalendlyReady] = useState(false);
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    script.onload = () => setCalendlyReady(true);
+    document.head.appendChild(script);
+
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://assets.calendly.com/assets/external/widget.css';
+    document.head.appendChild(link);
+
+    return () => {
+      document.head.removeChild(script);
+      document.head.removeChild(link);
+    };
+  }, []);
+
+  const openCalendly = () => {
+    if (calendlyReady && window.Calendly) {
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/ideatoplanincome/60min',
+      });
+    } else {
+      window.open('https://calendly.com/ideatoplanincome/60min', '_blank');
+    }
+  };
+
   const sessionFeatures = [
     'Identify the invisible blocks keeping you stuck',
     'Clarify what you actually want (not what you think you should want)',
@@ -9,17 +48,17 @@ export default function WorkWithMe() {
   ];
 
   const forYouIf = [
-    'You know something needs to change, but you don\'t know where to start',
-    'You\'ve been "waiting for the right time" for months (or years)',
-    'You\'re paralyzed by fear but ready to face it',
+    "You know something needs to change, but you don't know where to start",
+    "You've been \"waiting for the right time\" for months (or years)",
+    "You're paralyzed by fear but ready to face it",
     'You want someone to call you out and push you forward',
   ];
 
   const notForYouIf = [
-    'You\'re just browsing and not serious about making a change',
+    "You're just browsing and not serious about making a change",
     'You want someone to tell you what to do',
-    'You\'re looking for a magic pill or quick fix',
-    'You\'re not willing to be uncomfortable',
+    "You're looking for a magic pill or quick fix",
+    "You're not willing to be uncomfortable",
   ];
 
   return (
@@ -88,8 +127,12 @@ export default function WorkWithMe() {
           </div>
 
           <div className="text-center">
-            <p className="text-4xl font-bold text-emerald-900 mb-6">$97</p>
-            <button className="px-10 py-4 bg-orange-500 hover:bg-orange-600 text-white text-lg font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg">
+            <p className="text-4xl font-bold text-emerald-900 mb-2">$97</p>
+            <p className="text-gray-500 mb-6">60-minute private session</p>
+            <button
+              onClick={openCalendly}
+              className="px-10 py-4 bg-orange-500 hover:bg-orange-600 text-white text-lg font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg"
+            >
               Book Your Leap Session
             </button>
           </div>

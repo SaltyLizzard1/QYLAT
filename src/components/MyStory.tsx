@@ -1,13 +1,24 @@
+import SectionDivider from './SectionDivider';
+
 export default function MyStory() {
   return (
-    <section id="my-story" className="py-20 md:py-32 bg-white">
+    <section id="my-story" className="pt-16 pb-20 md:pb-32 bg-white scroll-mt-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-12 text-center">
           My Story
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-12 items-start">
-          <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-stretch">
+          <div className="w-full aspect-[3/4] min-h-0">
+            <img
+              src="/my-story-boat.png"
+              alt="Sunset on the water"
+              className="w-full h-full rounded-lg shadow-2xl object-cover"
+              loading="lazy"
+            />
+          </div>
+
+          <div className="min-h-0 flex flex-col justify-between gap-y-3 md:gap-y-4 prose prose-lg max-w-none text-gray-700 leading-relaxed [&_p]:mb-0 overflow-hidden">
             <p>
               In 2018, I quit my corporate job and bought a one-way ticket to Thailand — just to test
               the waters.
@@ -30,9 +41,7 @@ export default function MyStory() {
               The freedom. The new rhythm. The feeling of being truly alive. It confirmed everything
               I'd suspected. Humans weren't built to spend their lives in cubicles.
             </p>
-          </div>
 
-          <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6">
             <p>
               So I came back and sold everything. The house, the car, the clothes. Ready to make it
               permanent.
@@ -60,16 +69,8 @@ export default function MyStory() {
             <p className="text-2xl font-bold text-orange-600">This is it.</p>
           </div>
         </div>
-
-        <div className="mt-16">
-          <img
-            src="/rowan-heuvel-FCQ150fAR3I-unsplash.jpg"
-            alt="Misty mountain rice terraces"
-            className="w-full rounded-lg shadow-2xl"
-            loading="lazy"
-          />
-        </div>
       </div>
+      <SectionDivider bottomFill="#ffffff" />
     </section>
   );
 }

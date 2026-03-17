@@ -11,7 +11,7 @@ export default function Hero() {
     window.addEventListener('scroll', handleScroll);
 
     const img = new Image();
-    img.src = '/rowan-heuvel-FCQ150fAR3I-unsplash.jpg';
+    img.src = '/hero-mistymountains.png';
     img.onload = () => setImageLoaded(true);
 
     return () => window.removeEventListener('scroll', handleScroll);
@@ -31,7 +31,7 @@ export default function Hero() {
           imageLoaded ? 'opacity-100' : 'opacity-0'
         }`}
         style={{
-          backgroundImage: 'url(/rowan-heuvel-FCQ150fAR3I-unsplash.jpg)',
+          backgroundImage: 'url(/hero-mistymountains.png)',
           transform: `translateY(${scrollY * 0.5}px)`,
         }}
       >
@@ -39,7 +39,7 @@ export default function Hero() {
       </div>
 
       {!imageLoaded && (
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 animate-pulse"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900" />
       )}
 
       <div className="relative h-full flex items-center justify-center text-center px-4">
@@ -71,31 +71,6 @@ export default function Hero() {
         <div className="w-6 h-10 border-2 border-white rounded-full flex items-start justify-center p-2">
           <div className="w-1 h-3 bg-white rounded-full"></div>
         </div>
-      </div>
-
-      <div className="absolute bottom-0 left-0 right-0 h-24">
-        <svg
-          className="w-full h-full"
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <defs>
-            <linearGradient id="dividerGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#10b981" stopOpacity="0.3" />
-              <stop offset="50%" stopColor="#f97316" stopOpacity="0.3" />
-              <stop offset="100%" stopColor="#10b981" stopOpacity="0.3" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M0,60 C360,100 720,20 1440,60 L1440,120 L0,120 Z"
-            fill="url(#dividerGradient)"
-          />
-          <path
-            d="M0,70 C360,110 720,30 1440,70 L1440,120 L0,120 Z"
-            fill="white"
-          />
-        </svg>
       </div>
     </section>
   );
