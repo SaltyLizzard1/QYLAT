@@ -23,10 +23,10 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-[100dvh] min-h-screen overflow-hidden"
+      className="relative min-h-[100dvh] min-h-screen overflow-x-hidden"
     >
       <div
-        className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ${
+        className={`pointer-events-none absolute inset-0 bg-cover bg-center transition-opacity duration-700 ${
           imageLoaded ? 'opacity-100' : 'opacity-0'
         }`}
         style={{
@@ -34,31 +34,33 @@ export default function Hero() {
           transform: `translateY(${scrollY * 0.5}px)`,
         }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/45 via-black/35 to-black/55" />
       </div>
 
       {!imageLoaded && (
         <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900" />
       )}
 
-      <div className="relative h-full flex items-center justify-center text-center px-4">
-        <div className="relative max-w-5xl mx-auto z-10">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-8 drop-shadow-[0_6px_8px_rgba(0,0,0,0.6)]">
+      <div className="relative z-10 mx-auto flex min-h-[100dvh] min-h-screen w-full max-w-[100vw] flex-col items-center justify-center px-4 pt-24 pb-28 sm:px-8 sm:pt-28 sm:pb-32 md:px-10 md:pt-32 lg:px-14 lg:pt-36">
+        <div className="w-full max-w-5xl text-center">
+          <h1 className="text-[1.9rem] leading-[1.12] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-5 sm:mb-6 md:mb-8 drop-shadow-[0_4px_14px_rgba(0,0,0,0.55)]">
             Quit Your Life. Design One That Actually Fits.
           </h1>
-          <p className="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto leading-relaxed drop-shadow-[0_4px_6px_rgba(0,0,0,0.5)]">
+          <p className="mx-auto mb-6 max-w-3xl text-lg sm:text-xl md:text-2xl lg:text-[1.65rem] xl:text-3xl leading-relaxed text-white/95 drop-shadow-[0_3px_10px_rgba(0,0,0,0.45)]">
             Leave the old life behind and build the next one with intention.
           </p>
-          <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
+          <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
             <button
+              type="button"
               onClick={() => scrollToSection('my-story')}
-              className="min-w-[180px] px-10 py-5 bg-orange-500 hover:bg-orange-600 text-white font-semibold text-lg rounded-lg transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl"
+              className="w-full rounded-xl bg-orange-500 px-8 py-3.5 text-base font-semibold text-white shadow-xl transition-transform hover:scale-[1.02] hover:bg-orange-600 hover:shadow-2xl sm:w-auto sm:min-w-[11rem] sm:px-10 sm:py-4 sm:text-lg"
             >
               Start Here
             </button>
             <button
+              type="button"
               onClick={() => scrollToSection('work-with-me')}
-              className="min-w-[180px] px-10 py-5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-lg rounded-lg transition-all transform hover:scale-105 shadow-xl hover:shadow-2xl"
+              className="w-full rounded-xl bg-emerald-600 px-8 py-3.5 text-base font-semibold text-white shadow-xl transition-transform hover:scale-[1.02] hover:bg-emerald-700 hover:shadow-2xl sm:w-auto sm:min-w-[11rem] sm:px-10 sm:py-4 sm:text-lg"
             >
               Take the Leap
             </button>
@@ -66,9 +68,11 @@ export default function Hero() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-white rounded-full flex items-start justify-center p-2">
-          <div className="w-1 h-3 bg-white rounded-full"></div>
+      <div className="pointer-events-none absolute bottom-5 left-1/2 z-10 -translate-x-1/2 sm:bottom-7">
+        <div className="animate-bounce">
+          <div className="flex h-10 w-6 items-start justify-center rounded-full border-2 border-white/90 p-2 shadow-lg">
+            <div className="h-3 w-1 rounded-full bg-white" />
+          </div>
         </div>
       </div>
     </section>
