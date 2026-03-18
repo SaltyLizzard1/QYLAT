@@ -72,7 +72,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => scrollToSection('hero')}
-            className="flex items-center gap-2.5 sm:gap-3 md:gap-4 min-w-0 flex-1 text-left rounded-lg py-1 pr-2 -ml-0.5 hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#92A882] max-w-[calc(100%-3.5rem)] sm:max-w-none"
+            className="flex items-center gap-2.5 sm:gap-3 md:gap-4 min-w-0 flex-none text-left rounded-lg py-1 pr-2 -ml-0.5 hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#92A882] max-w-none sm:max-w-none"
             aria-label="QLT — Home"
           >
             <img

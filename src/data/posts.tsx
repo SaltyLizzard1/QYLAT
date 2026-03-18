@@ -86,7 +86,7 @@ export const posts: Post[] = [
     date: 'March 14, 2026',
     excerpt:
       "Why at 54 I'm quitting the autopilot life. The moment I knew I couldn't keep staring out the window pretending everything was fine. This is where it starts — raw, unfiltered, and terrifying.",
-    image: '/images/rice-fields.jpg',
+    image: '/hero-mistymountains.png',
   },
   {
     id: 3,
@@ -95,7 +95,7 @@ export const posts: Post[] = [
     date: 'March 15, 2026',
     excerpt:
       "I've been here before. Standing at the edge. Heart pounding. Every logical voice in my head screaming to step back. I jumped anyway. That was 2018.",
-    image: '/images/rice-fields.jpg',
+    image: '/hero-mistymountains.png',
     content: () => (
       <div className="prose prose-lg max-w-none">
         <p className="text-xl italic text-gray-700">I've been here before.</p>
