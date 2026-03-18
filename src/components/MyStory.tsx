@@ -2,23 +2,23 @@ import SectionDivider from './SectionDivider';
 
 export default function MyStory() {
   return (
-    <section id="my-story" className="pt-16 pb-20 md:pt-20 md:pb-28 bg-white">
+    <section id="my-story" className="py-20 md:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-12 text-center">
           My Story
         </h2>
 
-        <div className="grid md:grid-cols-2 gap-10 md:gap-14 md:items-start">
-          <div className="w-full aspect-[3/4] shrink-0 md:sticky md:top-28">
+        <div className="grid md:grid-cols-2 gap-10 md:gap-14 items-start">
+          <div className="w-full md:max-w-md">
             <img
               src="/my-story-boat.png"
               alt="Sunset on the water"
-              className="w-full h-full rounded-lg shadow-2xl object-cover"
+              className="w-full rounded-lg shadow-2xl object-cover aspect-[3/4]"
               loading="lazy"
             />
           </div>
 
-          <div className="flex flex-col gap-y-4 md:gap-y-5 prose prose-lg max-w-none text-gray-700 leading-relaxed [&_p]:mb-0">
+          <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed space-y-6">
             <p>
               In 2018, I quit my corporate job and bought a one-way ticket to Thailand — just to test
               the waters.

@@ -64,7 +64,7 @@ export default function WorkWithMe() {
   return (
     <section
       id="work-with-me"
-      className="relative z-10 -mt-10 md:-mt-14 lg:-mt-16 rounded-t-[1.75rem] md:rounded-t-[2.25rem] bg-gradient-to-b from-emerald-50 to-white pt-8 md:pt-10 pb-8 md:pb-12 shadow-[0_-12px_40px_-8px_rgba(0,0,0,0.12)]"
+      className="py-20 md:py-32 bg-gradient-to-b from-emerald-50 to-white"
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-emerald-900 mb-3 md:mb-4 text-center leading-tight">

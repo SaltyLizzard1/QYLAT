@@ -16,7 +16,6 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
 
-  /* Keep CSS scroll-padding in sync for hash links & keyboard focus */
   useLayoutEffect(() => {
     const el = headerRef.current;
     if (!el) return;
@@ -51,7 +50,16 @@ export default function Header() {
   };
 
   const headerBg = 'bg-[#92A882]';
-  const navColor = 'text-white hover:text-white hover:bg-white/15';
+  const navPill =
+    'rounded-full px-4 py-2.5 xl:px-5 xl:py-3 font-bold text-sm xl:text-[0.95rem] whitespace-nowrap ' +
+    'bg-gradient-to-b from-[#f8faf6] to-[#e2ead8] text-[#1a4d3a] border-2 border-white/95 ' +
+    'shadow-md shadow-black/10 hover:from-white hover:to-[#f0f5ec] hover:border-amber-300/90 ' +
+    'hover:text-[#0d3d2e] hover:shadow-lg active:scale-[0.98] transition-all duration-200';
+
+  const navPillMobile =
+    'w-full text-center rounded-full px-5 py-3 font-bold text-base ' +
+    'bg-gradient-to-b from-[#f8faf6] to-[#e2ead8] text-[#1a4d3a] border-2 border-white/95 ' +
+    'shadow-md hover:from-white hover:to-[#f0f5ec] hover:border-amber-300/90 transition-all';
 
   return (
     <header
@@ -70,15 +78,15 @@ export default function Header() {
             <img
               src={LOGO_SRC}
               alt=""
-              className="h-[56px] w-auto sm:h-[70px] md:h-[82px] lg:h-[96px] shrink-0 object-contain object-left"
-              height={96}
+              className="h-[70px] w-auto sm:h-[86px] md:h-[100px] lg:h-[116px] shrink-0 object-contain object-left"
+              height={116}
               decoding="async"
             />
             <span className="min-w-0 text-left border-l-2 border-white/40 pl-2 sm:pl-3 md:pl-4">
-              <span className="block text-[11px] sm:text-sm md:text-base lg:text-lg font-bold text-white leading-snug tracking-wide drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]">
+              <span className="block text-sm sm:text-base md:text-lg lg:text-xl font-bold text-white leading-snug tracking-wide drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]">
                 Quit Your Life
               </span>
-              <span className="block text-[11px] sm:text-sm md:text-base lg:text-lg font-semibold text-emerald-50 leading-snug tracking-wide drop-shadow mt-px">
+              <span className="block text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-emerald-50 leading-snug tracking-wide drop-shadow mt-px">
                 and Travel
               </span>
             </span>
@@ -90,20 +98,20 @@ export default function Header() {
                 key={label}
                 type="button"
                 onClick={() => scrollToSection(id)}
-                className={`px-4 py-2 rounded-lg transition-all duration-200 font-semibold text-base whitespace-nowrap ${navColor}`}
+                className={navPill}
               >
                 {label}
               </button>
             ))}
           </nav>
 
-          <nav className="hidden md:flex lg:hidden items-center justify-end gap-1.5 flex-1 min-w-0 flex-wrap">
+          <nav className="hidden md:flex lg:hidden items-center justify-end gap-2 flex-1 min-w-0 flex-wrap">
             {NAV.map(({ label, id }) => (
               <button
                 key={label}
                 type="button"
                 onClick={() => scrollToSection(id)}
-                className={`px-4 py-2 rounded-lg transition-all duration-200 font-semibold text-base whitespace-nowrap ${navColor}`}
+                className={navPill}
               >
                 {label}
               </button>
@@ -129,7 +137,7 @@ export default function Header() {
                 key={label}
                 type="button"
                 onClick={() => scrollToSection(id)}
-                className={`w-full text-left px-4 py-2 rounded-lg transition-all duration-200 font-semibold text-base whitespace-nowrap ${navColor}`}
+                className={navPillMobile}
               >
                 {label}
               </button>
