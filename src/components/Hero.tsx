@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { scrollToSectionById } from '../utils/scrollToSection';
 
 export default function Hero() {
   const [scrollY, setScrollY] = useState(0);
@@ -17,15 +18,13 @@ export default function Hero() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const scrollToSection = (id: string) => scrollToSectionById(id);
 
   return (
-    <section id="hero" className="relative h-screen overflow-hidden">
+    <section
+      id="hero"
+      className="relative min-h-[100dvh] min-h-screen overflow-hidden"
+    >
       <div
         className={`absolute inset-0 bg-cover bg-center transition-opacity duration-700 ${
           imageLoaded ? 'opacity-100' : 'opacity-0'

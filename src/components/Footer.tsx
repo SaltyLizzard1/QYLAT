@@ -1,5 +1,6 @@
 import { Instagram, Send, Mail } from 'lucide-react';
 import { useState } from 'react';
+import { scrollToSectionById } from '../utils/scrollToSection';
 
 export default function Footer() {
   const [email, setEmail] = useState('');
@@ -10,12 +11,7 @@ export default function Footer() {
     setEmail('');
   };
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const scrollToSection = (id: string) => scrollToSectionById(id);
 
   return (
     <footer className="bg-emerald-900 text-white py-16">

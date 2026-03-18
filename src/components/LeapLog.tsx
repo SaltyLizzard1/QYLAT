@@ -1,29 +1,25 @@
 import SectionDivider from './SectionDivider';
 import { posts } from '../data/posts';
+import { scrollToSectionById } from '../utils/scrollToSection';
 
 export default function LeapLog() {
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const scrollToSection = (id: string) => scrollToSectionById(id);
 
   return (
     <section
       id="the-leap-log"
-      className="pt-16 md:pt-28 pb-12 md:pb-20 bg-gradient-to-b from-gray-50 to-white scroll-mt-24"
+      className="pt-10 pb-14 md:pt-8 md:pb-20 bg-gradient-to-b from-white to-gray-50/80"
     >
-      {/* Intro */}
-      <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16 px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl md:text-5xl font-bold text-emerald-900">
+      {/* Intro — spacing aligned with Work With Me (h2 → mb-6, body gap) */}
+      <div className="max-w-3xl mx-auto text-center mb-8 md:mb-12 px-4 sm:px-6 lg:px-8">
+        <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-6">
           The Leap Log
         </h2>
-        <p className="mt-4 text-lg md:text-xl text-gray-600 leading-relaxed">
+        <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
           Raw dispatches from the edge — fear, breakthroughs, Thailand realities.
           Not polished postcards; real reinvention in progress.
         </p>
-        <p className="mt-6 text-base md:text-lg italic text-gray-500">
+        <p className="mt-8 text-base md:text-lg italic text-gray-500">
           If my leap pulls at you, let's build yours.{' '}
           <button
             onClick={() => scrollToSection('idea-to-plan')}

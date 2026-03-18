@@ -62,19 +62,22 @@ export default function WorkWithMe() {
   ];
 
   return (
-    <section id="work-with-me" className="py-20 md:py-32 bg-gradient-to-b from-emerald-50 to-white">
+    <section
+      id="work-with-me"
+      className="relative z-10 -mt-10 md:-mt-14 lg:-mt-16 rounded-t-[1.75rem] md:rounded-t-[2.25rem] bg-gradient-to-b from-emerald-50 to-white pt-8 md:pt-10 pb-8 md:pb-12 shadow-[0_-12px_40px_-8px_rgba(0,0,0,0.12)]"
+    >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-6 text-center">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-emerald-900 mb-3 md:mb-4 text-center leading-tight">
           Ready to Stop Waiting and Start Moving?
         </h2>
 
-        <p className="text-xl text-gray-700 mb-12 text-center max-w-3xl mx-auto leading-relaxed">
+        <p className="text-lg md:text-xl text-gray-700 mb-5 md:mb-6 text-center max-w-3xl mx-auto leading-relaxed">
           You already know something has to change. You're not burned out. You're not lazy. You're
           just done pretending...
         </p>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-12">
-          <h3 className="text-3xl font-bold text-emerald-800 mb-6">The Leap Session</h3>
+        <div className="bg-white rounded-2xl shadow-xl p-6 md:p-10 mb-8 md:mb-10">
+          <h3 className="text-2xl md:text-3xl font-bold text-emerald-800 mb-4">The Leap Session</h3>
 
           <p className="text-lg text-gray-700 mb-8">
             A 60-minute private coaching call designed to cut through the fog and get you moving.

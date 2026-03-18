@@ -5,6 +5,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Live height from Header; mobile buffer larger in JS */
+    scroll-padding-top: var(--header-scroll-padding, 120px);
   }
 
   body {
