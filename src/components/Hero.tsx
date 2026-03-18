@@ -41,12 +41,12 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900" />
       )}
 
-      <div className="relative z-10 mx-auto flex min-h-[100dvh] min-h-screen w-full max-w-[100vw] flex-col items-center justify-center px-4 pt-24 pb-28 sm:px-8 sm:pt-28 sm:pb-32 md:px-10 md:pt-32 lg:px-14 lg:pt-36">
+      <div className="relative z-10 mx-auto flex min-h-[100dvh] min-h-screen w-full max-w-[100vw] flex-col items-center justify-center px-4 pt-16 pb-16 sm:px-8 sm:pt-20 sm:pb-20 md:px-10 md:pt-16 lg:px-14 lg:pt-16">
         <div className="w-full max-w-5xl text-center">
-          <h1 className="text-[1.9rem] leading-[1.12] sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white mb-5 sm:mb-6 md:mb-8 drop-shadow-[0_4px_14px_rgba(0,0,0,0.55)]">
+          <h1 className="text-[1.9rem] leading-[1.12] sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-bold text-white mb-5 sm:mb-6 md:mb-8 drop-shadow-[0_4px_14px_rgba(0,0,0,0.55)]">
             Quit Your Life. Design One That Actually Fits.
           </h1>
-          <p className="mx-auto mb-6 max-w-3xl text-lg sm:text-xl md:text-2xl lg:text-[1.65rem] xl:text-3xl leading-relaxed text-white/95 drop-shadow-[0_3px_10px_rgba(0,0,0,0.45)]">
+          <p className="mx-auto mb-6 max-w-3xl text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-2xl leading-relaxed text-white/95 drop-shadow-[0_3px_10px_rgba(0,0,0,0.45)]">
             Leave the old life behind and build the next one with intention.
           </p>
           <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">

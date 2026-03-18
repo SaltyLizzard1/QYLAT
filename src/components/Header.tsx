@@ -12,27 +12,6 @@ const NAV = [
   { label: 'My Story', id: 'my-story' },
 ] as const;
 
-const navPillLg =
-  'rounded-full px-4 py-2.5 lg:px-5 text-[13px] lg:text-sm font-semibold tracking-wide ' +
-  'bg-gradient-to-b from-[#f4faf1] via-[#e8f2e3] to-[#dce8d6] text-[#145042] ' +
-  'border-2 border-[#a8c99a]/90 shadow-[0_2px_10px_rgba(46,90,65,0.14)] ' +
-  'hover:from-[#fffbf5] hover:via-[#fff4e6] hover:to-[#ffe8d4] hover:text-[#9a3412] ' +
-  'hover:border-[#f6ad55] hover:shadow-[0_6px_20px_rgba(234,120,40,0.2)] ' +
-  'hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200';
-
-const navPillMd =
-  'rounded-full px-2.5 py-2 text-[11px] font-semibold tracking-wide ' +
-  'bg-gradient-to-b from-[#f4faf1] to-[#dce8d6] text-[#145042] border border-[#a8c99a] ' +
-  'shadow-sm hover:from-[#fff8f0] hover:to-[#ffe4cc] hover:text-[#9a3412] hover:border-[#f6ad55] ' +
-  'transition-all duration-200';
-
-const navPillMobile =
-  'text-left rounded-2xl py-3.5 px-4 font-semibold tracking-wide ' +
-  'bg-gradient-to-r from-[#f4faf1] to-[#e0ebd8] text-[#145042] ' +
-  'border-2 border-[#a8c99a]/80 shadow-md ' +
-  'hover:from-[#fffaf3] hover:to-[#ffe8d4] hover:text-[#9a3412] hover:border-[#f6ad55] ' +
-  'hover:shadow-lg transition-all duration-200';
-
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
@@ -72,6 +51,7 @@ export default function Header() {
   };
 
   const headerBg = 'bg-[#92A882]';
+  const navColor = 'text-white hover:text-white hover:bg-white/15';
 
   return (
     <header
@@ -106,7 +86,12 @@ export default function Header() {
 
           <nav className="hidden lg:flex items-center justify-end gap-2 xl:gap-2.5 flex-1 min-w-0 flex-wrap">
             {NAV.map(({ label, id }) => (
-              <button key={label} type="button" onClick={() => scrollToSection(id)} className={navPillLg}>
+              <button
+                key={label}
+                type="button"
+                onClick={() => scrollToSection(id)}
+                className={`px-4 py-2 rounded-lg transition-all duration-200 font-semibold text-base whitespace-nowrap ${navColor}`}
+              >
                 {label}
               </button>
             ))}
@@ -114,7 +99,12 @@ export default function Header() {
 
           <nav className="hidden md:flex lg:hidden items-center justify-end gap-1.5 flex-1 min-w-0 flex-wrap">
             {NAV.map(({ label, id }) => (
-              <button key={label} type="button" onClick={() => scrollToSection(id)} className={navPillMd}>
+              <button
+                key={label}
+                type="button"
+                onClick={() => scrollToSection(id)}
+                className={`px-4 py-2 rounded-lg transition-all duration-200 font-semibold text-base whitespace-nowrap ${navColor}`}
+              >
                 {label}
               </button>
             ))}
@@ -135,7 +125,12 @@ export default function Header() {
         <div className={`md:hidden border-t border-[#7a8f6c]/60 animate-fade-in ${headerBg} shadow-inner`}>
           <nav className="flex flex-col gap-2.5 px-4 py-4">
             {NAV.map(({ label, id }) => (
-              <button key={label} type="button" onClick={() => scrollToSection(id)} className={navPillMobile}>
+              <button
+                key={label}
+                type="button"
+                onClick={() => scrollToSection(id)}
+                className={`w-full text-left px-4 py-2 rounded-lg transition-all duration-200 font-semibold text-base whitespace-nowrap ${navColor}`}
+              >
                 {label}
               </button>
             ))}
