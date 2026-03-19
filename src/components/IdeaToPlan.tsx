@@ -17,6 +17,7 @@ type FormData = {
   planGoal: string;
   planType: string;
   timeline: string;
+  expedited24h: boolean;
 };
 
 type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
@@ -35,7 +36,32 @@ const initialForm: FormData = {
   planGoal: '',
   planType: 'standard',
   timeline: '',
+  expedited24h: false,
 };
+
+const PLAN_OPTIONS = [
+  {
+    value: 'standard',
+    title: 'Standard Plan',
+    price: '$149',
+    description:
+      'Full business plan PDF: market fit, revenue model, 90-day actions, and marketing basics. Ideal when you need a solid roadmap without extra research layers.',
+  },
+  {
+    value: 'competitor',
+    title: 'Competitor Research Enhanced',
+    price: '$399',
+    description:
+      'Everything in Standard plus deeper competitor and positioning analysis—who else is solving this, how you stand out, and clearer differentiation for pitches or strategy.',
+  },
+  {
+    value: 'visa-ready',
+    title: 'Visa-Ready / Immigration-Compliant',
+    price: '$599',
+    description:
+      'Plan structured for visa and immigration contexts: business narrative, viability framing, and language aligned with what officers and advisors typically expect.',
+  },
+] as const;
 
 export default function IdeaToPlan() {
   const [showForm, setShowForm] = useState(false);
@@ -64,7 +90,12 @@ export default function IdeaToPlan() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    const t = e.target;
+    if (t.type === 'checkbox' && 'checked' in t) {
+      setForm((prev) => ({ ...prev, [t.name]: (t as HTMLInputElement).checked }));
+      return;
+    }
+    setForm((prev) => ({ ...prev, [t.name]: t.value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -139,8 +170,8 @@ export default function IdeaToPlan() {
             </ul>
 
             <div className="text-center">
-              <p className="text-3xl font-bold text-emerald-900 mb-2">$149 – $199</p>
-              <p className="text-gray-600 mb-6">Based on complexity</p>
+              <p className="text-3xl font-bold text-emerald-900 mb-2">$149 – $599</p>
+              <p className="text-gray-600 mb-6">Standard, competitor research, or visa-ready</p>
               <button
                 onClick={() => setShowForm(true)}
                 className="px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg"
@@ -157,7 +188,7 @@ export default function IdeaToPlan() {
           className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
           onClick={(e) => { if (e.target === e.currentTarget) closeForm(); }}
         >
-          <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+          <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col">
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
               <div>
                 <h3 className="text-lg font-bold text-emerald-900">Tell Me About Your Idea</h3>
@@ -276,34 +307,61 @@ export default function IdeaToPlan() {
                       </div>
                     </div>
 
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-1">When do you need this? <span className="text-red-500">*</span></label>
-                        <select name="timeline" value={form.timeline} onChange={handleChange} required
-                          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition bg-white">
-                          <option value="">Select timeline...</option>
-                          <option value="asap">ASAP — within days</option>
-                          <option value="1week">Within a week</option>
-                          <option value="2weeks">Within 2 weeks</option>
-                          <option value="flexible">Flexible</option>
-                        </select>
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">When do you need this? <span className="text-red-500">*</span></label>
+                      <select name="timeline" value={form.timeline} onChange={handleChange} required
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition bg-white">
+                        <option value="">Select timeline...</option>
+                        <option value="asap">ASAP — within days</option>
+                        <option value="1week">Within a week</option>
+                        <option value="2weeks">Within 2 weeks</option>
+                        <option value="flexible">Flexible</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">Plan type <span className="text-red-500">*</span></label>
+                      <p className="text-xs text-gray-500 mb-3">Choose the depth that matches your goal. Invoiced after we confirm scope.</p>
+                      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        {PLAN_OPTIONS.map((opt) => (
+                          <label
+                            key={opt.value}
+                            className={`flex flex-col cursor-pointer border-2 rounded-xl p-4 text-left transition-all h-full ${form.planType === opt.value ? 'border-emerald-500 bg-emerald-50 ring-1 ring-emerald-500/30' : 'border-gray-200 hover:border-emerald-300 bg-white'}`}
+                          >
+                            <input
+                              type="radio"
+                              name="planType"
+                              value={opt.value}
+                              checked={form.planType === opt.value}
+                              onChange={handleChange}
+                              className="sr-only"
+                            />
+                            <span className="font-bold text-gray-900 text-sm leading-tight">{opt.title}</span>
+                            <span className="text-emerald-700 font-bold text-lg mt-1">{opt.price}</span>
+                            <p className="text-xs text-gray-600 mt-2 leading-relaxed flex-1">{opt.description}</p>
+                          </label>
+                        ))}
                       </div>
-                      <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-2">Plan type <span className="text-red-500">*</span></label>
-                        <div className="flex gap-3">
-                          {[
-                            { value: 'standard', label: 'Standard', price: '$149' },
-                            { value: 'visa-ready', label: 'Visa-Ready', price: '$199' },
-                          ].map((opt) => (
-                            <label key={opt.value}
-                              className={`flex-1 flex flex-col cursor-pointer border-2 rounded-xl p-3 transition-all ${form.planType === opt.value ? 'border-emerald-500 bg-emerald-50' : 'border-gray-200 hover:border-emerald-300'}`}>
-                              <input type="radio" name="planType" value={opt.value} checked={form.planType === opt.value} onChange={handleChange} className="sr-only" />
-                              <span className="font-bold text-gray-900 text-sm">{opt.label}</span>
-                              <span className="text-emerald-700 font-semibold text-sm">{opt.price}</span>
-                            </label>
-                          ))}
+                    </div>
+
+                    <div>
+                      <label
+                        className={`flex gap-3 cursor-pointer border-2 rounded-xl p-4 transition-all ${form.expedited24h ? 'border-amber-400 bg-amber-50/60' : 'border-gray-200 hover:border-amber-300 bg-white'}`}
+                      >
+                        <input
+                          type="checkbox"
+                          name="expedited24h"
+                          checked={form.expedited24h}
+                          onChange={handleChange}
+                          className="mt-1 h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                        />
+                        <div>
+                          <span className="font-semibold text-gray-900 text-sm">Add-on: Expedited 24-hour turnaround</span>
+                          <p className="text-xs text-gray-600 mt-1 leading-relaxed">
+                            Jump the queue—your completed plan delivered within 24 hours of payment confirmation, when capacity allows. I&apos;ll confirm availability when I reply.
+                          </p>
                         </div>
-                      </div>
+                      </label>
                     </div>
 
                     <button type="submit" disabled={status === 'loading'}
