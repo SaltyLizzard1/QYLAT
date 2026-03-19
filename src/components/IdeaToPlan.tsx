@@ -1,7 +1,7 @@
 import { Lightbulb, FileText, Rocket, X, CheckCircle, AlertCircle, Loader } from 'lucide-react';
 import { useState } from 'react';
 
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxloAp-LZrAhN_Q5XjNExsTE60zM94k3Gs9JWIHVGmw2pisz6exSUBFSL4SWm-Poy9t/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKhnx_FQFN0zE7QSfUjmP5QkFLHy0aeigCp9MWD5u6Rx3HvS_XJRhAoFinIwJujq32/exec';
 
 type FormData = {
   fullName: string;
@@ -16,8 +16,7 @@ type FormData = {
   budget: string;
   planGoal: string;
   planType: string;
-  timeline: string;
-  expedited24h: boolean;
+  expedited24h: string;
 };
 
 type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
@@ -35,8 +34,7 @@ const initialForm: FormData = {
   budget: '',
   planGoal: '',
   planType: 'standard',
-  timeline: '',
-  expedited24h: false,
+  expedited24h: 'no',
 };
 
 const PLAN_OPTIONS = [
@@ -92,7 +90,7 @@ export default function IdeaToPlan() {
   ) => {
     const t = e.target;
     if (t.type === 'checkbox' && 'checked' in t) {
-      setForm((prev) => ({ ...prev, [t.name]: (t as HTMLInputElement).checked }));
+      setForm((prev) => ({ ...prev, [t.name]: (t as HTMLInputElement).checked ? 'yes' : 'no' }));
       return;
     }
     setForm((prev) => ({ ...prev, [t.name]: t.value }));
@@ -102,6 +100,7 @@ export default function IdeaToPlan() {
     e.preventDefault();
     setStatus('loading');
     setErrorMsg('');
+    console.log('Submitting:', JSON.stringify(form));
 
     try {
       await fetch(APPS_SCRIPT_URL, {
@@ -308,18 +307,6 @@ export default function IdeaToPlan() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1">When do you need this? <span className="text-red-500">*</span></label>
-                      <select name="timeline" value={form.timeline} onChange={handleChange} required
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition bg-white">
-                        <option value="">Select timeline...</option>
-                        <option value="asap">ASAP — within days</option>
-                        <option value="1week">Within a week</option>
-                        <option value="2weeks">Within 2 weeks</option>
-                        <option value="flexible">Flexible</option>
-                      </select>
-                    </div>
-
-                    <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">Plan type <span className="text-red-500">*</span></label>
                       <p className="text-xs text-gray-500 mb-3">Choose the depth that matches your goal. Invoiced after we confirm scope.</p>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -345,23 +332,18 @@ export default function IdeaToPlan() {
                     </div>
 
                     <div>
-                      <label
-                        className={`flex gap-3 cursor-pointer border-2 rounded-xl p-4 transition-all ${form.expedited24h ? 'border-amber-400 bg-amber-50/60' : 'border-gray-200 hover:border-amber-300 bg-white'}`}
-                      >
-                        <input
-                          type="checkbox"
-                          name="expedited24h"
-                          checked={form.expedited24h}
-                          onChange={handleChange}
-                          className="mt-1 h-4 w-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
-                        />
-                        <div>
-                          <span className="font-semibold text-gray-900 text-sm">Add-on: Expedited 24-hour turnaround</span>
-                          <p className="text-xs text-gray-600 mt-1 leading-relaxed">
-                            Jump the queue—your completed plan delivered within 24 hours of payment confirmation, when capacity allows. I&apos;ll confirm availability when I reply.
-                          </p>
-                        </div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">
+                        Rush delivery? <span className="text-gray-400 font-normal">(+$100)</span>
                       </label>
+                      <select
+                        name="expedited24h"
+                        value={form.expedited24h}
+                        onChange={handleChange}
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition bg-white"
+                      >
+                        <option value="no">No — standard turnaround (72 hours)</option>
+                        <option value="yes">Yes — rush delivery (24 hours, +$100)</option>
+                      </select>
                     </div>
 
                     <button type="submit" disabled={status === 'loading'}
