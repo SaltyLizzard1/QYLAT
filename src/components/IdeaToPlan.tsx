@@ -1,7 +1,7 @@
 import { Lightbulb, FileText, Rocket, X, CheckCircle, AlertCircle, Loader } from 'lucide-react';
 import { useState } from 'react';
 
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKhnx_FQFN0zE7QSfUjmP5QkFLHy0aeigCp9MWD5u6Rx3HvS_XJRhAoFinIwJujq32/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyKYlcau9zr2-WnicGANWbxfJ01X0MeDsf_UsO0XCovSI7pYfJRixMp2-koVx8RJrh7/exec';
 
 type FormData = {
   fullName: string;
@@ -33,28 +33,28 @@ const initialForm: FormData = {
   differentiation: '',
   budget: '',
   planGoal: '',
-  planType: 'standard',
+  planType: 'Starter',
   expedited24h: 'no',
 };
 
 const PLAN_OPTIONS = [
   {
-    value: 'standard',
-    title: 'Standard Plan',
-    price: '$149',
+    value: 'Starter',
+    title: 'Starter',
+    price: '$199',
     description:
       'Full business plan PDF: market fit, revenue model, 90-day actions, and marketing basics. Ideal when you need a solid roadmap without extra research layers.',
   },
   {
-    value: 'competitor',
-    title: 'Competitor Research Enhanced',
-    price: '$399',
+    value: 'Growth',
+    title: 'Growth',
+    price: '$349',
     description:
-      'Everything in Standard plus deeper competitor and positioning analysis—who else is solving this, how you stand out, and clearer differentiation for pitches or strategy.',
+      'Everything in Starter plus deeper competitor and positioning analysis—who else is solving this, how you stand out, and clearer differentiation for pitches or strategy.',
   },
   {
-    value: 'visa-ready',
-    title: 'Visa-Ready / Immigration-Compliant',
+    value: 'Visa / Investor',
+    title: 'Visa / Investor',
     price: '$599',
     description:
       'Plan structured for visa and immigration contexts: business narrative, viability framing, and language aligned with what officers and advisors typically expect.',
@@ -71,17 +71,18 @@ export default function IdeaToPlan() {
     {
       icon: Lightbulb,
       title: 'Share Your Idea',
-      description: 'Fill out a simple intake form about your business concept and goals',
+      description: 'Tell us your idea and goals in a quick, straightforward form',
     },
     {
       icon: FileText,
       title: 'AI-Assisted Planning',
-      description: 'We use cutting-edge AI tools to build a comprehensive business plan',
+      description: 'We guide the AI to craft a tailored, actionable plan that fits your vision',
     },
     {
       icon: Rocket,
       title: 'Get Your Plan',
-      description: 'Receive a polished PDF plan within 72 hours, ready to execute',
+      description:
+        "Get your polished, ready-to-use PDF plan in 72 hours—or faster if you're on a deadline",
     },
   ];
 
@@ -128,14 +129,20 @@ export default function IdeaToPlan() {
   return (
     <section id="idea-to-plan" className="pt-10 pb-20 md:pt-14 md:pb-32 bg-white">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-6 text-center">
-          Turn Your Business Idea Into a Real Plan in 72 Hours
-        </h2>
-
-        <p className="text-xl text-gray-700 mb-16 text-center max-w-3xl mx-auto leading-relaxed">
-          Perfect for solopreneurs and digital nomads ready to stop daydreaming and start building.
-          Get a comprehensive, actionable business plan without the overwhelm.
-        </p>
+        <div className="text-center mb-6">
+          <span className="inline-block max-w-full bg-emerald-700 text-white text-xs sm:text-sm md:text-base lg:text-lg font-bold px-4 sm:px-6 md:px-7 py-2 sm:py-2.5 md:py-3 rounded-full uppercase tracking-[0.12em] sm:tracking-[0.16em] md:tracking-[0.2em] [word-spacing:0.15em] sm:[word-spacing:0.22em] text-center shadow-md mb-4">
+            Introducing IdeaToPlan
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4">
+            Turn Your Business Idea Into a Real Plan in 72 Hours
+          </h2>
+          <p className="text-base text-emerald-700 font-medium mb-4 max-w-2xl mx-auto">
+            A done-for-you business planning service built for founders who are ready to move. Fast turnaround. Real plans. No fluff.
+          </p>
+          <p className="text-xl text-gray-700 mb-6 max-w-3xl mx-auto leading-relaxed">
+            You already made the hard decision to leap. Now let&apos;s make sure you land right. Get your plan in 72 hours — or rush it in 24.
+          </p>
+        </div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-16">
           {steps.map((step, index) => (
@@ -149,35 +156,79 @@ export default function IdeaToPlan() {
           ))}
         </div>
 
-        <div className="bg-gradient-to-br from-emerald-50 to-orange-50 rounded-2xl shadow-xl p-8 md:p-12">
-          <div className="max-w-3xl mx-auto">
-            <h3 className="text-2xl font-bold text-emerald-900 mb-6">What You'll Get:</h3>
-            <ul className="space-y-3 mb-8 text-gray-700">
-              {[
-                'Market analysis and competitive landscape',
-                'Target audience and customer personas',
-                'Revenue model and pricing strategy',
-                '90-day action plan with clear milestones',
-                'Marketing and growth strategies',
-                'Professional PDF ready to share with partners or investors',
-              ].map((item, i) => (
-                <li key={i} className="flex items-start">
-                  <span className="text-emerald-600 font-bold mr-3">✓</span>
-                  <span>{item}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="text-center">
-              <p className="text-3xl font-bold text-emerald-900 mb-2">$149 – $599</p>
-              <p className="text-gray-600 mb-6">Standard, competitor research, or visa-ready</p>
-              <button
-                onClick={() => setShowForm(true)}
-                className="px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg"
-              >
-                Share Your Idea
-              </button>
+        <div className="mb-12">
+          <div className="grid md:grid-cols-3 gap-6 mb-10">
+            <div className="border-2 border-gray-200 rounded-2xl p-6 bg-white shadow-sm flex flex-col">
+              <h3 className="text-xl font-bold text-gray-900 mb-1">Starter</h3>
+              <p className="text-emerald-700 font-bold text-2xl mb-1">$199</p>
+              <p className="text-sm text-gray-500 mb-4">For founders who want a polished business plan without overpaying.</p>
+              <ul className="space-y-2 text-sm text-gray-700 flex-1">
+                {[
+                  'Actionable business plan built around your idea',
+                  'Revenue model and pricing strategy',
+                  '90-day roadmap with clear milestones',
+                  'Professional PDF delivered in 72 hours',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="text-emerald-600 font-bold mt-0.5">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
+
+            <div className="border-2 border-emerald-500 rounded-2xl p-6 bg-emerald-50 shadow-lg flex flex-col relative">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-xs font-bold px-4 py-1 rounded-full">
+                Most Popular
+              </div>
+              <h3 className="text-xl font-bold text-gray-900 mb-1">Growth</h3>
+              <p className="text-emerald-700 font-bold text-2xl mb-1">$349</p>
+              <p className="text-sm text-gray-500 mb-4">For entrepreneurs who want market validation and smarter positioning.</p>
+              <ul className="space-y-2 text-sm text-gray-700 flex-1">
+                {[
+                  'Everything in Starter',
+                  'Competitor research and landscape analysis',
+                  'SWOT analysis',
+                  'Viability verdict with go/no-go assessment',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="text-emerald-600 font-bold mt-0.5">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="border-2 border-gray-200 rounded-2xl p-6 bg-white shadow-sm flex flex-col">
+              <h3 className="text-xl font-bold text-gray-900 mb-1">Visa / Investor</h3>
+              <p className="text-emerald-700 font-bold text-2xl mb-1">$599</p>
+              <p className="text-sm text-gray-500 mb-4">
+                For founders who need USCIS- and investor-ready structure and compliance language.
+              </p>
+              <ul className="space-y-2 text-sm text-gray-700 flex-1">
+                {[
+                  'Everything in Growth',
+                  'Visa-ready formatting and structure',
+                  '5-year financial projections',
+                  'Job creation and non-marginality language',
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="text-emerald-600 font-bold mt-0.5">✓</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="text-center">
+            <p className="text-gray-500 mb-6 text-sm">Payment collected at booking. Rush orders confirmed before charge.</p>
+            <button
+              onClick={() => setShowForm(true)}
+              className="px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg"
+            >
+              Share Your Idea
+            </button>
           </div>
         </div>
       </div>
@@ -190,8 +241,8 @@ export default function IdeaToPlan() {
           <div className="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] flex flex-col">
             <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100">
               <div>
-                <h3 className="text-lg font-bold text-emerald-900">Tell Me About Your Idea</h3>
-                <p className="text-xs text-gray-500 mt-0.5">Takes about 3 minutes. No payment now.</p>
+                <h3 className="text-lg font-bold text-emerald-900">Tell Us About Your Idea</h3>
+                <p className="text-xs text-gray-500 mt-0.5">Takes about 3 minutes.</p>
               </div>
               <button onClick={closeForm} className="p-2 rounded-full hover:bg-gray-100 transition-colors" aria-label="Close">
                 <X className="w-5 h-5 text-gray-500" />
@@ -203,7 +254,7 @@ export default function IdeaToPlan() {
                 <div className="text-center py-8">
                   <CheckCircle className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
                   <h3 className="text-2xl font-bold text-emerald-900 mb-3">You're in the queue!</h3>
-                  <p className="text-gray-600 mb-2">I've received your idea and will be in touch within 24 hours to confirm details and next steps.</p>
+                  <p className="text-gray-600 mb-2">We&apos;ve received your idea and will be in touch within 24 hours to confirm details and next steps.</p>
                   <p className="text-gray-500 text-sm">Check your inbox — and spam, just in case.</p>
                   <button onClick={closeForm} className="mt-6 px-8 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition-colors">
                     Close
@@ -235,7 +286,7 @@ export default function IdeaToPlan() {
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1">Describe your business idea <span className="text-red-500">*</span></label>
                       <textarea name="businessIdea" value={form.businessIdea} onChange={handleChange} required rows={3}
-                        placeholder="What's the idea? Give me the overview."
+                        placeholder="What's the idea? Give us the overview."
                         className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition resize-none" />
                     </div>
 
@@ -308,7 +359,7 @@ export default function IdeaToPlan() {
 
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">Plan type <span className="text-red-500">*</span></label>
-                      <p className="text-xs text-gray-500 mb-3">Choose the depth that matches your goal. Invoiced after we confirm scope.</p>
+                      <p className="text-xs text-gray-500 mb-3">Payment collected at booking. Rush orders confirmed before charge.</p>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                         {PLAN_OPTIONS.map((opt) => (
                           <label
@@ -333,8 +384,11 @@ export default function IdeaToPlan() {
 
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1">
-                        Rush delivery? <span className="text-gray-400 font-normal">(+$100)</span>
+                        Rush delivery?
                       </label>
+                      <p className="text-xs text-gray-500 mb-2 leading-relaxed">
+                        Rush requests are reviewed before confirmation. You&apos;ll be charged after approval.
+                      </p>
                       <select
                         name="expedited24h"
                         value={form.expedited24h}
@@ -342,7 +396,7 @@ export default function IdeaToPlan() {
                         className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition bg-white"
                       >
                         <option value="no">No — standard turnaround (72 hours)</option>
-                        <option value="yes">Yes — rush delivery (24 hours, +$100)</option>
+                        <option value="yes">Yes — rush delivery (24 hours)</option>
                       </select>
                     </div>
 
@@ -353,7 +407,9 @@ export default function IdeaToPlan() {
                       ) : 'Submit My Idea'}
                     </button>
 
-                    <p className="text-center text-xs text-gray-400">No payment now. I'll confirm scope and send an invoice within 24 hours.</p>
+                    <p className="text-center text-xs text-gray-400">
+                      Payment collected at booking. Rush orders confirmed before charge.
+                    </p>
                   </form>
                 </>
               )}

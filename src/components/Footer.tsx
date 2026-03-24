@@ -81,12 +81,6 @@ export default function Footer() {
                 Home
               </button>
               <button
-                onClick={() => scrollToSection('my-story')}
-                className="hover:text-orange-400 transition-colors"
-              >
-                My Story
-              </button>
-              <button
                 onClick={() => scrollToSection('work-with-me')}
                 className="hover:text-orange-400 transition-colors"
               >
@@ -97,6 +91,18 @@ export default function Footer() {
                 className="hover:text-orange-400 transition-colors"
               >
                 Idea To Plan
+              </button>
+              <button
+                onClick={() => scrollToSection('about')}
+                className="hover:text-orange-400 transition-colors"
+              >
+                About
+              </button>
+              <button
+                onClick={() => scrollToSection('the-leap-log')}
+                className="hover:text-orange-400 transition-colors"
+              >
+                The Leap Log
               </button>
             </nav>
 

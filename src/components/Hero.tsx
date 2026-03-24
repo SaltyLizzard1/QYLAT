@@ -10,8 +10,6 @@ export default function Hero() {
     img.onload = () => setImageLoaded(true);
   }, []);
 
-  const scrollToSection = (id: string) => scrollToSectionById(id);
-
   return (
     <section
       id="hero"
@@ -38,21 +36,14 @@ export default function Hero() {
             <span className="block mb-2.5 sm:mb-3 md:mb-4">Quit Your Life.</span>
             <span className="block">Design One That Actually Fits.</span>
           </h1>
-          <p className="mx-auto mb-6 max-w-3xl text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-2xl leading-relaxed text-white/95 drop-shadow-[0_3px_10px_rgba(0,0,0,0.45)]">
+          <p className="mx-auto mb-8 max-w-3xl text-lg sm:text-xl md:text-xl lg:text-2xl xl:text-2xl leading-relaxed text-white/95 drop-shadow-[0_3px_10px_rgba(0,0,0,0.45)]">
             Leave the old life behind and build the next one with intention.
           </p>
-          <div className="flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
+          <div className="flex justify-center">
             <button
               type="button"
-              onClick={() => scrollToSection('my-story')}
-              className="w-full rounded-xl bg-orange-500 px-8 py-3.5 text-base font-semibold text-white shadow-xl transition-transform hover:scale-[1.02] hover:bg-orange-600 hover:shadow-2xl sm:w-auto sm:min-w-[11rem] sm:px-10 sm:py-4 sm:text-lg"
-            >
-              Start Here
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollToSection('work-with-me')}
-              className="w-full rounded-xl bg-emerald-600 px-8 py-3.5 text-base font-semibold text-white shadow-xl transition-transform hover:scale-[1.02] hover:bg-emerald-700 hover:shadow-2xl sm:w-auto sm:min-w-[11rem] sm:px-10 sm:py-4 sm:text-lg"
+              onClick={() => scrollToSectionById('work-with-me')}
+              className="rounded-xl bg-emerald-600 px-8 py-3.5 text-base font-semibold text-white shadow-xl transition-transform hover:scale-[1.02] hover:bg-emerald-700 hover:shadow-2xl sm:min-w-[11rem] sm:px-10 sm:py-4 sm:text-lg"
             >
               Take the Leap
             </button>

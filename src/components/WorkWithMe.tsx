@@ -33,10 +33,10 @@ export default function WorkWithMe() {
   const openCalendly = () => {
     if (calendlyReady && window.Calendly) {
       window.Calendly.initPopupWidget({
-        url: 'https://calendly.com/ideatoplanincome/60min',
+        url: 'https://calendly.com/ideatoplanincome/45min',
       });
     } else {
-      window.open('https://calendly.com/ideatoplanincome/60min', '_blank');
+      window.open('https://calendly.com/ideatoplanincome/45min', '_blank');
     }
   };
 
@@ -80,7 +80,7 @@ export default function WorkWithMe() {
           <h3 className="text-2xl md:text-3xl font-bold text-emerald-800 mb-4">The Leap Session</h3>
 
           <p className="text-lg text-gray-700 mb-8">
-            A 60-minute private coaching call designed to cut through the fog and get you moving.
+            A 45-minute private coaching call designed to cut through the fog and get you moving.
             This isn't therapy. This isn't a pep talk. This is a targeted intervention to identify
             your blocks, clarify your wants, and build your first real action plan.
           </p>
@@ -131,7 +131,7 @@ export default function WorkWithMe() {
 
           <div className="text-center">
             <p className="text-4xl font-bold text-emerald-900 mb-2">$97</p>
-            <p className="text-gray-500 mb-6">60-minute private session</p>
+            <p className="text-gray-500 mb-6">45-minute private session</p>
             <button
               onClick={openCalendly}
               className="px-10 py-4 bg-orange-500 hover:bg-orange-600 text-white text-lg font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg"

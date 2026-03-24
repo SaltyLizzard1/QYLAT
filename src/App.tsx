@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import MyStory from './components/MyStory';
 import WorkWithMe from './components/WorkWithMe';
 import LeapLog from './components/LeapLog';
 import IdeaToPlan from './components/IdeaToPlan';
@@ -22,9 +21,8 @@ function App() {
       <Header />
       <Hero />
       <WorkWithMe />
-      <LeapLog />
       <IdeaToPlan />
-      <MyStory />
+      <LeapLog />
       <Footer />
     </div>
   );

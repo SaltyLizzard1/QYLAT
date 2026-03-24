@@ -7,9 +7,9 @@ const LOGO_SRC = '/qlt-logo.png';
 const NAV = [
   { label: 'Home', id: 'hero' },
   { label: 'Work With Me', id: 'work-with-me' },
-  { label: 'The Leap Log', id: 'the-leap-log' },
   { label: 'Idea To Plan', id: 'idea-to-plan' },
-  { label: 'My Story', id: 'my-story' },
+  { label: 'About', id: 'about' },
+  { label: 'The Leap Log', id: 'the-leap-log' },
 ] as const;
 
 export default function Header() {
@@ -73,21 +73,22 @@ export default function Header() {
             type="button"
             onClick={() => scrollToSection('hero')}
             className="flex items-center gap-2.5 sm:gap-3 md:gap-4 min-w-0 flex-none text-left rounded-lg py-1 pr-2 -ml-0.5 hover:bg-white/10 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-200/80 focus-visible:ring-offset-2 focus-visible:ring-offset-[#92A882] max-w-none sm:max-w-none"
-            aria-label="QLT — Home"
+            aria-label="QLT — Live the Life You Want to Live"
           >
             <img
               src={LOGO_SRC}
               alt=""
-              className="h-[70px] w-auto sm:h-[86px] md:h-[100px] lg:h-[116px] shrink-0 object-contain object-left"
-              height={116}
+              className="h-[92px] w-auto sm:h-[112px] md:h-[128px] lg:h-[148px] shrink-0 object-contain object-left"
+              height={148}
               decoding="async"
             />
+            {/* Slightly smaller type so a larger logo doesn’t squeeze the nav / layout */}
             <span className="min-w-0 text-left border-l-2 border-white/40 pl-2 sm:pl-3 md:pl-4">
-              <span className="block text-sm sm:text-base md:text-lg lg:text-xl font-bold text-white leading-snug tracking-wide drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]">
-                Quit Your Life
+              <span className="block text-xs sm:text-sm md:text-base lg:text-lg font-bold text-white leading-snug tracking-wide drop-shadow-[0_1px_3px_rgba(0,0,0,0.4)]">
+                Live the Life
               </span>
-              <span className="block text-sm sm:text-base md:text-lg lg:text-xl font-semibold text-emerald-50 leading-snug tracking-wide drop-shadow mt-px">
-                and Travel
+              <span className="block text-xs sm:text-sm md:text-base lg:text-lg font-semibold text-emerald-50 leading-snug tracking-wide drop-shadow mt-px">
+                You Want to Live
               </span>
             </span>
           </button>
