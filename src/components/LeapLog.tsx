@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { images } from '../config/images';
+import PostCard from './PostCard';
 import SectionDivider from './SectionDivider';
 import { posts } from '../data/posts';
 import { scrollToSectionById } from '../utils/scrollToSection';
@@ -77,43 +78,7 @@ export default function LeapLog() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8 mb-8">
           {posts.map((post) => (
-            <div key={post.id} className="h-auto">
-              <article className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 group h-auto flex flex-col">
-                {post.image && (
-                  <button
-                    type="button"
-                    onClick={() => post.content && openPost(post.slug)}
-                    className="block w-full overflow-hidden text-left disabled:cursor-default"
-                    disabled={!post.content}
-                  >
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
-                      loading="lazy"
-                    />
-                  </button>
-                )}
-                <div className="p-6 flex flex-col flex-1">
-                  <time className="text-sm text-gray-500 font-medium">{post.date}</time>
-                  <h3 className="mt-2 text-xl font-semibold text-gray-900 group-hover:text-orange-600 transition-colors">
-                    {post.title}
-                  </h3>
-                  <p className="mt-3 text-gray-600 line-clamp-3 flex-1">{post.excerpt}</p>
-                  {post.content ? (
-                    <button
-                      type="button"
-                      onClick={() => openPost(post.slug)}
-                      className="mt-4 inline-block text-orange-600 hover:text-orange-800 font-medium"
-                    >
-                      Read the full leap →
-                    </button>
-                  ) : (
-                    <span className="mt-4 inline-block text-gray-400 font-medium">Coming soon</span>
-                  )}
-                </div>
-              </article>
-            </div>
+            <PostCard key={post.id} post={post} onOpenPost={openPost} />
           ))}
         </div>
       </div>
