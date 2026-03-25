@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local env (keep .env.example tracked if you add one)
+.env
+.env.local
+.env.*.local
+
+# Logs and caches
+*.log
+npm-debug.log*
+.vite/
+
+# Editor / OS
+.DS_Store
+Thumbs.db
