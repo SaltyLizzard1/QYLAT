@@ -1,0 +1,16 @@
+---
+description: Do not use em dashes in site copy or content
+alwaysApply: true
+---
+
+# Punctuation: no em dashes
+
+In this project, **never use the em dash character** (`—`) in user-facing copy, posts, components, or strings.
+
+Use instead:
+
+- A **period** and a new sentence, or
+- A **hyphen with spaces** (` - `) when a short break is needed, or
+- **Rewrite** the sentence.
+
+Do not introduce em dashes in new or edited content.

@@ -1,22 +1,17 @@
 import { Instagram, Send, Mail } from 'lucide-react';
-import { useState } from 'react';
+import NewsletterSignup from './NewsletterSignup';
 import { scrollToSectionById } from '../utils/scrollToSection';
 
 export default function Footer() {
-  const [email, setEmail] = useState('');
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Email submitted:', email);
-    setEmail('');
-  };
-
   const scrollToSection = (id: string) => scrollToSectionById(id);
 
   return (
-    <footer className="bg-emerald-900 text-white py-16">
+    <footer
+      id="site-footer"
+      className="bg-emerald-900 text-white rounded-t-[1.75rem] pt-10 pb-12 shadow-[0_-8px_30px_rgba(0,0,0,0.06)]"
+    >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 gap-12 mb-12">
+        <div className="grid md:grid-cols-2 gap-x-12 gap-y-8 mb-8">
           <div>
             <h3 className="text-2xl font-bold mb-6">Quit Your Life and Travel</h3>
             <p className="text-emerald-100 mb-6 leading-relaxed">
@@ -47,28 +42,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <div>
-            <h4 className="text-xl font-bold mb-6">Join the Newsletter</h4>
-            <p className="text-emerald-100 mb-4">
-              Get weekly inspiration, practical tips, and the courage to take the leap.
-            </p>
-            <form onSubmit={handleSubmit} className="flex gap-2">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500"
-                required
-              />
-              <button
-                type="submit"
-                className="px-6 py-3 bg-orange-500 hover:bg-orange-600 rounded-lg font-semibold transition-colors"
-              >
-                Subscribe
-              </button>
-            </form>
-          </div>
+          <NewsletterSignup variant="dark" />
         </div>
 
         <div className="border-t border-emerald-700 pt-8">
@@ -93,16 +67,16 @@ export default function Footer() {
                 Idea To Plan
               </button>
               <button
-                onClick={() => scrollToSection('about')}
-                className="hover:text-orange-400 transition-colors"
-              >
-                About
-              </button>
-              <button
                 onClick={() => scrollToSection('the-leap-log')}
                 className="hover:text-orange-400 transition-colors"
               >
                 The Leap Log
+              </button>
+              <button
+                onClick={() => scrollToSection('about')}
+                className="hover:text-orange-400 transition-colors"
+              >
+                About
               </button>
             </nav>
 

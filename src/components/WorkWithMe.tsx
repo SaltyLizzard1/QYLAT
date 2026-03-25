@@ -64,7 +64,7 @@ export default function WorkWithMe() {
   return (
     <section
       id="work-with-me"
-      className="pt-10 pb-20 md:pt-14 md:pb-32 bg-emerald-50 relative z-10"
+      className="pt-8 pb-14 md:pt-10 md:pb-20 bg-emerald-50 relative z-10"
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-emerald-900 mb-3 md:mb-4 text-center leading-tight">

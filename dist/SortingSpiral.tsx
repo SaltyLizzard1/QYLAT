@@ -6,8 +6,7 @@ import React from "react";
 // The pull quote, CTA color (#D85A30), and font stack match the
 // unified QYLAT blog format agreed on 2026-03-24.
 
-const LEAD_IMAGE_SRC = "/mountainofclothes.jpg";
-// Same lead as Leap Log “packing” post; use .png if you add public/mountainofclothes.png
+const LEAD_IMAGE_SRC = "/ai_bini.png";
 
 export default function SortingSpiral() {
   return (

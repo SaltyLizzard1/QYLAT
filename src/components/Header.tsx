@@ -1,15 +1,14 @@
 import { useState, useRef, useLayoutEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import { images } from '../config/images';
 import { SITE_HEADER_ID, scrollToSectionById } from '../utils/scrollToSection';
-
-const LOGO_SRC = '/qlt-logo.png';
 
 const NAV = [
   { label: 'Home', id: 'hero' },
   { label: 'Work With Me', id: 'work-with-me' },
   { label: 'Idea To Plan', id: 'idea-to-plan' },
-  { label: 'About', id: 'about' },
   { label: 'The Leap Log', id: 'the-leap-log' },
+  { label: 'About', id: 'about' },
 ] as const;
 
 export default function Header() {
@@ -76,7 +75,7 @@ export default function Header() {
             aria-label="QLT — Live the Life You Want to Live"
           >
             <img
-              src={LOGO_SRC}
+              src={images.logo}
               alt=""
               className="h-[92px] w-auto sm:h-[112px] md:h-[128px] lg:h-[148px] shrink-0 object-contain object-left"
               height={148}

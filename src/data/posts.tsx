@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { images } from '../config/images';
 
 export interface Post {
   id: number;
@@ -9,6 +10,12 @@ export interface Post {
   image: string;
   content?: () => React.JSX.Element;
 }
+
+/**
+ * 60-day plan post - Leap Log id **3**, slug `60-day-plan-thailand-again`.
+ */
+const SIXTY_DAY_PLAN_EXCERPT =
+  "The second leap is harder than the first. Here's the exact 60-day plan I'm following - packing, visa, banking, and every task from first sort to final keys.";
 
 function KitForm() {
   const embedRef = useRef<HTMLDivElement>(null);
@@ -30,16 +37,22 @@ function KitForm() {
     };
   }, []);
 
+  return <div ref={embedRef} className="min-h-[120px]" />;
+}
+
+function SixtyDayPlanDownloadSection() {
   return (
-    <div className="my-8 p-6 bg-emerald-50 rounded-xl border-2 border-emerald-300">
-      <p className="text-emerald-900 font-bold text-xl mb-2">
-        Want the full plan as a free download?
+    <div className="bg-emerald-50 rounded-xl p-6 border-l-4 border-emerald-600 not-prose my-8">
+      <p className="font-semibold text-emerald-900 text-lg mb-2">
+        Want the exact 60-day plan I&apos;m using right now?
       </p>
       <p className="text-gray-600 mb-4">
-        Get the printable PDF version of this 60-day checklist sent straight to your inbox.
+        I built a simple spreadsheet that tracks every task from first sort to final keys - packing,
+        visa, banking, logistics, all of it. I&apos;m giving it away free. Drop your email below and
+        I&apos;ll send it straight to you. No spam, no fluff - just the tool I&apos;m actually
+        following every day.
       </p>
-
-      <div ref={embedRef} />
+      <KitForm />
     </div>
   );
 }
@@ -54,7 +67,7 @@ function PostContent({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** Slug for “Day 0: The Decision to Leap” — used by About / deep links */
+/** Slug for “Day 0: The Decision to Leap” — used for ordering / deep links */
 export const DAY_ZERO_SLUG = 'day-0-the-decision-to-leap';
 
 export const posts: Post[] = [
@@ -62,10 +75,10 @@ export const posts: Post[] = [
     id: 1,
     slug: DAY_ZERO_SLUG,
     title: 'Day 0: The Decision to Leap',
-    date: 'March 14, 2026',
+    date: 'February 2, 2026',
     excerpt:
       'Not a highlight reel. The real one. From autopilot in Florida to a one-way ticket to Thailand — and what happened when the world hit pause.',
-    image: '/absolutemess.jpg',
+    image: import.meta.env.VITE_IMG_DAY0,
     content: () => (
       <PostContent>
         <p className="text-sm text-emerald-700 uppercase tracking-widest font-sans mb-6">
@@ -100,102 +113,13 @@ export const posts: Post[] = [
     ),
   },
   {
-    id: 2,
-    slug: 'the-more-i-sort-the-more-appears',
-    title: 'The More I Sort, The More Appears',
-    date: 'March 24, 2026',
-    excerpt:
-      'Every time I clear a surface, something appears on it. On chaos, packing light, and why the fashion blogger fantasy ends the moment you picture your suitcase open on a hostel floor.',
-    image: '/absolutemess2.jpg',
-    content: () => (
-      <PostContent>
-        <p className="text-sm text-emerald-700 uppercase tracking-widest font-sans mb-6">
-          Why I&apos;m not packing like a fashion blogger.
-        </p>
-
-        <p>I have sorted the same pile of clothes three times today.</p>
-        <p>
-          Not because I&apos;m indecisive. Because every time I clear a surface, something appears on
-          it. I have lived in this apartment for years and apparently I have been quietly hoarding
-          things I forgot I owned.
-        </p>
-        <p>
-          My brain does not do well with this. I need order to think. Right now my living room looks
-          like a thrift store had a breakdown, and I am somewhere in the middle of it with a garbage
-          bag in one hand and absolutely no plan in the other.
-        </p>
-        <p>At some point this afternoon I had a thought that felt reasonable at the time.</p>
-        <p>
-          <em>If I&apos;m going to be traveling, I should look good doing it.</em>
-        </p>
-        <p>
-          So I started setting things aside. The good jeans. The going-out tops. The heels I&apos;ve
-          worn twice but keep because they&apos;re perfect. I was building a travel wardrobe in my head
-          and it felt exciting and it felt like a solution to the chaos. It was neither.
-        </p>
-
-        <blockquote className="border-l-4 border-orange-500 pl-5 py-1 my-8 not-prose">
-          <p className="text-xl italic text-gray-800">
-            You don&apos;t want more options when you&apos;re living out of a bag. You want fewer
-            decisions.
-          </p>
-        </blockquote>
-
-        <p>
-          Then I pictured it. The room I&apos;ll be staying in. The suitcase open on the floor because
-          there&apos;s nowhere else to put it. Every single thing I packed spread across a 10x10 space.
-        </p>
-        <p>That&apos;s where the fashion blogger fantasy ends.</p>
-        <p>
-          The less you pack, the lighter you move. The lighter you move, the more you actually show
-          up for the life you went there to live instead of managing your luggage.
-        </p>
-        <p>
-          So the heels went into the donation bag. The good jeans made the cut. Two pairs.
-          That&apos;s it.
-        </p>
-        <p>
-          I&apos;m not packing light because I have to. I&apos;m packing light because I&apos;ve already
-          learned what happens when you don&apos;t. It shouldn&apos;t feel like home. That&apos;s the
-          whole point.
-        </p>
-        <p>
-          <em>Back to the bags.</em>
-        </p>
-        <p>
-          The mess is part of it. The chaos, the second-guessing, the moment you almost pack the heels
-          anyway — that&apos;s not a sign you&apos;re doing it wrong. That&apos;s what letting go
-          actually looks like. Nobody&apos;s leap is clean. Mine certainly isn&apos;t.
-        </p>
-        <p>
-          But you sort another pile. You make another decision. And slowly, the life you&apos;re
-          leaving gets lighter.
-        </p>
-        <p>So does everything else.</p>
-
-        <div className="border-t border-gray-200 pt-6 mt-10">
-          <p className="text-sm text-gray-400 font-sans mb-1">
-            Ready to build the business that funds your leap?
-          </p>
-          <a
-            href="#idea-to-plan"
-            className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
-          >
-            Take the Leap →
-          </a>
-        </div>
-      </PostContent>
-    ),
-  },
-  {
     id: 3,
     slug: '60-day-plan-thailand-again',
     title:
-      "The 60-Day Plan: How I'm Packing Up My Life and Moving to Thailand (Again)",
+      "60 Days to Thailand. Here's Exactly How I'm Doing It.",
     date: 'March 15, 2026',
-    excerpt:
-      "The second leap is harder than the first—because you know what you're risking. Here's my 60-day plan: phases, logistics, and what doing it twice actually teaches you.",
-    image: '/images/plane-ticket-schedule.jpg',
+    excerpt: SIXTY_DAY_PLAN_EXCERPT,
+    image: images.sixtyDay,
     content: () => (
       <PostContent>
         <p>
@@ -211,26 +135,31 @@ export const posts: Post[] = [
         <p>So I came home, sold everything, and prepared to make it permanent.</p>
         <p>Then the world had other plans.</p>
         <p>
-          COVID shut everything down. And before I could recover from that, a legal situation I had
-          no control over kept me locked in place for years. Five years of watching the dream sit on
-          pause. Five years of rebuilding from scratch. Less money than I had before. Less certainty.
-          More fear.
+          COVID shut everything down. A legal situation I had no control over kept me locked in place
+          for years. Five years of watching the dream sit on pause. Five years of rebuilding from
+          scratch. Less money. Less certainty. More fear.
         </p>
         <p>And still. Here I am. Going anyway.</p>
         <p>
-          That&apos;s the part of this story I want you to sit with before we get into the logistics.
-          Because if you&apos;re reading this waiting for the perfect moment, the right amount of
-          money, the right circumstances — I need you to understand something.
+          If you&apos;re reading this waiting for the perfect moment, the right amount of money, the
+          right circumstances - I need you to understand something.
         </p>
-        <p className="font-semibold text-emerald-900">There is no perfect moment. There is only the decision.</p>
-        <p>This is mine. Again.</p>
-        <p className="mt-8 font-medium">Here&apos;s exactly how I&apos;m doing it.</p>
 
-        <h2>Phase 1: Planning and Preparation (Days 1 to 7)</h2>
+        <blockquote className="border-l-4 border-orange-500 pl-5 py-1 my-8 not-prose">
+          <p className="text-xl italic text-gray-800">
+            There is no perfect moment. There is only the decision.
+          </p>
+        </blockquote>
+
+        <p>This is mine. Again. Here&apos;s exactly how I&apos;m doing it.</p>
+
+        <h2 className="text-lg font-semibold text-emerald-900 mt-8 mb-2">
+          Phase 1: Planning and Preparation (Days 1 to 7)
+        </h2>
         <p>
-          Before a single box gets packed or a single item gets listed, the foundation has to be
-          solid. Passport validity checked. Visa research done. A complete inventory of everything
-          in the apartment.
+          Before a single box gets packed or a single item gets listed, the foundation has to be solid.
+          Passport validity checked. Visa research done. A complete inventory of everything in the
+          apartment.
         </p>
         <p>
           That last one sounds simple. It&apos;s not. Walking through your own space and deciding what
@@ -242,34 +171,40 @@ export const posts: Post[] = [
           building. Everything else finds a new home.
         </p>
 
-        <h2>Phase 2: Logistics and Operations (Days 8 to 30)</h2>
+        <SixtyDayPlanDownloadSection />
+
+        <h2 className="text-lg font-semibold text-emerald-900 mt-8 mb-2">
+          Phase 2: Logistics and Operations (Days 8 to 30)
+        </h2>
         <p>
           This is where the practical work happens. Listing furniture on Facebook Marketplace.
-          Opening a Wise account for international transfers. Porting my phone number to Google Voice
-          so I don&apos;t lose access to banking apps when my US SIM goes dark.
+          Opening a Wise account for international transfers.
         </p>
         <p>
-          The financial infrastructure piece is critical and most people get it wrong. You need a
-          bank that doesn&apos;t charge foreign transaction fees, a way to receive payments
-          internationally, and two-factor authentication that doesn&apos;t depend on a SIM card
-          you&apos;re about to cancel.
+          The financial infrastructure piece is critical and most people get it wrong. You need a bank
+          that doesn&apos;t charge foreign transaction fees, a way to receive payments internationally,
+          and two-factor authentication that doesn&apos;t depend on a SIM card you&apos;re about to
+          cancel.
         </p>
         <p>Book the flight. Book the first 14 nights. Apply for the visa. In that order.</p>
 
-        <h2>Phase 3: Execution and Packing (Days 12 to 45)</h2>
+        <h2 className="text-lg font-semibold text-emerald-900 mt-8 mb-2">
+          Phase 3: Execution and Packing (Days 12 to 45)
+        </h2>
         <p>
           The physical work. Boxes. Labels. Donation runs. The slow reduction of a life into what
           fits in two bags.
         </p>
         <p>
           This phase is different the second time. Not easier. Different. Last time I let things go
-          with hope. This time I let things go with hard-won knowledge. These things did not save me
-          when everything fell apart. They will not save me now. The only thing that travels with me
-          that matters is the business I built before I left.
+          with hope. This time I let things go with hard-won knowledge. The only thing that travels
+          with me that matters is the business I built before I left.
         </p>
         <p className="font-semibold text-emerald-800">That last sentence is worth reading again.</p>
 
-        <h2>Phase 4: Final Countdown (Days 50 to 60)</h2>
+        <h2 className="text-lg font-semibold text-emerald-900 mt-8 mb-2">
+          Phase 4: Final Countdown (Days 50 to 60)
+        </h2>
         <p>
           The last things to go are always the hardest. The everyday items you reach for without
           thinking. The coffee maker. The good knife. The pillow you&apos;ve had for years.
@@ -281,19 +216,7 @@ export const posts: Post[] = [
         <p>Hand over the keys.</p>
         <p>Get on the plane.</p>
 
-        <div className="bg-emerald-50 rounded-xl p-6 border-l-4 border-emerald-600 not-prose my-8">
-          <p className="font-semibold text-emerald-900 text-lg mb-2">
-            Want the exact 60-day plan I&apos;m using right now?
-          </p>
-          <p className="text-gray-600 mb-4">
-            I built a simple spreadsheet that tracks every task from first sort to final keys —
-            packing, visa, banking, logistics, all of it. I&apos;m giving it away free. Drop your
-            email below and I&apos;ll send it straight to you. No spam, no fluff — just the tool
-            I&apos;m actually following every day.
-          </p>
-          <KitForm />
-        </div>
-        <h2>The Full 60-Day Plan</h2>
+        <h2 className="text-lg font-semibold text-emerald-900 mt-8 mb-2">The Full 60-Day Plan</h2>
         <p>Use this as your own template. Screenshot it. Print it. Make it yours.</p>
         <div className="overflow-x-auto not-prose my-6">
           <table className="w-full text-sm border-collapse">
@@ -354,7 +277,9 @@ export const posts: Post[] = [
           </table>
         </div>
 
-        <h2>What doing it twice actually teaches you</h2>
+        <h2 className="text-lg font-semibold text-emerald-900 mt-8 mb-2">
+          What doing it twice actually teaches you
+        </h2>
         <p>
           The first leap is about courage. You don&apos;t know what you&apos;re getting into so you
           just go.
@@ -362,7 +287,7 @@ export const posts: Post[] = [
         <p>
           The second leap is about something harder. It&apos;s about going anyway when you know
           exactly what you&apos;re risking. When you&apos;ve already paid the price once and
-          you&apos;re willing to pay it again because the alternative — staying — is no longer
+          you&apos;re willing to pay it again because the alternative - staying - is no longer
           acceptable.
         </p>
         <p>
@@ -375,23 +300,23 @@ export const posts: Post[] = [
         </p>
         <p>
           If you&apos;ve been waiting for permission, for the right time, for enough money, for the
-          fear to go away — it won&apos;t. None of it will arrive on schedule.
+          fear to go away - it won&apos;t. None of it will arrive on schedule.
         </p>
-        <p className="text-lg font-semibold text-emerald-900">The only thing that changes is whether you decide.</p>
+        <p className="font-semibold text-emerald-900">
+          The only thing that changes is whether you decide.
+        </p>
 
-        <h2>The business piece</h2>
-        <p>
-          One thing I did differently this time: I built the income before I left.
-        </p>
-        <p>
-          IdeaToPlan is a done-for-you business planning service I built specifically to fund this
-          move. Fast turnaround. Real plans. No fluff. If you&apos;re building the business that
-          makes your own leap possible,{' '}
-          <a href="#idea-to-plan" className="text-orange-600 font-semibold hover:underline">
-            start there
+        <div className="border-t border-gray-200 pt-6 mt-10">
+          <p className="text-sm text-gray-400 font-sans mb-1">
+            Ready to build the business that funds your leap?
+          </p>
+          <a
+            href="#idea-to-plan"
+            className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
+          >
+            Take the Leap →
           </a>
-          .
-        </p>
+        </div>
       </PostContent>
     ),
   },
@@ -399,10 +324,10 @@ export const posts: Post[] = [
     id: 5,
     slug: 'debit-card-swallowed-by-an-atm-in-bali',
     title: 'Debit Card Swallowed by an ATM in Bali',
-    date: 'March 24, 2026',
+    date: 'March 18, 2026',
     excerpt:
       'TD Bank was perfect for Tampa. It was useless in Bali. The replacement card took a month. Here is what I set up differently this time.',
-    image: '/bali_bank.png',
+    image: images.baliAtm,
     content: () => (
       <PostContent>
         <p className="text-sm text-emerald-700 uppercase tracking-widest font-sans mb-6">
@@ -456,6 +381,94 @@ export const posts: Post[] = [
             The card in the ATM cost me a month of pain. This setup cost me an afternoon. Worth it.
           </p>
         </blockquote>
+
+        <div className="border-t border-gray-200 pt-6 mt-10">
+          <p className="text-sm text-gray-400 font-sans mb-1">
+            Ready to build the business that funds your leap?
+          </p>
+          <a
+            href="#idea-to-plan"
+            className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
+          >
+            Take the Leap →
+          </a>
+        </div>
+      </PostContent>
+    ),
+  },
+  {
+    id: 4,
+    slug: 'the-more-i-sort-the-more-appears',
+    title: 'The More I Sort, The More Appears',
+    date: 'March 24, 2026',
+    excerpt:
+      'Every time I clear a surface, something appears on it. On chaos, packing light, and why the fashion blogger fantasy ends the moment you picture your suitcase open on a hostel floor.',
+    image: import.meta.env.VITE_IMG_SORTING,
+    content: () => (
+      <PostContent>
+        <p className="text-sm text-emerald-700 uppercase tracking-widest font-sans mb-6">
+          Why I&apos;m not packing like a fashion blogger.
+        </p>
+
+        <p>I have sorted the same pile of clothes three times today.</p>
+        <p>
+          Not because I&apos;m indecisive. Because every time I clear a surface, something appears on
+          it. I have lived in this apartment for years and apparently I have been quietly hoarding
+          things I forgot I owned.
+        </p>
+        <p>
+          My brain does not do well with this. I need order to think. Right now my living room looks
+          like a thrift store had a breakdown, and I am somewhere in the middle of it with a garbage
+          bag in one hand and absolutely no plan in the other.
+        </p>
+        <p>At some point this afternoon I had a thought that felt reasonable at the time.</p>
+        <p>
+          <em>If I&apos;m going to be traveling, I should look good doing it.</em>
+        </p>
+        <p>
+          So I started setting things aside. The good jeans. The going-out tops. The heels I&apos;ve
+          worn twice but keep because they&apos;re perfect. I was building a travel wardrobe in my head
+          and it felt exciting and it felt like a solution to the chaos. It was neither.
+        </p>
+
+        <blockquote className="border-l-4 border-orange-500 pl-5 py-1 my-8 not-prose">
+          <p className="text-xl italic text-gray-800">
+            You don&apos;t want more options when you&apos;re living out of a bag. You want fewer
+            decisions.
+          </p>
+        </blockquote>
+
+        <p>
+          Then I pictured it. The room I&apos;ll be staying in. The suitcase open on the floor because
+          there&apos;s nowhere else to put it. Every single thing I packed spread across a 10x10 space.
+        </p>
+        <p>That&apos;s where the fashion blogger fantasy ends.</p>
+        <p>
+          The less you pack, the lighter you move. The lighter you move, the more you actually show up
+          for the life you went there to live instead of managing your luggage.
+        </p>
+        <p>
+          So the heels went into the donation bag. The good jeans made the cut. Two pairs.
+          That&apos;s it.
+        </p>
+        <p>
+          I&apos;m not packing light because I have to. I&apos;m packing light because I&apos;ve already
+          learned what happens when you don&apos;t. It shouldn&apos;t feel like home. That&apos;s the
+          whole point.
+        </p>
+        <p>
+          <em>Back to the bags.</em>
+        </p>
+        <p>
+          The mess is part of it. The chaos, the second-guessing, the moment you almost pack the heels
+          anyway — that&apos;s not a sign you&apos;re doing it wrong. That&apos;s what letting go
+          actually looks like. Nobody&apos;s leap is clean. Mine certainly isn&apos;t.
+        </p>
+        <p>
+          But you sort another pile. You make another decision. And slowly, the life you&apos;re
+          leaving gets lighter.
+        </p>
+        <p>So does everything else.</p>
 
         <div className="border-t border-gray-200 pt-6 mt-10">
           <p className="text-sm text-gray-400 font-sans mb-1">

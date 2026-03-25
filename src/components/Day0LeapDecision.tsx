@@ -1,10 +1,9 @@
+import { images } from '../config/images';
 import { scrollToSectionById } from '../utils/scrollToSection';
 
 // ─── QYLAT Blog Post: Day 0 — The Decision to Leap 2.0 ───
 // Structure identical to SortingSpiral.tsx; scoped with .leap-post.
 // CTA uses in-app scroll to #idea-to-plan (SortingSpiral uses /ideatoplan).
-
-const LEAD_IMAGE_SRC = '/absolutemess.jpg';
 
 export default function Day0LeapDecision() {
   return (
@@ -122,7 +121,7 @@ export default function Day0LeapDecision() {
 
       {/* Lead Image */}
       <img
-        src={LEAD_IMAGE_SRC}
+        src={images.day0}
         alt="The moment before the second leap"
         className="lead-image"
       />

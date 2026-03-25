@@ -5,7 +5,7 @@ type SectionDividerProps = {
 
 export default function SectionDivider({ bottomFill = '#ffffff' }: SectionDividerProps) {
   return (
-    <div className="w-full h-12 -mb-px flex-shrink-0" aria-hidden>
+    <div className="w-full h-8 -mb-px flex-shrink-0" aria-hidden>
       <svg
         className="w-full h-full block"
         viewBox="0 0 1440 120"
