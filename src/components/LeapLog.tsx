@@ -3,7 +3,6 @@ import { images } from '../config/images';
 import PostCard from './PostCard';
 import SectionDivider from './SectionDivider';
 import { posts } from '../data/posts';
-import { scrollToSectionById } from '../utils/scrollToSection';
 
 function leadImagePositionClass(image: string, variant: 'card' | 'modal'): string {
   if (image === images.bini) {
@@ -16,7 +15,6 @@ function leadImagePositionClass(image: string, variant: 'card' | 'modal'): strin
 }
 
 export default function LeapLog() {
-  const scrollToSection = (id: string) => scrollToSectionById(id);
   const [openSlug, setOpenSlug] = useState<string | null>(null);
   const modalScrollRef = useRef<HTMLDivElement>(null);
   const modalHeaderRef = useRef<HTMLElement>(null);
@@ -44,6 +42,17 @@ export default function LeapLog() {
       document.body.style.overflow = prev;
     };
   }, [openSlug, closePost]);
+
+  useEffect(() => {
+    const handleClosePostView = () => {
+      setOpenSlug(null);
+    };
+
+    window.addEventListener('qylat:close-post-view', handleClosePostView);
+    return () => {
+      window.removeEventListener('qylat:close-post-view', handleClosePostView);
+    };
+  }, []);
 
   useEffect(() => {
     if (!openSlug) return;
@@ -143,13 +152,12 @@ export default function LeapLog() {
       )}
 
       <div className="mt-8 md:mt-10 text-center px-4">
-        <button
-          type="button"
-          onClick={() => scrollToSection('work-with-me')}
+        <a
+          href="#work-with-me"
           className="inline-block bg-orange-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-orange-600 transition-all transform hover:scale-105 shadow-lg"
         >
           Take the Leap
-        </button>
+        </a>
       </div>
 
       <SectionDivider bottomFill="#ffffff" />

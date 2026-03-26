@@ -1,9 +1,8 @@
 import { images } from '../config/images';
-import { scrollToSectionById } from '../utils/scrollToSection';
 
 // ─── QYLAT Blog Post: Day 0 — The Decision to Leap 2.0 ───
 // Structure identical to SortingSpiral.tsx; scoped with .leap-post.
-// CTA uses in-app scroll to #idea-to-plan (SortingSpiral uses /ideatoplan).
+// CTA links to #work-with-me (SortingSpiral uses /ideatoplan).
 
 export default function Day0LeapDecision() {
   return (
@@ -197,13 +196,7 @@ export default function Day0LeapDecision() {
       {/* CTA */}
       <div className="cta-block">
         <p>Ready to build the business that funds your leap?</p>
-        <a
-          href="#idea-to-plan"
-          onClick={(e) => {
-            e.preventDefault();
-            scrollToSectionById('idea-to-plan');
-          }}
-        >
+        <a href="#work-with-me">
           Take the Leap →
         </a>
       </div>

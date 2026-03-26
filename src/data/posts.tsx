@@ -67,6 +67,17 @@ function PostContent({ children }: { children: React.ReactNode }) {
   );
 }
 
+function handleTakeLeapCTA(event: React.MouseEvent<HTMLAnchorElement>) {
+  event.preventDefault();
+  window.dispatchEvent(new Event('qylat:close-post-view'));
+  requestAnimationFrame(() => {
+    const workWithMeSection = document.getElementById('work-with-me');
+    if (workWithMeSection) {
+      workWithMeSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+}
+
 /** Slug for “Day 0: The Decision to Leap” — used for ordering / deep links */
 export const DAY_ZERO_SLUG = 'day-0-the-decision-to-leap';
 
@@ -107,7 +118,7 @@ export const posts: Post[] = [
 
         <div className="border-t border-gray-200 pt-6 mt-10">
           <p className="text-sm text-gray-400 font-sans mb-1">Ready to build the business that funds your leap?</p>
-          <a href="#idea-to-plan" className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity">Take the Leap →</a>
+          <a href="#work-with-me" onClick={handleTakeLeapCTA} className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity">Take the Leap →</a>
         </div>
       </PostContent>
     ),
@@ -311,7 +322,8 @@ export const posts: Post[] = [
             Ready to build the business that funds your leap?
           </p>
           <a
-            href="#idea-to-plan"
+            href="#work-with-me"
+            onClick={handleTakeLeapCTA}
             className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
           >
             Take the Leap →
@@ -387,7 +399,8 @@ export const posts: Post[] = [
             Ready to build the business that funds your leap?
           </p>
           <a
-            href="#idea-to-plan"
+            href="#work-with-me"
+            onClick={handleTakeLeapCTA}
             className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
           >
             Take the Leap →
@@ -475,7 +488,8 @@ export const posts: Post[] = [
             Ready to build the business that funds your leap?
           </p>
           <a
-            href="#idea-to-plan"
+            href="#work-with-me"
+            onClick={handleTakeLeapCTA}
             className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
           >
             Take the Leap →
