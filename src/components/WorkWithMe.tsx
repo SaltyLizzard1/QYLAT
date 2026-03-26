@@ -1,6 +1,8 @@
 import { Check, X } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
+const CALENDLY_URL = 'https://calendly.com/ideatoplanincome/new-meeting';
+
 declare global {
   interface Window {
     Calendly?: {
@@ -25,18 +27,26 @@ export default function WorkWithMe() {
     document.head.appendChild(link);
 
     return () => {
-      document.head.removeChild(script);
-      document.head.removeChild(link);
+      try {
+        document.head.removeChild(script);
+      } catch {
+        /* already removed */
+      }
+      try {
+        document.head.removeChild(link);
+      } catch {
+        /* already removed */
+      }
     };
   }, []);
 
   const openCalendly = () => {
     if (calendlyReady && window.Calendly) {
       window.Calendly.initPopupWidget({
-        url: 'https://calendly.com/ideatoplanincome/45min',
+        url: CALENDLY_URL,
       });
     } else {
-      window.open('https://calendly.com/ideatoplanincome/45min', '_blank');
+      window.open(CALENDLY_URL, '_blank');
     }
   };
 
@@ -133,6 +143,7 @@ export default function WorkWithMe() {
             <p className="text-4xl font-bold text-emerald-900 mb-2">$97</p>
             <p className="text-gray-500 mb-6">45-minute private session</p>
             <button
+              type="button"
               onClick={openCalendly}
               className="px-10 py-4 bg-orange-500 hover:bg-orange-600 text-white text-lg font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg"
             >

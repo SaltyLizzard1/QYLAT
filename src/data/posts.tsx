@@ -215,7 +215,7 @@ export const posts: Post[] = [
     excerpt:
       "The second leap is harder than the first. Here's the exact 60-day plan I'm following - packing, visa, banking, and every task from first sort to final keys.",
     image: images.sixtyDay,
-    content: () => (
+    content: ({ onTakeLeapClick } = {}) => (
       <PostContent>
         <p>The first time I did this, it was easier. Not because it wasn&apos;t scary. It was terrifying. But I hadn&apos;t lost anything yet. I just knew I was done with the life I had and ready for something different.</p>
         <p>So I left. Tested the waters. Bought a one-way ticket to Thailand and felt, for the first time in years, completely alive.</p>
@@ -233,20 +233,17 @@ export const posts: Post[] = [
         <SixtyDayPlanTableCollapsible />
         <p>Five years taught me what actually matters. I rebuilt. I came back stronger.</p>
         <p>And I would do every single bit of it again to get back to that feeling of being truly alive.</p>
-        <div className="mt-12 pt-8 border-t border-gray-200">
-          <p className="text-center font-semibold text-emerald-900 mb-4">Ready to build the business that funds your leap?</p>
-          <div className="text-center">
-            <a
-              href="#work-with-me"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('work-with-me')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="inline-block px-8 py-3 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg transition-all"
-            >
-              Take the Leap →
-            </a>
-          </div>
+        <div className="border-t border-gray-200 pt-6 mt-10">
+          <p className="text-sm text-gray-400 font-sans mb-1">
+            Ready to build the business that funds your leap?
+          </p>
+          <a
+            href="#work-with-me"
+            onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
+            className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
+          >
+            Take the Leap →
+          </a>
         </div>
       </PostContent>
     ),
