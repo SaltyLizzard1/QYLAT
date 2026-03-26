@@ -20,3 +20,5 @@ export default function SectionDivider({ bottomFill = '#ffffff' }: SectionDivide
     </div>
   );
 }
+git add .
+git commit -m "Finish feature work"
