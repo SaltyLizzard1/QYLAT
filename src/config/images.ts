@@ -8,9 +8,6 @@ export const images = {
   about: import.meta.env.VITE_IMG_ABOUT,
   aboutBeach: import.meta.env.VITE_IMG_ABOUT_BEACH,
   hero: import.meta.env.VITE_IMG_HERO,
-  logo:
-    import.meta.env.VITE_IMG_LOGO === '/logo-removebg.png' || !import.meta.env.VITE_IMG_LOGO
-      ? '/qlt-logo.png'
-      : import.meta.env.VITE_IMG_LOGO,
+  logo: import.meta.env.VITE_IMG_LOGO,
   bini: import.meta.env.VITE_IMG_BINI,
 } as const;
