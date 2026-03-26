@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { images } from '../config/images';
 
 export interface Post {
@@ -11,19 +11,12 @@ export interface Post {
   content?: (options?: { onTakeLeapClick?: () => void }) => React.JSX.Element;
 }
 
-/**
- * 60-day plan post - Leap Log id **3**, slug `60-day-plan-thailand-again`.
- */
-const SIXTY_DAY_PLAN_EXCERPT =
-  "The second leap is harder than the first. Here's the exact 60-day plan I'm following - packing, visa, banking, and every task from first sort to final keys.";
-
 function KitForm() {
   const embedRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const host = embedRef.current;
     if (!host) return;
-
     host.innerHTML = '';
 
     const script = document.createElement('script');
@@ -53,6 +46,94 @@ function SixtyDayPlanDownloadSection() {
         following every day.
       </p>
       <KitForm />
+    </div>
+  );
+}
+
+function SixtyDayPlanTableCollapsible() {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const planRows = [
+    ['1', 'Planning', 'Create master inventory of all items', 'High'],
+    ['2', 'Planning', 'Verify passport validity (must be 6+ months)', 'High'],
+    ['3', 'Planning', 'Research Thailand visa types (DTV, Tourist, LTR)', 'High'],
+    ['5', 'Planning', 'Sort items into Keep, Sell, and Donate', 'Medium'],
+    ['8', 'Logistics', 'Photograph large furniture and electronics', 'High'],
+    ['10', 'Logistics', 'List items on Facebook Marketplace', 'Medium'],
+    ['20', 'Logistics', 'Open travel-friendly bank account (Wise or Schwab)', 'High'],
+    ['22', 'Logistics', 'Port phone number to Google Voice', 'High'],
+    ['25', 'Logistics', 'Book one-way flight to Thailand', 'High'],
+    ['26', 'Logistics', 'Book initial 14-day accommodation', 'Medium'],
+    ['28', 'Logistics', 'Verify 2FA on all banking apps', 'High'],
+    ['30', 'Logistics', 'Apply for Thailand Visa via E-Visa portal', 'High'],
+    ['12', 'Execution', 'Box up books, decor, and non-essentials', 'Low'],
+    ['15', 'Execution', 'Sort kitchen down to one essential set', 'Medium'],
+    ['35', 'Execution', 'Pack seasonal clothing and extra linens', 'Medium'],
+    ['40', 'Execution', 'Schedule dental and medical checkups', 'Medium'],
+    ['45', 'Execution', 'Arrange international shipping or extra baggage', 'High'],
+    ['50', 'Final', 'Pack majority of wardrobe', 'High'],
+    ['53', 'Final', 'Schedule cancellation of cable, internet, electricity', 'High'],
+    ['55', 'Final', 'Pack remaining kitchen and living room items', 'High'],
+    ['57', 'Final', 'Deep clean and complete final repairs', 'Medium'],
+    ['59', 'Final', 'Confirm airport transfer and print all documents', 'High'],
+    ['60', 'Final', 'Move out, return keys, depart for Thailand', 'High'],
+  ] as const;
+
+  return (
+    <div className="not-prose my-6">
+      {!isOpen ? (
+        <button
+          type="button"
+          onClick={() => setIsOpen(true)}
+          className="inline-flex cursor-pointer items-center rounded-lg bg-emerald-800 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-900"
+        >
+          View Full 60-Day Breakdown
+        </button>
+      ) : (
+        <div>
+          <button
+            type="button"
+            onClick={() => setIsOpen(false)}
+            className="inline-flex cursor-pointer items-center rounded-lg bg-emerald-800 px-4 py-2.5 text-sm font-semibold text-white hover:bg-emerald-900"
+          >
+            Hide Full 60-Day Breakdown
+          </button>
+          <div className="overflow-x-auto mt-4">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr className="bg-emerald-800 text-white">
+                  <th className="px-4 py-3 text-left font-semibold">Day</th>
+                  <th className="px-4 py-3 text-left font-semibold">Phase</th>
+                  <th className="px-4 py-3 text-left font-semibold">Task</th>
+                  <th className="px-4 py-3 text-left font-semibold">Priority</th>
+                </tr>
+              </thead>
+              <tbody>
+                {planRows.map(([day, phase, task, priority], index) => (
+                  <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                    <td className="px-4 py-3 font-medium text-emerald-800">{day}</td>
+                    <td className="px-4 py-3 text-gray-600">{phase}</td>
+                    <td className="px-4 py-3 text-gray-800">{task}</td>
+                    <td className="px-4 py-3">
+                      <span
+                        className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                          priority === 'High'
+                            ? 'bg-orange-100 text-orange-700'
+                            : priority === 'Medium'
+                              ? 'bg-emerald-100 text-emerald-700'
+                              : 'bg-gray-100 text-gray-600'
+                        }`}
+                      >
+                        {priority}
+                      </span>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -128,209 +209,44 @@ export const posts: Post[] = [
   },
   {
     id: 3,
-    slug: '60-day-plan-thailand-again',
-    title:
-      "60 Days to Thailand. Here's Exactly How I'm Doing It.",
+    slug: 'how-to-move-to-thailand-in-60-days',
+    title: 'How to Move to Thailand in 60 Days',
     date: 'March 15, 2026',
-    excerpt: SIXTY_DAY_PLAN_EXCERPT,
+    excerpt:
+      "The second leap is harder than the first. Here's the exact 60-day plan I'm following - packing, visa, banking, and every task from first sort to final keys.",
     image: images.sixtyDay,
-    content: ({ onTakeLeapClick } = {}) => (
+    content: () => (
       <PostContent>
-        <p>
-          The first time I did this, it was easier. Not because it wasn&apos;t scary. It was
-          terrifying. But I hadn&apos;t lost anything yet. I just knew I was done with the life I had
-          and ready for something different.
-        </p>
-        <p>
-          So I left. Tested the waters. Bought a one-way ticket to Thailand and felt, for the first
-          time in years, completely alive.
-        </p>
+        <p>The first time I did this, it was easier. Not because it wasn&apos;t scary. It was terrifying. But I hadn&apos;t lost anything yet. I just knew I was done with the life I had and ready for something different.</p>
+        <p>So I left. Tested the waters. Bought a one-way ticket to Thailand and felt, for the first time in years, completely alive.</p>
         <p>It confirmed everything I suspected. This was the life I was supposed to be living.</p>
         <p>So I came home, sold everything, and prepared to make it permanent.</p>
         <p>Then the world had other plans.</p>
-        <p>
-          COVID shut everything down. A legal situation I had no control over kept me locked in place
-          for years. Five years of watching the dream sit on pause. Five years of rebuilding from
-          scratch. Less money. Less certainty. More fear.
-        </p>
+        <p>COVID shut everything down. A legal situation I had no control over kept me locked in place for years. Five years of watching the dream sit on pause. Five years of rebuilding from scratch. Less money. Less certainty. More fear.</p>
         <p>And still. Here I am. Going anyway.</p>
-        <p>
-          If you&apos;re reading this waiting for the perfect moment, the right amount of money, the
-          right circumstances - I need you to understand something.
-        </p>
-
+        <p>If you&apos;re reading this waiting for the perfect moment, the right amount of money, the right circumstances - I need you to understand something.</p>
         <blockquote className="border-l-4 border-orange-500 pl-5 py-1 my-8 not-prose">
-          <p className="text-xl italic text-gray-800">
-            There is no perfect moment. There is only the decision.
-          </p>
+          <p className="text-xl italic text-gray-800">There is no perfect moment. There is only the decision.</p>
         </blockquote>
-
         <p>This is mine. Again. Here&apos;s exactly how I&apos;m doing it.</p>
-
-        <h2 className="text-lg font-semibold text-emerald-900 mt-8 mb-2">
-          Phase 1: Planning and Preparation (Days 1 to 7)
-        </h2>
-        <p>
-          Before a single box gets packed or a single item gets listed, the foundation has to be solid.
-          Passport validity checked. Visa research done. A complete inventory of everything in the
-          apartment.
-        </p>
-        <p>
-          That last one sounds simple. It&apos;s not. Walking through your own space and deciding what
-          matters is one of the most clarifying and gutting things you can do. Every object is a
-          decision. Every decision is a small grief.
-        </p>
-        <p>
-          I&apos;ve done this before. I know what goes. I keep the things that serve the life I&apos;m
-          building. Everything else finds a new home.
-        </p>
-
         <SixtyDayPlanDownloadSection />
-
-        <h2 className="text-lg font-semibold text-emerald-900 mt-8 mb-2">
-          Phase 2: Logistics and Operations (Days 8 to 30)
-        </h2>
-        <p>
-          This is where the practical work happens. Listing furniture on Facebook Marketplace.
-          Opening a Wise account for international transfers.
-        </p>
-        <p>
-          The financial infrastructure piece is critical and most people get it wrong. You need a bank
-          that doesn&apos;t charge foreign transaction fees, a way to receive payments internationally,
-          and two-factor authentication that doesn&apos;t depend on a SIM card you&apos;re about to
-          cancel.
-        </p>
-        <p>Book the flight. Book the first 14 nights. Apply for the visa. In that order.</p>
-
-        <h2 className="text-lg font-semibold text-emerald-900 mt-8 mb-2">
-          Phase 3: Execution and Packing (Days 12 to 45)
-        </h2>
-        <p>
-          The physical work. Boxes. Labels. Donation runs. The slow reduction of a life into what
-          fits in two bags.
-        </p>
-        <p>
-          This phase is different the second time. Not easier. Different. Last time I let things go
-          with hope. This time I let things go with hard-won knowledge. The only thing that travels
-          with me that matters is the business I built before I left.
-        </p>
-        <p className="font-semibold text-emerald-800">That last sentence is worth reading again.</p>
-
-        <h2 className="text-lg font-semibold text-emerald-900 mt-8 mb-2">
-          Phase 4: Final Countdown (Days 50 to 60)
-        </h2>
-        <p>
-          The last things to go are always the hardest. The everyday items you reach for without
-          thinking. The coffee maker. The good knife. The pillow you&apos;ve had for years.
-        </p>
-        <p>
-          Then the admin. Cancel the cable. Cancel the internet. Deep clean. Final repairs. Print the
-          visa documents.
-        </p>
-        <p>Hand over the keys.</p>
-        <p>Get on the plane.</p>
-
-        <h2 className="text-lg font-semibold text-emerald-900 mt-8 mb-2">The Full 60-Day Plan</h2>
-        <p>Use this as your own template. Screenshot it. Print it. Make it yours.</p>
-        <div className="overflow-x-auto not-prose my-6">
-          <table className="w-full text-sm border-collapse">
-            <thead>
-              <tr className="bg-emerald-800 text-white">
-                <th className="px-4 py-3 text-left font-semibold">Day</th>
-                <th className="px-4 py-3 text-left font-semibold">Phase</th>
-                <th className="px-4 py-3 text-left font-semibold">Task</th>
-                <th className="px-4 py-3 text-left font-semibold">Priority</th>
-              </tr>
-            </thead>
-            <tbody>
-              {[
-                ['1', 'Planning', 'Create master inventory of all items', 'High'],
-                ['2', 'Planning', 'Verify passport validity (must be 6+ months)', 'High'],
-                ['3', 'Planning', 'Research Thailand visa types (DTV, Tourist, LTR)', 'High'],
-                ['5', 'Planning', 'Sort items into Keep, Sell, and Donate', 'Medium'],
-                ['8', 'Logistics', 'Photograph large furniture and electronics', 'High'],
-                ['10', 'Logistics', 'List items on Facebook Marketplace', 'Medium'],
-                ['20', 'Logistics', 'Open travel-friendly bank account (Wise or Schwab)', 'High'],
-                ['22', 'Logistics', 'Port phone number to Google Voice', 'High'],
-                ['25', 'Logistics', 'Book one-way flight to Thailand', 'High'],
-                ['26', 'Logistics', 'Book initial 14-day accommodation', 'Medium'],
-                ['28', 'Logistics', 'Verify 2FA on all banking apps', 'High'],
-                ['30', 'Logistics', 'Apply for Thailand Visa via E-Visa portal', 'High'],
-                ['12', 'Execution', 'Box up books, decor, and non-essentials', 'Low'],
-                ['15', 'Execution', 'Sort kitchen down to one essential set', 'Medium'],
-                ['35', 'Execution', 'Pack seasonal clothing and extra linens', 'Medium'],
-                ['40', 'Execution', 'Schedule dental and medical checkups', 'Medium'],
-                ['45', 'Execution', 'Arrange international shipping or extra baggage', 'High'],
-                ['50', 'Final', 'Pack majority of wardrobe', 'High'],
-                ['53', 'Final', 'Schedule cancellation of cable, internet, electricity', 'High'],
-                ['55', 'Final', 'Pack remaining kitchen and living room items', 'High'],
-                ['57', 'Final', 'Deep clean and complete final repairs', 'Medium'],
-                ['59', 'Final', 'Confirm airport transfer and print all documents', 'High'],
-                ['60', 'Final', 'Move out, return keys, depart for Thailand', 'High'],
-              ].map(([day, phase, task, priority], i) => (
-                <tr key={i} className={i % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                  <td className="px-4 py-3 font-medium text-emerald-800">{day}</td>
-                  <td className="px-4 py-3 text-gray-600">{phase}</td>
-                  <td className="px-4 py-3 text-gray-800">{task}</td>
-                  <td className="px-4 py-3">
-                    <span
-                      className={`px-2 py-1 rounded-full text-xs font-semibold ${
-                        priority === 'High'
-                          ? 'bg-orange-100 text-orange-700'
-                          : priority === 'Medium'
-                            ? 'bg-emerald-100 text-emerald-700'
-                            : 'bg-gray-100 text-gray-600'
-                      }`}
-                    >
-                      {priority}
-                    </span>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        <h2 className="text-lg font-semibold text-emerald-900 mt-8 mb-2">
-          What doing it twice actually teaches you
-        </h2>
-        <p>
-          The first leap is about courage. You don&apos;t know what you&apos;re getting into so you
-          just go.
-        </p>
-        <p>
-          The second leap is about something harder. It&apos;s about going anyway when you know
-          exactly what you&apos;re risking. When you&apos;ve already paid the price once and
-          you&apos;re willing to pay it again because the alternative - staying - is no longer
-          acceptable.
-        </p>
-        <p>
-          I lost five years. I lost the money. I lost the momentum. I rebuilt from zero with less
-          than I started with.
-        </p>
-        <p>
-          And I would do every single bit of it again to get back to that feeling of being truly
-          alive.
-        </p>
-        <p>
-          If you&apos;ve been waiting for permission, for the right time, for enough money, for the
-          fear to go away - it won&apos;t. None of it will arrive on schedule.
-        </p>
-        <p className="font-semibold text-emerald-900">
-          The only thing that changes is whether you decide.
-        </p>
-
-        <div className="border-t border-gray-200 pt-6 mt-10">
-          <p className="text-sm text-gray-400 font-sans mb-1">
-            Ready to build the business that funds your leap?
-          </p>
-          <a
-            href="#work-with-me"
-            onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
-            className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
-          >
-            Take the Leap →
-          </a>
+        <SixtyDayPlanTableCollapsible />
+        <p>Five years taught me what actually matters. I rebuilt. I came back stronger.</p>
+        <p>And I would do every single bit of it again to get back to that feeling of being truly alive.</p>
+        <div className="mt-12 pt-8 border-t border-gray-200">
+          <p className="text-center font-semibold text-emerald-900 mb-4">Ready to build the business that funds your leap?</p>
+          <div className="text-center">
+            <a
+              href="#work-with-me"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('work-with-me')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="inline-block px-8 py-3 bg-orange-600 hover:bg-orange-700 text-white font-semibold rounded-lg transition-all"
+            >
+              Take the Leap →
+            </a>
+          </div>
         </div>
       </PostContent>
     ),
