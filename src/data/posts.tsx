@@ -8,7 +8,7 @@ export interface Post {
   date: string;
   excerpt: string;
   image: string;
-  content?: () => React.JSX.Element;
+  content?: (options?: { onTakeLeapClick?: () => void }) => React.JSX.Element;
 }
 
 /**
@@ -67,9 +67,12 @@ function PostContent({ children }: { children: React.ReactNode }) {
   );
 }
 
-function handleTakeLeapCTA(event: React.MouseEvent<HTMLAnchorElement>) {
+function handleTakeLeapCTA(
+  event: React.MouseEvent<HTMLAnchorElement>,
+  onTakeLeapClick?: () => void
+) {
   event.preventDefault();
-  window.dispatchEvent(new Event('qylat:close-post-view'));
+  onTakeLeapClick?.();
   requestAnimationFrame(() => {
     const workWithMeSection = document.getElementById('work-with-me');
     if (workWithMeSection) {
@@ -90,7 +93,7 @@ export const posts: Post[] = [
     excerpt:
       'Not a highlight reel. The real one. From autopilot in Florida to a one-way ticket to Thailand — and what happened when the world hit pause.',
     image: import.meta.env.VITE_IMG_DAY0,
-    content: () => (
+    content: ({ onTakeLeapClick } = {}) => (
       <PostContent>
         <p className="text-sm text-emerald-700 uppercase tracking-widest font-sans mb-6">
           Not a highlight reel. The real one.
@@ -118,7 +121,7 @@ export const posts: Post[] = [
 
         <div className="border-t border-gray-200 pt-6 mt-10">
           <p className="text-sm text-gray-400 font-sans mb-1">Ready to build the business that funds your leap?</p>
-          <a href="#work-with-me" onClick={handleTakeLeapCTA} className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity">Take the Leap →</a>
+          <a href="#work-with-me" onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)} className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity">Take the Leap →</a>
         </div>
       </PostContent>
     ),
@@ -131,7 +134,7 @@ export const posts: Post[] = [
     date: 'March 15, 2026',
     excerpt: SIXTY_DAY_PLAN_EXCERPT,
     image: images.sixtyDay,
-    content: () => (
+    content: ({ onTakeLeapClick } = {}) => (
       <PostContent>
         <p>
           The first time I did this, it was easier. Not because it wasn&apos;t scary. It was
@@ -323,7 +326,7 @@ export const posts: Post[] = [
           </p>
           <a
             href="#work-with-me"
-            onClick={handleTakeLeapCTA}
+            onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
             className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
           >
             Take the Leap →
@@ -340,7 +343,7 @@ export const posts: Post[] = [
     excerpt:
       'TD Bank was perfect for Tampa. It was useless in Bali. The replacement card took a month. Here is what I set up differently this time.',
     image: images.baliAtm,
-    content: () => (
+    content: ({ onTakeLeapClick } = {}) => (
       <PostContent>
         <p className="text-sm text-emerald-700 uppercase tracking-widest font-sans mb-6">
           What I learned about money the hard way and what I&apos;m doing differently this time.
@@ -400,7 +403,7 @@ export const posts: Post[] = [
           </p>
           <a
             href="#work-with-me"
-            onClick={handleTakeLeapCTA}
+            onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
             className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
           >
             Take the Leap →
@@ -417,7 +420,7 @@ export const posts: Post[] = [
     excerpt:
       'Every time I clear a surface, something appears on it. On chaos, packing light, and why the fashion blogger fantasy ends the moment you picture your suitcase open on a hostel floor.',
     image: import.meta.env.VITE_IMG_SORTING,
-    content: () => (
+    content: ({ onTakeLeapClick } = {}) => (
       <PostContent>
         <p className="text-sm text-emerald-700 uppercase tracking-widest font-sans mb-6">
           Why I&apos;m not packing like a fashion blogger.
@@ -489,7 +492,7 @@ export const posts: Post[] = [
           </p>
           <a
             href="#work-with-me"
-            onClick={handleTakeLeapCTA}
+            onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
             className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
           >
             Take the Leap →

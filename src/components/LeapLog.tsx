@@ -44,17 +44,6 @@ export default function LeapLog() {
   }, [openSlug, closePost]);
 
   useEffect(() => {
-    const handleClosePostView = () => {
-      setOpenSlug(null);
-    };
-
-    window.addEventListener('qylat:close-post-view', handleClosePostView);
-    return () => {
-      window.removeEventListener('qylat:close-post-view', handleClosePostView);
-    };
-  }, []);
-
-  useEffect(() => {
     if (!openSlug) return;
     const scrollEl = modalScrollRef.current;
     const headerEl = modalHeaderRef.current;
@@ -145,7 +134,7 @@ export default function LeapLog() {
             </header>
 
             <article className="border-t border-gray-100 px-6 py-6 sm:px-8 md:px-10 md:py-10">
-              {activePost.content()}
+              {activePost.content({ onTakeLeapClick: closePost })}
             </article>
           </div>
         </div>
