@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { images } from '../config/images';
 import PostCard from './PostCard';
 import SectionDivider from './SectionDivider';
@@ -15,22 +16,42 @@ function leadImagePositionClass(image: string, variant: 'card' | 'modal'): strin
 }
 
 export default function LeapLog() {
-  const [openSlug, setOpenSlug] = useState<string | null>(null);
+  const { slug: slugParam } = useParams<{ slug?: string }>();
+  const navigate = useNavigate();
   const modalScrollRef = useRef<HTMLDivElement>(null);
   const modalHeaderRef = useRef<HTMLElement>(null);
 
-  const openPost = useCallback((slug: string) => {
-    setOpenSlug(slug);
-  }, []);
-
-  const closePost = useCallback(() => {
-    setOpenSlug(null);
-  }, []);
-
-  const activePost = openSlug ? posts.find((p) => p.slug === openSlug) : undefined;
+  const activePost = slugParam
+    ? posts.find((p) => p.slug === slugParam && p.content)
+    : undefined;
 
   useEffect(() => {
-    if (!openSlug) return;
+    if (!slugParam) return;
+    const ok = posts.some((p) => p.slug === slugParam && p.content);
+    if (!ok) navigate('/', { replace: true });
+  }, [slugParam, navigate]);
+
+  useEffect(() => {
+    if (!slugParam) return;
+    const t = window.setTimeout(() => {
+      document.getElementById('the-leap-log')?.scrollIntoView({ block: 'start' });
+    }, 80);
+    return () => window.clearTimeout(t);
+  }, [slugParam]);
+
+  const openPost = useCallback(
+    (slug: string) => {
+      navigate(`/leap/${slug}`);
+    },
+    [navigate]
+  );
+
+  const closePost = useCallback(() => {
+    navigate('/', { replace: true });
+  }, [navigate]);
+
+  useEffect(() => {
+    if (!slugParam) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') closePost();
     };
@@ -41,10 +62,10 @@ export default function LeapLog() {
       document.removeEventListener('keydown', onKey);
       document.body.style.overflow = prev;
     };
-  }, [openSlug, closePost]);
+  }, [slugParam, closePost]);
 
   useEffect(() => {
-    if (!openSlug) return;
+    if (!slugParam) return;
     const scrollEl = modalScrollRef.current;
     const headerEl = modalHeaderRef.current;
     if (!scrollEl || !headerEl) return;
@@ -58,7 +79,7 @@ export default function LeapLog() {
     requestAnimationFrame(() => {
       requestAnimationFrame(alignHeader);
     });
-  }, [openSlug]);
+  }, [slugParam]);
 
   return (
     <section
@@ -68,7 +89,7 @@ export default function LeapLog() {
       <div className="max-w-3xl mx-auto text-center mb-6 md:mb-8 px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl md:text-5xl font-bold text-emerald-900 mb-4">The Leap Log</h2>
         <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-          Raw dispatches from the edge — fear, breakthroughs, Thailand realities.
+          Raw dispatches from the edge. Fear, breakthroughs, Thailand realities.
           Not polished postcards; real reinvention in progress.
         </p>
       </div>
