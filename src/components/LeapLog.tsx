@@ -5,7 +5,14 @@ import PostCard from './PostCard';
 import SectionDivider from './SectionDivider';
 import { posts } from '../data/posts';
 
-function leadImagePositionClass(image: string, variant: 'card' | 'modal'): string {
+function leadImagePositionClass(
+  image: string,
+  variant: 'card' | 'modal',
+  slug?: string
+): string {
+  if (slug === 'decision-made-doubt-showed-up') {
+    return 'object-[center_top]';
+  }
   if (image === images.bini) {
     return 'object-[55%_30%]';
   }
@@ -134,7 +141,7 @@ export default function LeapLog() {
                 <img
                   src={activePost.image}
                   alt={activePost.title}
-                  className={`h-[400px] max-h-[400px] w-full object-cover ${leadImagePositionClass(activePost.image, 'modal')}`}
+                  className={`h-[400px] max-h-[400px] w-full object-cover ${leadImagePositionClass(activePost.image, 'modal', activePost.slug)}`}
                   loading="eager"
                   decoding="async"
                 />
