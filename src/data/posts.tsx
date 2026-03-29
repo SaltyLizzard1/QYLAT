@@ -8,6 +8,12 @@ export interface Post {
   date: string;
   excerpt: string;
   image: string;
+  /**
+   * CSS `object-position` for the Leap Log card and modal hero (`object-fit: cover`).
+   * Examples: `"center 30%"`, `"top center"`. Omit to use per-image defaults (`center center` on cards
+   * unless another rule applies).
+   */
+  heroPosition?: string;
   /** Shown on cards and in the post modal after the date (e.g. "3 min read"). */
   readTime?: string;
   content?: (options?: { onTakeLeapClick?: () => void }) => React.JSX.Element;
@@ -177,6 +183,7 @@ export const posts: Post[] = [
     excerpt:
       'I already decided. The doubt showed up anyway. On losing the safety net you never planned to use, and why forward is the only option left.',
     image: '/Blog/edge-post-hero.jpg',
+    heroPosition: 'center 30%',
     content: ({ onTakeLeapClick } = {}) => (
       <PostContent>
         <p>I already decided. That part is done.</p>

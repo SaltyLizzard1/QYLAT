@@ -1,26 +1,12 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { images } from '../config/images';
 import PostCard from './PostCard';
 import SectionDivider from './SectionDivider';
 import { posts } from '../data/posts';
-
-function leadImagePositionClass(
-  image: string,
-  variant: 'card' | 'modal',
-  slug?: string
-): string {
-  if (slug === 'decision-made-doubt-showed-up') {
-    return 'object-[center_30%]';
-  }
-  if (image === images.bini) {
-    return 'object-[55%_30%]';
-  }
-  if (image === images.baliAtm) {
-    return variant === 'modal' ? 'object-[center_18%]' : 'object-[center_22%]';
-  }
-  return variant === 'modal' ? 'object-[center_30%]' : 'object-center';
-}
+import {
+  postHeroObjectPositionClass,
+  postHeroObjectPositionStyle,
+} from '../utils/postHeroImage';
 
 export default function LeapLog() {
   const { slug: slugParam } = useParams<{ slug?: string }>();
@@ -141,7 +127,8 @@ export default function LeapLog() {
                 <img
                   src={activePost.image}
                   alt={activePost.title}
-                  className={`h-[400px] max-h-[400px] w-full object-cover ${leadImagePositionClass(activePost.image, 'modal', activePost.slug)}`}
+                  className={`h-[400px] max-h-[400px] w-full object-cover ${postHeroObjectPositionClass(activePost, 'modal')}`.trimEnd()}
+                  style={postHeroObjectPositionStyle(activePost)}
                   loading="eager"
                   decoding="async"
                 />

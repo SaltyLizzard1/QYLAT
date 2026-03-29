@@ -1,5 +1,8 @@
 import type { Post } from '../data/posts';
-import { images } from '../config/images';
+import {
+  postHeroObjectPositionClass,
+  postHeroObjectPositionStyle,
+} from '../utils/postHeroImage';
 
 type PostCardProps = {
   post: Post;
@@ -7,17 +10,8 @@ type PostCardProps = {
 };
 
 export default function PostCard({ post, onOpenPost }: PostCardProps) {
-  // Special crop so the "dog" subject stays visible in desktop card view.
-  const cardImageObjectPosition =
-    post.slug === 'decision-made-doubt-showed-up'
-      ? 'object-[center_30%]'
-      : post.slug === 'the-more-i-sort-the-more-appears'
-      ? 'object-[center_30%]'
-      : post.image === images.bini
-        ? 'object-[55%_30%]'
-        : post.image === images.baliAtm
-          ? 'object-[center_22%]'
-          : 'object-center';
+  const heroPositionStyle = postHeroObjectPositionStyle(post);
+  const cardImageObjectPosition = postHeroObjectPositionClass(post, 'card');
 
   return (
     <div className="h-auto">
@@ -32,7 +26,8 @@ export default function PostCard({ post, onOpenPost }: PostCardProps) {
             <img
               src={post.image}
               alt={post.title}
-              className={`w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300 ${cardImageObjectPosition}`}
+              className={`w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300 ${cardImageObjectPosition}`.trimEnd()}
+              style={heroPositionStyle}
               loading="lazy"
             />
           </button>
