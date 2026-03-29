@@ -145,7 +145,10 @@ export default function LeapLog() {
               ref={modalHeaderRef}
               className="mb-8 scroll-mt-4 px-6 pt-6 text-center sm:px-8 md:px-10"
             >
-              <p className="text-sm font-medium text-gray-500">{activePost.date}</p>
+              <p className="text-sm font-medium text-gray-500">
+                {activePost.date}
+                {activePost.readTime ? ` · ${activePost.readTime}` : ''}
+              </p>
               <h2
                 id="leap-post-title"
                 className="mt-2 text-3xl font-bold text-emerald-900 md:text-4xl"

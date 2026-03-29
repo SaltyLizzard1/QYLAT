@@ -36,7 +36,10 @@ export default function PostCard({ post, onOpenPost }: PostCardProps) {
           </button>
         )}
         <div className="p-6 flex flex-col flex-1">
-          <time className="text-sm text-gray-500 font-medium">{post.date}</time>
+          <div className="text-sm text-gray-500 font-medium">
+            <time>{post.date}</time>
+            {post.readTime ? <span> · {post.readTime}</span> : null}
+          </div>
           <h3 className="mt-2 text-xl font-semibold text-gray-900 group-hover:text-orange-600 transition-colors">
             {post.title}
           </h3>

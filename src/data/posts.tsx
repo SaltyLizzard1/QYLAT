@@ -8,6 +8,8 @@ export interface Post {
   date: string;
   excerpt: string;
   image: string;
+  /** Shown on cards and in the post modal after the date (e.g. "3 min read"). */
+  readTime?: string;
   content?: (options?: { onTakeLeapClick?: () => void }) => React.JSX.Element;
 }
 
@@ -166,6 +168,92 @@ function handleTakeLeapCTA(
 export const DAY_ZERO_SLUG = 'day-0-the-decision-to-leap';
 
 export const posts: Post[] = [
+  {
+    id: 6,
+    slug: 'decision-made-doubt-showed-up',
+    title: 'The Decision Is Made. The Doubt Showed Up Anyway.',
+    date: 'March 28, 2026',
+    readTime: '3 min read',
+    excerpt:
+      'I already decided. Then the doubt showed up anyway, loud and uninvited. On losing the safety net you never planned to use, and why forward is the only option left.',
+    image: '/Blog/edge-post-hero.jpg',
+    content: ({ onTakeLeapClick } = {}) => (
+      <PostContent>
+        <p className="text-sm text-gray-500 font-sans mb-2">QYLAT</p>
+        <p className="text-sm text-emerald-700 uppercase tracking-widest font-sans mb-6">
+          Written from the edge
+        </p>
+
+        <p>I already decided. That part is done.</p>
+        <p>
+          But today the doubt showed up anyway - loud, uninvited, and carrying receipts.
+        </p>
+        <p>
+          Someone close to me made it clear they don&apos;t believe in what I am doing. That stings in
+          its own way. But the thing that really hit today was the safety net.
+        </p>
+        <p>It is gone.</p>
+        <p>
+          There was a job - something I could have quietly gone back to if this all fell apart. A door
+          I never planned to walk through again, but one I knew was there. Today it closed. Not by my
+          choice. And losing something you never intended to use still hurts more than you expect it
+          to.
+        </p>
+        <p>
+          For a few hours this morning, I let myself feel all of it. Not into changing my mind. Just
+          into the weight of how real this has become.
+        </p>
+
+        <blockquote className="border-l-4 border-orange-500 pl-5 py-1 my-8 not-prose">
+          <p className="text-xl italic text-gray-800">
+            The question isn&apos;t what happens if you fail. It&apos;s what happens if you don&apos;t
+            try.
+          </p>
+        </blockquote>
+
+        <p>
+          I heard that at the gym today. My AI podcast cut out mid-episode and a motivation speech took
+          over. I almost skipped it. I didn&apos;t.
+        </p>
+        <p>
+          I sat with the question. What happens if I don&apos;t try? What does staying look like -
+          another year of the same ceiling, the same routine, the same version of myself I have already
+          outgrown?
+        </p>
+        <p>I felt the answer before I could think it.</p>
+        <p>Unbearable.</p>
+        <p>
+          That is why I decided in the first place. Today just reminded me. There is no backup plan
+          now. There is only forward. And honestly? That kind of clarity, as terrifying as it is, has
+          a way of cutting through the noise faster than anything else.
+        </p>
+        <p>
+          Doubt is not a sign you are making the wrong choice. It is a sign the choice is real. Small
+          decisions don&apos;t come with this much weight.
+        </p>
+        <p>
+          If you are reading this with your own decision already made - the one you keep
+          second-guessing, the one someone in your life doesn&apos;t understand - this feeling is part
+          of it.
+        </p>
+        <p>It doesn&apos;t mean stop. It means you are close.</p>
+        <p>Keep going.</p>
+
+        <div className="border-t border-gray-200 pt-6 mt-10">
+          <p className="text-sm text-gray-400 font-sans mb-1">
+            Ready to build the business that funds your leap?
+          </p>
+          <a
+            href="#work-with-me"
+            onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
+            className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
+          >
+            Take the Leap →
+          </a>
+        </div>
+      </PostContent>
+    ),
+  },
   {
     id: 1,
     slug: DAY_ZERO_SLUG,
