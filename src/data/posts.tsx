@@ -175,33 +175,22 @@ export const posts: Post[] = [
     date: 'March 28, 2026',
     readTime: '3 min read',
     excerpt:
-      'I already decided. Then the doubt showed up anyway, loud and uninvited. On losing the safety net you never planned to use, and why forward is the only option left.',
+      'I already decided. The doubt showed up anyway. On losing the safety net you never planned to use, and why forward is the only option left.',
     image: '/Blog/edge-post-hero.jpg',
     content: ({ onTakeLeapClick } = {}) => (
       <PostContent>
-        <p className="text-sm text-gray-500 font-sans mb-2">QYLAT</p>
-        <p className="text-sm text-emerald-700 uppercase tracking-widest font-sans mb-6">
-          Written from the edge
-        </p>
-
         <p>I already decided. That part is done.</p>
-        <p>
-          But today the doubt showed up anyway - loud, uninvited, and carrying receipts.
-        </p>
-        <p>
-          Someone close to me made it clear they don&apos;t believe in what I am doing. That stings in
-          its own way. But the thing that really hit today was the safety net.
-        </p>
+        <p>But today the doubt showed up anyway. Loud, uninvited, and carrying receipts.</p>
+        <p>The thing that really hit today was the safety net.</p>
         <p>It is gone.</p>
         <p>
-          There was a job - something I could have quietly gone back to if this all fell apart. A door
-          I never planned to walk through again, but one I knew was there. Today it closed. Not by my
-          choice. And losing something you never intended to use still hurts more than you expect it
-          to.
+          There was a job. Something I could have quietly gone back to if this all fell apart. A door I
+          never planned to walk through again, but one I knew was there. Today it closed. Not by my
+          choice. And losing something you never intended to use still hurts more than you expect it to.
         </p>
+        <p>For a few hours this morning, I let myself feel all of it.</p>
         <p>
-          For a few hours this morning, I let myself feel all of it. Not into changing my mind. Just
-          into the weight of how real this has become.
+          Not into changing my mind. Just into the weight of how real this has become.
         </p>
 
         <blockquote className="border-l-4 border-orange-500 pl-5 py-1 my-8 not-prose">
@@ -215,26 +204,27 @@ export const posts: Post[] = [
           I heard that at the gym today. My AI podcast cut out mid-episode and a motivation speech took
           over. I almost skipped it. I didn&apos;t.
         </p>
+        <p>I sat with the question.</p>
+        <p>What happens if I don&apos;t try?</p>
+        <p>What does staying look like.</p>
         <p>
-          I sat with the question. What happens if I don&apos;t try? What does staying look like -
-          another year of the same ceiling, the same routine, the same version of myself I have already
+          Another year of the same ceiling, the same routine, the same version of myself I have already
           outgrown?
         </p>
         <p>I felt the answer before I could think it.</p>
         <p>Unbearable.</p>
+        <p>That is why I decided in the first place. Today just reminded me.</p>
         <p>
-          That is why I decided in the first place. Today just reminded me. There is no backup plan
-          now. There is only forward. And honestly? That kind of clarity, as terrifying as it is, has
-          a way of cutting through the noise faster than anything else.
+          There is no backup plan now. There is only forward. And honestly, that kind of clarity, as
+          terrifying as it is, has a way of cutting through the noise faster than anything else.
         </p>
         <p>
           Doubt is not a sign you are making the wrong choice. It is a sign the choice is real. Small
           decisions don&apos;t come with this much weight.
         </p>
         <p>
-          If you are reading this with your own decision already made - the one you keep
-          second-guessing, the one someone in your life doesn&apos;t understand - this feeling is part
-          of it.
+          If you are reading this with your own decision already made, the one you keep
+          second-guessing, the one that feels impossibly heavy some days, this feeling is part of it.
         </p>
         <p>It doesn&apos;t mean stop. It means you are close.</p>
         <p>Keep going.</p>
