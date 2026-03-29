@@ -10,7 +10,7 @@ export default function PostCard({ post, onOpenPost }: PostCardProps) {
   // Special crop so the "dog" subject stays visible in desktop card view.
   const cardImageObjectPosition =
     post.slug === 'decision-made-doubt-showed-up'
-      ? 'object-[center_top]'
+      ? 'object-[center_30%]'
       : post.slug === 'the-more-i-sort-the-more-appears'
       ? 'object-[center_30%]'
       : post.image === images.bini

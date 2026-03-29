@@ -11,7 +11,7 @@ function leadImagePositionClass(
   slug?: string
 ): string {
   if (slug === 'decision-made-doubt-showed-up') {
-    return 'object-[center_top]';
+    return 'object-[center_30%]';
   }
   if (image === images.bini) {
     return 'object-[55%_30%]';
