@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import PostCard from './PostCard';
 import SectionDivider from './SectionDivider';
@@ -13,6 +13,18 @@ export default function LeapLog() {
   const navigate = useNavigate();
   const modalScrollRef = useRef<HTMLDivElement>(null);
   const modalHeaderRef = useRef<HTMLElement>(null);
+
+  const postsNewestFirst = useMemo(
+    () =>
+      [...posts].sort((a, b) => {
+        const tb = new Date(b.date).getTime();
+        const ta = new Date(a.date).getTime();
+        const byDate = tb - ta;
+        if (byDate !== 0) return byDate;
+        return b.id - a.id;
+      }),
+    []
+  );
 
   const activePost = slugParam
     ? posts.find((p) => p.slug === slugParam && p.content)
@@ -89,7 +101,7 @@ export default function LeapLog() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8 mb-8">
-          {posts.map((post) => (
+          {postsNewestFirst.map((post) => (
             <PostCard key={post.id} post={post} onOpenPost={openPost} />
           ))}
         </div>
