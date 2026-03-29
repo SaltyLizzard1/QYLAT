@@ -254,7 +254,7 @@ export default function IdeaToPlan() {
                 <div className="text-center py-8">
                   <CheckCircle className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
                   <h3 className="text-2xl font-bold text-emerald-900 mb-3">You're in the queue!</h3>
-                  <p className="text-gray-600 mb-2">We&apos;ve received your idea and will be in touch within 24 hours to confirm details and next steps.</p>
+                  <p className="text-gray-600 mb-2">We&apos;ve received your idea and will be in touch within 48 hours to confirm details and next steps.</p>
                   <p className="text-gray-500 text-sm">Check your inbox — and spam, just in case.</p>
                   <button onClick={closeForm} className="mt-6 px-8 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-lg transition-colors">
                     Close
