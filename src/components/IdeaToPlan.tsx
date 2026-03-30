@@ -238,9 +238,11 @@ export default function IdeaToPlan() {
             <p className="text-gray-500 mb-6 text-sm">Payment collected at booking. Rush orders confirmed before charge.</p>
             <button
               onClick={() => {
-                setForm((prev) =>
-                  prev.planType === 'Visa / Investor' ? { ...prev, planType: 'Starter' } : prev
-                );
+                setForm((prev) => ({
+                  ...prev,
+                  planType: prev.planType === 'Visa / Investor' ? 'Starter' : prev.planType,
+                  planGoal: prev.planGoal === 'visa' ? '' : prev.planGoal,
+                }));
                 setShowForm(true);
               }}
               className="px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg"
@@ -369,7 +371,9 @@ export default function IdeaToPlan() {
                           <option value="bank-loan">Bank loan</option>
                           <option value="investor">Investor pitch</option>
                           <option value="personal-roadmap">Personal roadmap</option>
-                          <option value="visa">Visa application</option>
+                          <option value="visa" disabled>
+                            Visa application
+                          </option>
                           <option value="other">Other</option>
                         </select>
                       </div>
