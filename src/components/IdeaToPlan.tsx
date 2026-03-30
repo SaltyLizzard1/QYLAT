@@ -37,7 +37,16 @@ const initialForm: FormData = {
   expedited24h: 'no',
 };
 
-const PLAN_OPTIONS = [
+type PlanOption = {
+  value: string;
+  title: string;
+  price: string;
+  description: string;
+  /** When true, shown in the form as non-selectable “Coming soon”. */
+  comingSoon?: boolean;
+};
+
+const PLAN_OPTIONS: PlanOption[] = [
   {
     value: 'Starter',
     title: 'Starter',
@@ -58,8 +67,9 @@ const PLAN_OPTIONS = [
     price: '$599',
     description:
       'Plan structured for visa and immigration contexts: business narrative, viability framing, and language aligned with what officers and advisors typically expect.',
+    comingSoon: true,
   },
-] as const;
+];
 
 export default function IdeaToPlan() {
   const [showForm, setShowForm] = useState(false);
@@ -199,13 +209,16 @@ export default function IdeaToPlan() {
               </ul>
             </div>
 
-            <div className="border-2 border-gray-200 rounded-2xl p-6 bg-white shadow-sm flex flex-col">
+            <div className="border-2 border-dashed border-gray-300 rounded-2xl p-6 bg-gray-50/80 shadow-sm flex flex-col relative opacity-95">
+              <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-100 text-amber-900 text-xs font-bold px-4 py-1 rounded-full border border-amber-200">
+                Coming soon
+              </div>
               <h3 className="text-xl font-bold text-gray-900 mb-1">Visa / Investor</h3>
-              <p className="text-emerald-700 font-bold text-2xl mb-1">$599</p>
+              <p className="text-gray-500 font-bold text-2xl mb-1">$599</p>
               <p className="text-sm text-gray-500 mb-4">
                 For founders who need USCIS- and investor-ready structure and compliance language.
               </p>
-              <ul className="space-y-2 text-sm text-gray-700 flex-1">
+              <ul className="space-y-2 text-sm text-gray-600 flex-1">
                 {[
                   'Everything in Growth',
                   'Visa-ready formatting and structure',
@@ -213,7 +226,7 @@ export default function IdeaToPlan() {
                   'Job creation and non-marginality language',
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2">
-                    <span className="text-emerald-600 font-bold mt-0.5">✓</span>
+                    <span className="text-gray-400 font-bold mt-0.5">✓</span>
                     {item}
                   </li>
                 ))}
@@ -224,7 +237,12 @@ export default function IdeaToPlan() {
           <div className="text-center">
             <p className="text-gray-500 mb-6 text-sm">Payment collected at booking. Rush orders confirmed before charge.</p>
             <button
-              onClick={() => setShowForm(true)}
+              onClick={() => {
+                setForm((prev) =>
+                  prev.planType === 'Visa / Investor' ? { ...prev, planType: 'Starter' } : prev
+                );
+                setShowForm(true);
+              }}
               className="px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg"
             >
               Share Your Idea
@@ -361,24 +379,39 @@ export default function IdeaToPlan() {
                       <label className="block text-sm font-semibold text-gray-700 mb-2">Plan type <span className="text-red-500">*</span></label>
                       <p className="text-xs text-gray-500 mb-3">Payment collected at booking. Rush orders confirmed before charge.</p>
                       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                        {PLAN_OPTIONS.map((opt) => (
-                          <label
-                            key={opt.value}
-                            className={`flex flex-col cursor-pointer border-2 rounded-xl p-4 text-left transition-all h-full ${form.planType === opt.value ? 'border-emerald-500 bg-emerald-50 ring-1 ring-emerald-500/30' : 'border-gray-200 hover:border-emerald-300 bg-white'}`}
-                          >
-                            <input
-                              type="radio"
-                              name="planType"
-                              value={opt.value}
-                              checked={form.planType === opt.value}
-                              onChange={handleChange}
-                              className="sr-only"
-                            />
-                            <span className="font-bold text-gray-900 text-sm leading-tight">{opt.title}</span>
-                            <span className="text-emerald-700 font-bold text-lg mt-1">{opt.price}</span>
-                            <p className="text-xs text-gray-600 mt-2 leading-relaxed flex-1">{opt.description}</p>
-                          </label>
-                        ))}
+                        {PLAN_OPTIONS.map((opt) =>
+                          opt.comingSoon ? (
+                            <div
+                              key={opt.value}
+                              className="flex flex-col border-2 border-dashed border-gray-300 rounded-xl p-4 text-left h-full bg-gray-50 cursor-not-allowed opacity-90"
+                              aria-disabled="true"
+                            >
+                              <span className="self-start text-[10px] font-bold uppercase tracking-wide text-amber-900 bg-amber-100 px-2 py-0.5 rounded-full border border-amber-200 mb-2">
+                                Coming soon
+                              </span>
+                              <span className="font-bold text-gray-800 text-sm leading-tight">{opt.title}</span>
+                              <span className="text-gray-500 font-bold text-lg mt-1">{opt.price}</span>
+                              <p className="text-xs text-gray-500 mt-2 leading-relaxed flex-1">{opt.description}</p>
+                            </div>
+                          ) : (
+                            <label
+                              key={opt.value}
+                              className={`flex flex-col cursor-pointer border-2 rounded-xl p-4 text-left transition-all h-full ${form.planType === opt.value ? 'border-emerald-500 bg-emerald-50 ring-1 ring-emerald-500/30' : 'border-gray-200 hover:border-emerald-300 bg-white'}`}
+                            >
+                              <input
+                                type="radio"
+                                name="planType"
+                                value={opt.value}
+                                checked={form.planType === opt.value}
+                                onChange={handleChange}
+                                className="sr-only"
+                              />
+                              <span className="font-bold text-gray-900 text-sm leading-tight">{opt.title}</span>
+                              <span className="text-emerald-700 font-bold text-lg mt-1">{opt.price}</span>
+                              <p className="text-xs text-gray-600 mt-2 leading-relaxed flex-1">{opt.description}</p>
+                            </label>
+                          )
+                        )}
                       </div>
                     </div>
 
