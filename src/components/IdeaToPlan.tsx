@@ -62,8 +62,8 @@ const PLAN_OPTIONS: PlanOption[] = [
       'Everything in Starter plus deeper competitor and positioning analysis—who else is solving this, how you stand out, and clearer differentiation for pitches or strategy.',
   },
   {
-    value: 'Visa / Investor',
-    title: 'Visa / Investor',
+    value: 'Visa / Immigration',
+    title: 'Visa / Immigration',
     price: '$599',
     description:
       'Plan structured for visa and immigration contexts: business narrative, viability framing, and language aligned with what officers and advisors typically expect.',
@@ -213,7 +213,7 @@ export default function IdeaToPlan() {
               <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-amber-100 text-amber-900 text-xs font-bold px-4 py-1 rounded-full border border-amber-200">
                 Coming soon
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-1">Visa / Investor</h3>
+              <h3 className="text-xl font-bold text-gray-900 mb-1">Visa / Immigration</h3>
               <p className="text-gray-500 font-bold text-2xl mb-1">$599</p>
               <p className="text-sm text-gray-500 mb-4">
                 For founders who need USCIS- and investor-ready structure and compliance language.
@@ -240,7 +240,7 @@ export default function IdeaToPlan() {
               onClick={() => {
                 setForm((prev) => ({
                   ...prev,
-                  planType: prev.planType === 'Visa / Investor' ? 'Starter' : prev.planType,
+                  planType: prev.planType === 'Visa / Immigration' ? 'Starter' : prev.planType,
                   planGoal: prev.planGoal === 'visa' ? '' : prev.planGoal,
                 }));
                 setShowForm(true);
