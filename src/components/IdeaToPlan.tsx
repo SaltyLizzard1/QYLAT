@@ -389,64 +389,70 @@ export default function IdeaToPlan() {
                       </div>
                     </div>
 
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1">Founder background</label>
-                      <textarea
-                        name="founderBackground"
-                        value={form.founderBackground}
-                        onChange={handleChange}
-                        rows={3}
-                        placeholder="Your experience, skills, and why you are building this."
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition resize-none"
-                      />
-                    </div>
+                    {form.planGoal === 'investor' && (
+                      <div className="space-y-4 border border-emerald-200 rounded-xl p-4 bg-emerald-50">
+                        <p className="text-sm font-semibold text-emerald-800">Investor Pitch Details</p>
 
-                    <div className="grid sm:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-1">Funding ask</label>
-                        <input
-                          name="fundingAsk"
-                          value={form.fundingAsk}
-                          onChange={handleChange}
-                          placeholder="Amount or round you are targeting, if any"
-                          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
-                        />
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-1">Your background</label>
+                          <textarea
+                            name="founderBackground"
+                            value={form.founderBackground}
+                            onChange={handleChange}
+                            rows={3}
+                            placeholder="Relevant experience and why you&apos;re the right person to build this."
+                            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition resize-none"
+                          />
+                        </div>
+
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">Funding ask</label>
+                            <input
+                              name="fundingAsk"
+                              value={form.fundingAsk}
+                              onChange={handleChange}
+                              placeholder="e.g. $500K seed round"
+                              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">Current traction</label>
+                            <input
+                              name="currentTraction"
+                              value={form.currentTraction}
+                              onChange={handleChange}
+                              placeholder="Revenue, users, pilots, waitlist, etc."
+                              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-1">Use of funds</label>
+                          <textarea
+                            name="useOfFunds"
+                            value={form.useOfFunds}
+                            onChange={handleChange}
+                            rows={2}
+                            placeholder="What will the investment capital be used for?"
+                            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition resize-none"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-1">Exit vision</label>
+                          <textarea
+                            name="exitVision"
+                            value={form.exitVision}
+                            onChange={handleChange}
+                            rows={2}
+                            placeholder="Acquisition, IPO, lifestyle business? What does success look like in 5-7 years?"
+                            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition resize-none"
+                          />
+                        </div>
                       </div>
-                      <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-1">Current traction</label>
-                        <input
-                          name="currentTraction"
-                          value={form.currentTraction}
-                          onChange={handleChange}
-                          placeholder="Users, revenue, pilots, waitlist, etc."
-                          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1">Use of funds</label>
-                      <textarea
-                        name="useOfFunds"
-                        value={form.useOfFunds}
-                        onChange={handleChange}
-                        rows={3}
-                        placeholder="How you would deploy capital if you raised."
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition resize-none"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-1">Exit vision</label>
-                      <textarea
-                        name="exitVision"
-                        value={form.exitVision}
-                        onChange={handleChange}
-                        rows={2}
-                        placeholder="Long-term outcome you are building toward (optional)."
-                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition resize-none"
-                      />
-                    </div>
+                    )}
 
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">Plan type <span className="text-red-500">*</span></label>
