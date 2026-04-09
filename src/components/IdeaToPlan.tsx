@@ -17,6 +17,11 @@ type FormData = {
   planGoal: string;
   planType: string;
   expedited24h: string;
+  founderBackground: string;
+  fundingAsk: string;
+  useOfFunds: string;
+  currentTraction: string;
+  exitVision: string;
 };
 
 type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
@@ -35,6 +40,11 @@ const initialForm: FormData = {
   planGoal: '',
   planType: 'Starter',
   expedited24h: 'no',
+  founderBackground: '',
+  fundingAsk: '',
+  useOfFunds: '',
+  currentTraction: '',
+  exitVision: '',
 };
 
 type PlanOption = {
@@ -377,6 +387,65 @@ export default function IdeaToPlan() {
                           <option value="other">Other</option>
                         </select>
                       </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">Founder background</label>
+                      <textarea
+                        name="founderBackground"
+                        value={form.founderBackground}
+                        onChange={handleChange}
+                        rows={3}
+                        placeholder="Your experience, skills, and why you are building this."
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition resize-none"
+                      />
+                    </div>
+
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-1">Funding ask</label>
+                        <input
+                          name="fundingAsk"
+                          value={form.fundingAsk}
+                          onChange={handleChange}
+                          placeholder="Amount or round you are targeting, if any"
+                          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-1">Current traction</label>
+                        <input
+                          name="currentTraction"
+                          value={form.currentTraction}
+                          onChange={handleChange}
+                          placeholder="Users, revenue, pilots, waitlist, etc."
+                          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">Use of funds</label>
+                      <textarea
+                        name="useOfFunds"
+                        value={form.useOfFunds}
+                        onChange={handleChange}
+                        rows={3}
+                        placeholder="How you would deploy capital if you raised."
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition resize-none"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1">Exit vision</label>
+                      <textarea
+                        name="exitVision"
+                        value={form.exitVision}
+                        onChange={handleChange}
+                        rows={2}
+                        placeholder="Long-term outcome you are building toward (optional)."
+                        className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition resize-none"
+                      />
                     </div>
 
                     <div>
