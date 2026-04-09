@@ -22,6 +22,12 @@ type FormData = {
   useOfFunds: string;
   currentTraction: string;
   exitVision: string;
+  loanAmount: string;
+  loanUse: string;
+  collateral: string;
+  creditStanding: string;
+  existingDebt: string;
+  ownerAssets: string;
 };
 
 type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
@@ -45,6 +51,12 @@ const initialForm: FormData = {
   useOfFunds: '',
   currentTraction: '',
   exitVision: '',
+  loanAmount: '',
+  loanUse: '',
+  collateral: '',
+  creditStanding: '',
+  existingDebt: '',
+  ownerAssets: '',
 };
 
 type PlanOption = {
