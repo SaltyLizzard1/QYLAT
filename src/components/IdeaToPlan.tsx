@@ -401,6 +401,93 @@ export default function IdeaToPlan() {
                       </div>
                     </div>
 
+                    {form.planGoal === 'bank-loan' && (
+                      <div className="space-y-4 border border-emerald-200 rounded-xl p-4 bg-emerald-50">
+                        <p className="text-sm font-semibold text-emerald-800">Bank Loan Details</p>
+
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">
+                              Loan amount requested
+                            </label>
+                            <input
+                              name="loanAmount"
+                              value={form.loanAmount}
+                              onChange={handleChange}
+                              placeholder="e.g. $50,000 SBA loan"
+                              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">
+                              Intended use of loan
+                            </label>
+                            <input
+                              name="loanUse"
+                              value={form.loanUse}
+                              onChange={handleChange}
+                              placeholder="e.g. Equipment, working capital, inventory"
+                              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">
+                              Collateral available
+                            </label>
+                            <input
+                              name="collateral"
+                              value={form.collateral}
+                              onChange={handleChange}
+                              placeholder="e.g. Vehicle, equipment, property"
+                              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">
+                              Credit &amp; financial standing
+                            </label>
+                            <input
+                              name="creditStanding"
+                              value={form.creditStanding}
+                              onChange={handleChange}
+                              placeholder="e.g. Good credit, no bankruptcies"
+                              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid sm:grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">
+                              Existing debt or obligations
+                            </label>
+                            <input
+                              name="existingDebt"
+                              value={form.existingDebt}
+                              onChange={handleChange}
+                              placeholder="e.g. Car loan, no other business debt"
+                              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-semibold text-gray-700 mb-1">
+                              Business or personal assets
+                            </label>
+                            <input
+                              name="ownerAssets"
+                              value={form.ownerAssets}
+                              onChange={handleChange}
+                              placeholder="e.g. $20K savings, owned equipment"
+                              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
                     {form.planGoal === 'investor' && (
                       <div className="space-y-4 border border-emerald-200 rounded-xl p-4 bg-emerald-50">
                         <p className="text-sm font-semibold text-emerald-800">Investor Pitch Details</p>
