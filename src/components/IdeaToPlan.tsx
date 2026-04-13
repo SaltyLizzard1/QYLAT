@@ -24,10 +24,11 @@ type FormData = {
   exitVision: string;
   loanAmount: string;
   loanUse: string;
-  collateral: string;
   creditStanding: string;
   existingDebt: string;
-  ownerAssets: string;
+  assetsCollateral: string;
+  currentRevenue: string;
+  yearsInBusiness: string;
 };
 
 type SubmitStatus = 'idle' | 'loading' | 'success' | 'error';
@@ -53,10 +54,11 @@ const initialForm: FormData = {
   exitVision: '',
   loanAmount: '',
   loanUse: '',
-  collateral: '',
   creditStanding: '',
   existingDebt: '',
-  ownerAssets: '',
+  assetsCollateral: '',
+  currentRevenue: '',
+  yearsInBusiness: '',
 };
 
 type PlanOption = {
@@ -352,6 +354,21 @@ export default function IdeaToPlan() {
                       </div>
                     </div>
 
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-1">Current annual revenue</label>
+                        <input name="currentRevenue" value={form.currentRevenue} onChange={handleChange}
+                          placeholder="e.g. $150,000 - leave blank if pre-revenue"
+                          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold text-gray-700 mb-1">Years in business</label>
+                        <input name="yearsInBusiness" value={form.yearsInBusiness} onChange={handleChange}
+                          placeholder="e.g. 5 years - leave blank if new"
+                          className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition" />
+                      </div>
+                    </div>
+
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-1">Who is your target customer? <span className="text-red-500">*</span></label>
                       <input name="targetAudience" value={form.targetAudience} onChange={handleChange} required
@@ -435,18 +452,6 @@ export default function IdeaToPlan() {
                         <div className="grid sm:grid-cols-2 gap-4">
                           <div>
                             <label className="block text-sm font-semibold text-gray-700 mb-1">
-                              Collateral available
-                            </label>
-                            <input
-                              name="collateral"
-                              value={form.collateral}
-                              onChange={handleChange}
-                              placeholder="e.g. Vehicle, equipment, property"
-                              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
-                            />
-                          </div>
-                          <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-1">
                               Credit &amp; financial standing
                             </label>
                             <input
@@ -457,9 +462,6 @@ export default function IdeaToPlan() {
                               className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
                             />
                           </div>
-                        </div>
-
-                        <div className="grid sm:grid-cols-2 gap-4">
                           <div>
                             <label className="block text-sm font-semibold text-gray-700 mb-1">
                               Existing debt or obligations
@@ -472,18 +474,20 @@ export default function IdeaToPlan() {
                               className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
                             />
                           </div>
-                          <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-1">
-                              Business or personal assets
-                            </label>
-                            <input
-                              name="ownerAssets"
-                              value={form.ownerAssets}
-                              onChange={handleChange}
-                              placeholder="e.g. $20K savings, owned equipment"
-                              className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition"
-                            />
-                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-1">
+                            Collateral and assets
+                          </label>
+                          <textarea
+                            name="assetsCollateral"
+                            value={form.assetsCollateral}
+                            onChange={handleChange}
+                            rows={3}
+                            placeholder="e.g. Vehicle or property as collateral, savings, equipment, other assets relevant to the loan"
+                            className="w-full border border-gray-300 rounded-lg px-4 py-3 text-gray-800 focus:outline-none focus:ring-2 focus:ring-emerald-400 transition resize-none"
+                          />
                         </div>
                       </div>
                     )}
