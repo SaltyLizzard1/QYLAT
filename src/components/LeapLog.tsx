@@ -4,6 +4,7 @@ import PostCard from './PostCard';
 import SectionDivider from './SectionDivider';
 import { posts } from '../data/posts';
 import {
+  postHeroObjectFitClass,
   postHeroObjectPositionClass,
   postHeroObjectPositionStyle,
 } from '../utils/postHeroImage';
@@ -139,7 +140,7 @@ export default function LeapLog() {
                 <img
                   src={activePost.image}
                   alt={activePost.title}
-                  className={`h-[400px] max-h-[400px] w-full object-cover ${postHeroObjectPositionClass(activePost, 'modal')}`.trimEnd()}
+                  className={`h-[400px] max-h-[400px] w-full ${postHeroObjectFitClass(activePost)} ${postHeroObjectPositionClass(activePost, 'modal')}`.trimEnd()}
                   style={postHeroObjectPositionStyle(activePost)}
                   loading="eager"
                   decoding="async"

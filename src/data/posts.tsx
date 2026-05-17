@@ -9,11 +9,12 @@ export interface Post {
   excerpt: string;
   image: string;
   /**
-   * CSS `object-position` for the Leap Log card and modal hero (`object-fit: cover`).
-   * Examples: `"center 30%"`, `"top center"`. Omit to use per-image defaults (`center center` on cards
-   * unless another rule applies).
+   * CSS `object-position` for the Leap Log card and modal hero.
+   * Examples: `"center 30%"`, `"52% center"`. Omit to use per-image defaults.
    */
   heroPosition?: string;
+  /** `object-fit` for card and modal heroes. Defaults to `cover`. */
+  heroFit?: 'cover' | 'contain';
   /** Shown on cards and in the post modal after the date (e.g. "3 min read"). */
   readTime?: string;
   content?: (options?: { onTakeLeapClick?: () => void }) => React.JSX.Element;
@@ -170,10 +171,124 @@ function handleTakeLeapCTA(
   });
 }
 
+function handleIdeaToPlanCTA(event: React.MouseEvent<HTMLAnchorElement>) {
+  event.preventDefault();
+  requestAnimationFrame(() => {
+    const ideaToPlanSection = document.getElementById('idea-to-plan');
+    if (ideaToPlanSection) {
+      ideaToPlanSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+}
+
 /** Slug for “Day 0: The Decision to Leap” — used for ordering / deep links */
 export const DAY_ZERO_SLUG = 'day-0-the-decision-to-leap';
 
 export const posts: Post[] = [
+  {
+    id: 7,
+    slug: 'the-ending-never-goes-as-planned',
+    title: 'The Ending Never Goes As Planned',
+    date: 'May 17, 2026',
+    excerpt:
+      'I had a version of how this would go. None of it went that way.',
+    image: import.meta.env.VITE_IMG_ENDING,
+    heroFit: 'contain',
+    heroPosition: '52% center',
+    content: () => (
+      <PostContent>
+        <p>I had a version of how this would go.</p>
+        <p>
+          The last day would feel earned. The people I&apos;d worked alongside would gather, maybe not
+          formally, but in the way that matters. A moment of acknowledgment. A proper goodbye. The
+          customers I&apos;d spent years building relationships with would know I was leaving. There
+          would be closure.
+        </p>
+        <p>None of it went that way.</p>
+
+        <p className="font-bold text-gray-900 mt-8 mb-2">The Ending We Write In Our Heads</p>
+        <p>
+          When you decide to make a major life change, quit your life, buy the ticket, commit to the
+          leap, you spend a lot of time thinking about what&apos;s ahead.
+        </p>
+        <p>
+          What you don&apos;t expect is how much energy you&apos;ll spend on the ending.
+        </p>
+        <p>
+          We write it in our heads without realising we&apos;re doing it. The farewell that feels
+          proportionate to the time invested. The people who show up. The clean exit that honours what
+          was, while making space for what&apos;s coming.
+        </p>
+        <p>It&apos;s a good story. We just rarely get to live it.</p>
+
+        <p className="font-bold text-gray-900 mt-8 mb-2">What Actually Happens</p>
+        <p>
+          The ending gets taken from you in ways you didn&apos;t anticipate. Not dramatically. Not all
+          at once. But in small specific ways that add up.
+        </p>
+        <p>
+          The goodbye you planned doesn&apos;t happen. The people you expected aren&apos;t there. The
+          closure you needed doesn&apos;t arrive on schedule.
+        </p>
+        <p>
+          And you&apos;re left standing at the departure point with a messier ending than you wrote, and
+          a plane to catch anyway.
+        </p>
+
+        <p className="font-bold text-gray-900 mt-8 mb-2">What Nobody Tells You</p>
+        <p>Here&apos;s what I&apos;ve learned about leaving.</p>
+
+        <blockquote className="border-l-4 border-orange-500 pl-5 py-1 my-8 not-prose">
+          <p className="text-xl italic text-gray-800">
+            The ending is not yours to control. Only the direction is.
+          </p>
+        </blockquote>
+
+        <p>
+          You can plan the destination. You can prepare for the journey. But the ending, the last
+          chapter of the life you&apos;re leaving, gets written by circumstances, by other
+          people&apos;s choices, by timing, by chaos you didn&apos;t invite.
+        </p>
+        <p>
+          My supposed tribe looked different at the end than I expected. The support I assumed was
+          fixed turned out to be fluid. The goodbye I&apos;d earned didn&apos;t come.
+        </p>
+        <p>
+          And in the spaces left by all of that, something else arrived.
+        </p>
+        <p>
+          Consistency in an inconsistent time. Unexpected anchors in unexpected places. The reminder
+          that solid ground shows up where you least expect it when the ground you planned on shifts.
+        </p>
+        <p>I&apos;m writing this before I get on the plane.</p>
+        <p>
+          The ending didn&apos;t go as planned. The universe filters. Not always kindly. But
+          accurately.
+        </p>
+        <p>I&apos;m going anyway.</p>
+        <p>
+          Not because it doesn&apos;t hurt. Not because the messy ending doesn&apos;t matter. But
+          because waiting for the clean exit, the earned goodbye, the full support, the tidy closure,
+          means waiting forever.
+        </p>
+        <p>The ending never goes as planned.</p>
+        <p>Go anyway.</p>
+
+        <div className="border-t border-gray-200 pt-6 mt-10">
+          <p className="text-sm text-gray-400 font-sans mb-1">
+            Ready to stop waiting for the clean ending and actually build the next chapter?
+          </p>
+          <a
+            href="#idea-to-plan"
+            onClick={handleIdeaToPlanCTA}
+            className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
+          >
+            Get your IdeaToPlan at the early rate → first three at $149
+          </a>
+        </div>
+      </PostContent>
+    ),
+  },
   {
     id: 6,
     slug: 'decision-made-doubt-showed-up',

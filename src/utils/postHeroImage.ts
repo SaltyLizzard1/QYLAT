@@ -28,3 +28,7 @@ export function postHeroObjectPositionClass(post: Post, variant: 'card' | 'modal
   }
   return 'object-center';
 }
+
+export function postHeroObjectFitClass(post: Post): string {
+  return post.heroFit === 'contain' ? 'object-contain' : 'object-cover';
+}

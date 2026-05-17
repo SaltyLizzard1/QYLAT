@@ -10,6 +10,7 @@ interface ImportMetaEnv {
   readonly VITE_IMG_ABOUT_BEACH: string;
   readonly VITE_IMG_HERO: string;
   readonly VITE_IMG_BINI: string;
+  readonly VITE_IMG_ENDING: string;
 }
 
 declare module 'lucide-react';

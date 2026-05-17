@@ -1,5 +1,6 @@
 import type { Post } from '../data/posts';
 import {
+  postHeroObjectFitClass,
   postHeroObjectPositionClass,
   postHeroObjectPositionStyle,
 } from '../utils/postHeroImage';
@@ -20,13 +21,13 @@ export default function PostCard({ post, onOpenPost }: PostCardProps) {
           <button
             type="button"
             onClick={() => post.content && onOpenPost(post.slug)}
-            className="block w-full overflow-hidden text-left disabled:cursor-default"
+            className="block w-full overflow-hidden bg-gray-100 text-left disabled:cursor-default"
             disabled={!post.content}
           >
             <img
               src={post.image}
               alt={post.title}
-              className={`w-full h-80 object-cover group-hover:scale-105 transition-transform duration-300 ${cardImageObjectPosition}`.trimEnd()}
+              className={`w-full h-80 ${postHeroObjectFitClass(post)} group-hover:scale-105 transition-transform duration-300 ${cardImageObjectPosition}`.trimEnd()}
               style={heroPositionStyle}
               loading="lazy"
             />
