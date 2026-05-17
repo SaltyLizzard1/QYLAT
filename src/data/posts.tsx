@@ -250,11 +250,10 @@ export const posts: Post[] = [
           people&apos;s choices, by timing, by chaos you didn&apos;t invite.
         </p>
         <p>
-          My supposed tribe looked different at the end than I expected. The support I assumed was
-          fixed turned out to be fluid. The goodbye I&apos;d earned didn&apos;t come.
+          The people I counted on shifted. That&apos;s the part nobody warns you about.
         </p>
         <p>
-          And in the spaces left by all of that, something else arrived.
+          But in the spaces left by all of that, something else arrived.
         </p>
         <p>
           Consistency in an inconsistent time. Unexpected anchors in unexpected places. The reminder
