@@ -1,53 +1,10 @@
 import { Check } from 'lucide-react';
-import { useState, useEffect } from 'react';
 
-const CALENDLY_URL = 'https://calendly.com/ideatoplanincome/new-meeting';
-
-declare global {
-  interface Window {
-    Calendly?: {
-      initPopupWidget: (options: { url: string }) => void;
-    };
-  }
-}
+const CAL_URL = 'https://cal.com/qylat/leap-session';
 
 export default function WorkWithMe() {
-  const [calendlyReady, setCalendlyReady] = useState(false);
-
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    script.onload = () => setCalendlyReady(true);
-    document.head.appendChild(script);
-
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://assets.calendly.com/assets/external/widget.css';
-    document.head.appendChild(link);
-
-    return () => {
-      try {
-        document.head.removeChild(script);
-      } catch {
-        /* already removed */
-      }
-      try {
-        document.head.removeChild(link);
-      } catch {
-        /* already removed */
-      }
-    };
-  }, []);
-
-  const openCalendly = () => {
-    if (calendlyReady && window.Calendly) {
-      window.Calendly.initPopupWidget({
-        url: CALENDLY_URL,
-      });
-    } else {
-      window.open(CALENDLY_URL, '_blank');
-    }
+  const openBooking = () => {
+    window.open(CAL_URL, '_blank');
   };
 
   const sessionFeatures = [
@@ -63,6 +20,7 @@ export default function WorkWithMe() {
     "You're paralyzed by fear but ready to face it",
     'You want someone to call you out and push you forward',
   ];
+
 
   return (
     <section
@@ -120,7 +78,7 @@ export default function WorkWithMe() {
             <p className="text-gray-500 mb-6">45-minute private session</p>
             <button
               type="button"
-              onClick={openCalendly}
+              onClick={openBooking}
               className="px-10 py-4 bg-orange-500 hover:bg-orange-600 text-white text-lg font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg"
             >
               Book Your Leap Session

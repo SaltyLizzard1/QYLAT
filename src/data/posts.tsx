@@ -17,10 +17,7 @@ export interface Post {
   heroFit?: 'cover' | 'contain';
   /** Shown on cards and in the post modal after the date (e.g. "3 min read"). */
   readTime?: string;
-  content?: (options?: {
-    onTakeLeapClick?: () => void;
-    onIdeaToPlanClick?: () => void;
-  }) => React.JSX.Element;
+  content?: (options?: { onTakeLeapClick?: () => void }) => React.JSX.Element;
 }
 
 function KitForm() {
@@ -174,17 +171,13 @@ function handleTakeLeapCTA(
   });
 }
 
-function handleIdeaToPlanCTA(
-  event: React.MouseEvent<HTMLAnchorElement>,
-  onIdeaToPlanClick?: () => void
-) {
+function handleIdeaToPlanCTA(event: React.MouseEvent<HTMLAnchorElement>) {
   event.preventDefault();
-  if (onIdeaToPlanClick) {
-    onIdeaToPlanClick();
-    return;
-  }
   requestAnimationFrame(() => {
-    document.getElementById('idea-to-plan')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const ideaToPlanSection = document.getElementById('idea-to-plan');
+    if (ideaToPlanSection) {
+      ideaToPlanSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   });
 }
 
@@ -202,7 +195,7 @@ export const posts: Post[] = [
     image: import.meta.env.VITE_IMG_ENDING,
     heroFit: 'contain',
     heroPosition: '52% center',
-    content: ({ onIdeaToPlanClick } = {}) => (
+    content: () => (
       <PostContent>
         <p>I had a version of how this would go.</p>
         <p>
@@ -278,29 +271,33 @@ export const posts: Post[] = [
           means waiting forever.
         </p>
         <p>The ending never goes as planned.</p>
-        <p>
-          <strong>
-            <em>Go anyway.</em>
-          </strong>
-        </p>
+        <p>Go anyway.</p>
 
-        <div className="bg-gradient-to-br from-emerald-50 to-orange-50 rounded-2xl p-8 mt-12 border border-emerald-200 text-center not-prose">
+        <div className="bg-gradient-to-br from-emerald-50 to-orange-50 rounded-2xl p-8 mt-12 border border-emerald-200 text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-emerald-700 mb-2">
-            Launch Pricing - Only 3 Spots
+            Launch Pricing &mdash; Only 3 Spots
           </p>
           <p className="text-2xl md:text-3xl font-bold text-emerald-900 mb-3">
             Turn &quot;go anyway&quot; into a real plan.
           </p>
           <p className="text-gray-600 max-w-xl mx-auto mb-6">
-            IdeaToPlan builds you a real business plan based on your actual idea, market, and
-            goals. Not a template. Not generic filler. A plan you can move on.
+            IdeaToPlan builds you a real business plan based on your actual idea,
+            market, and goals. Not a template. Not generic filler. A plan you can
+            move on.
           </p>
           <a
             href="#idea-to-plan"
-            onClick={(event) => handleIdeaToPlanCTA(event, onIdeaToPlanClick)}
+            onClick={(e) => {
+              e.preventDefault();
+              window.history.replaceState(null, '', '/');
+              document.body.style.overflow = '';
+              requestAnimationFrame(() => {
+                document.getElementById('idea-to-plan')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              });
+            }}
             className="inline-block bg-orange-500 hover:bg-orange-600 text-white text-lg font-semibold px-8 py-4 rounded-full transition-all transform hover:scale-105 shadow-lg"
           >
-            Get Your Plan - $149 Early Rate
+            Get Your Plan &mdash; $149 Early Rate
           </a>
           <p className="text-xs text-gray-400 mt-3">
             Standard pricing starts at $199 after the first three customers.

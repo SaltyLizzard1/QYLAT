@@ -74,14 +74,14 @@ const PLAN_OPTIONS: PlanOption[] = [
   {
     value: 'Starter',
     title: 'Starter',
-    price: '$199',
+    price: '$149',
     description:
       'Full business plan PDF: market fit, revenue model, 90-day actions, and marketing basics. Ideal when you need a solid roadmap without extra research layers.',
   },
   {
     value: 'Growth',
     title: 'Growth',
-    price: '$349',
+    price: '$279',
     description:
       'Everything in Starter plus deeper competitor and positioning analysis—who else is solving this, how you stand out, and clearer differentiation for pitches or strategy.',
   },
@@ -194,7 +194,9 @@ export default function IdeaToPlan() {
           <div className="grid md:grid-cols-3 gap-6 mb-8">
             <div className="border-2 border-gray-200 rounded-2xl p-6 bg-white shadow-sm flex flex-col">
               <h3 className="text-xl font-bold text-gray-900 mb-1">Starter</h3>
-              <p className="text-emerald-700 font-bold text-2xl mb-1">$199</p>
+              <p className="text-gray-500 line-through text-2xl font-bold mb-0">$199</p>
+              <p className="text-xs text-orange-600 font-semibold mb-1">For a limited time only</p>
+              <p className="text-emerald-700 font-bold text-2xl mb-1">$149</p>
               <p className="text-sm text-gray-500 mb-4">For founders who want a polished business plan without overpaying.</p>
               <ul className="space-y-2 text-sm text-gray-700 flex-1">
                 {[
@@ -216,7 +218,9 @@ export default function IdeaToPlan() {
                 Most Popular
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-1">Growth</h3>
-              <p className="text-emerald-700 font-bold text-2xl mb-1">$349</p>
+              <p className="text-gray-500 line-through text-2xl font-bold mb-0">$349</p>
+              <p className="text-xs text-orange-600 font-semibold mb-1">For a limited time only</p>
+              <p className="text-emerald-700 font-bold text-2xl mb-1">$279</p>
               <p className="text-sm text-gray-500 mb-4">For entrepreneurs who want market validation and smarter positioning.</p>
               <ul className="space-y-2 text-sm text-gray-700 flex-1">
                 {[
