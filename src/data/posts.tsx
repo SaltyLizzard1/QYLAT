@@ -17,7 +17,10 @@ export interface Post {
   heroFit?: 'cover' | 'contain';
   /** Shown on cards and in the post modal after the date (e.g. "3 min read"). */
   readTime?: string;
-  content?: (options?: { onTakeLeapClick?: () => void }) => React.JSX.Element;
+  content?: (options?: {
+    onTakeLeapClick?: () => void;
+    onIdeaToPlanClick?: () => void;
+  }) => React.JSX.Element;
 }
 
 function KitForm() {
@@ -171,6 +174,20 @@ function handleTakeLeapCTA(
   });
 }
 
+function handleIdeaToPlanCTA(
+  event: React.MouseEvent<HTMLAnchorElement>,
+  onIdeaToPlanClick?: () => void
+) {
+  event.preventDefault();
+  if (onIdeaToPlanClick) {
+    onIdeaToPlanClick();
+    return;
+  }
+  requestAnimationFrame(() => {
+    document.getElementById('idea-to-plan')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
 /** Slug for “Day 0: The Decision to Leap” — used for ordering / deep links */
 export const DAY_ZERO_SLUG = 'day-0-the-decision-to-leap';
 
@@ -185,7 +202,7 @@ export const posts: Post[] = [
     image: import.meta.env.VITE_IMG_ENDING,
     heroFit: 'contain',
     heroPosition: '52% center',
-    content: () => (
+    content: ({ onIdeaToPlanClick } = {}) => (
       <PostContent>
         <p>I had a version of how this would go.</p>
         <p>
@@ -280,14 +297,7 @@ export const posts: Post[] = [
           </p>
           <a
             href="#idea-to-plan"
-            onClick={(e) => {
-              e.preventDefault();
-              window.history.replaceState(null, '', '/');
-              document.body.style.overflow = '';
-              requestAnimationFrame(() => {
-                document.getElementById('idea-to-plan')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              });
-            }}
+            onClick={(event) => handleIdeaToPlanCTA(event, onIdeaToPlanClick)}
             className="inline-block bg-orange-500 hover:bg-orange-600 text-white text-lg font-semibold px-8 py-4 rounded-full transition-all transform hover:scale-105 shadow-lg"
           >
             Get Your Plan - $149 Early Rate

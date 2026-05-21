@@ -56,6 +56,15 @@ export default function LeapLog() {
     navigate('/', { replace: true });
   }, [navigate]);
 
+  const goToIdeaToPlan = useCallback(() => {
+    navigate('/', { replace: true });
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        document.getElementById('idea-to-plan')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  }, [navigate]);
+
   useEffect(() => {
     if (!slugParam) return;
     const onKey = (e: KeyboardEvent) => {
@@ -165,7 +174,7 @@ export default function LeapLog() {
             </header>
 
             <article className="border-t border-gray-100 px-6 py-6 sm:px-8 md:px-10 md:py-10">
-              {activePost.content({ onTakeLeapClick: closePost })}
+              {activePost.content({ onTakeLeapClick: closePost, onIdeaToPlanClick: goToIdeaToPlan })}
             </article>
           </div>
         </div>
