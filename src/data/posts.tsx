@@ -171,16 +171,6 @@ function handleTakeLeapCTA(
   });
 }
 
-function handleIdeaToPlanCTA(event: React.MouseEvent<HTMLAnchorElement>) {
-  event.preventDefault();
-  requestAnimationFrame(() => {
-    const ideaToPlanSection = document.getElementById('idea-to-plan');
-    if (ideaToPlanSection) {
-      ideaToPlanSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-}
-
 /** Slug for “Day 0: The Decision to Leap” — used for ordering / deep links */
 export const DAY_ZERO_SLUG = 'day-0-the-decision-to-leap';
 
@@ -271,19 +261,40 @@ export const posts: Post[] = [
           means waiting forever.
         </p>
         <p>The ending never goes as planned.</p>
-        <p>Go anyway.</p>
+        <p>
+          <strong>
+            <em>Go anyway.</em>
+          </strong>
+        </p>
 
-        <div className="border-t border-gray-200 pt-6 mt-10">
-          <p className="text-sm text-gray-400 font-sans mb-1">
-            Ready to stop waiting for the clean ending and actually build the next chapter?
+        <div className="bg-gradient-to-br from-emerald-50 to-orange-50 rounded-2xl p-8 mt-12 border border-emerald-200 text-center not-prose">
+          <p className="text-sm font-semibold uppercase tracking-widest text-emerald-700 mb-2">
+            Launch Pricing - Only 3 Spots
+          </p>
+          <p className="text-2xl md:text-3xl font-bold text-emerald-900 mb-3">
+            Turn &quot;go anyway&quot; into a real plan.
+          </p>
+          <p className="text-gray-600 max-w-xl mx-auto mb-6">
+            IdeaToPlan builds you a real business plan based on your actual idea, market, and
+            goals. Not a template. Not generic filler. A plan you can move on.
           </p>
           <a
             href="#idea-to-plan"
-            onClick={handleIdeaToPlanCTA}
-            className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
+            onClick={(e) => {
+              e.preventDefault();
+              window.history.replaceState(null, '', '/');
+              document.body.style.overflow = '';
+              requestAnimationFrame(() => {
+                document.getElementById('idea-to-plan')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              });
+            }}
+            className="inline-block bg-orange-500 hover:bg-orange-600 text-white text-lg font-semibold px-8 py-4 rounded-full transition-all transform hover:scale-105 shadow-lg"
           >
-            Get your IdeaToPlan at the early rate → first three at $149
+            Get Your Plan - $149 Early Rate
           </a>
+          <p className="text-xs text-gray-400 mt-3">
+            Standard pricing starts at $199 after the first three customers.
+          </p>
         </div>
       </PostContent>
     ),

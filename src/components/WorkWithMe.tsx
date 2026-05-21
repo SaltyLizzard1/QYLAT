@@ -1,4 +1,4 @@
-import { Check, X } from 'lucide-react';
+import { Check } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 const CALENDLY_URL = 'https://calendly.com/ideatoplanincome/new-meeting';
@@ -64,13 +64,6 @@ export default function WorkWithMe() {
     'You want someone to call you out and push you forward',
   ];
 
-  const notForYouIf = [
-    "You're just browsing and not serious about making a change",
-    'You want someone to tell you what to do',
-    "You're looking for a magic pill or quick fix",
-    "You're not willing to be uncomfortable",
-  ];
-
   return (
     <section
       id="work-with-me"
@@ -107,36 +100,19 @@ export default function WorkWithMe() {
             </ul>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
-            <div className="bg-emerald-50 rounded-lg p-6">
-              <h4 className="text-xl font-bold text-emerald-900 mb-4 flex items-center">
-                <Check className="w-6 h-6 mr-2" />
-                This is for you if...
-              </h4>
-              <ul className="space-y-3">
-                {forYouIf.map((item, index) => (
-                  <li key={index} className="flex items-start text-gray-700">
-                    <span className="text-emerald-600 mr-2">•</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="bg-orange-50 rounded-lg p-6">
-              <h4 className="text-xl font-bold text-orange-900 mb-4 flex items-center">
-                <X className="w-6 h-6 mr-2" />
-                This is not for you if...
-              </h4>
-              <ul className="space-y-3">
-                {notForYouIf.map((item, index) => (
-                  <li key={index} className="flex items-start text-gray-700">
-                    <span className="text-orange-600 mr-2">•</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="bg-emerald-50 rounded-lg p-6 mb-8">
+            <h4 className="text-xl font-bold text-emerald-900 mb-4 flex items-center">
+              <Check className="w-6 h-6 mr-2" />
+              This is for you if...
+            </h4>
+            <ul className="grid sm:grid-cols-2 gap-3">
+              {forYouIf.map((item, index) => (
+                <li key={index} className="flex items-start text-gray-700">
+                  <span className="text-emerald-600 mr-2">•</span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
 
           <div className="text-center">
