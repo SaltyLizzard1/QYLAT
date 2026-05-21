@@ -22,6 +22,8 @@ export function scrollToSectionById(
     const buffer = headerBufferPx();
     const top = el.getBoundingClientRect().top + window.scrollY - headerH - buffer;
     window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    const hash = sectionId === 'hero' ? '/' : `/#${sectionId}`;
+    window.history.replaceState(null, '', hash);
   };
 
   if (opts?.afterMobileMenuClose) {
