@@ -15,7 +15,11 @@ export default function About() {
         <h1 className="text-3xl font-semibold text-emerald-900 mb-6">About Liz</h1>
         <div className="text-left space-y-5 text-gray-700 text-lg leading-relaxed">
           <p>
-            I&apos;m Liz. In 2018 I quit my corporate job and bought a one-way ticket to Thailand.
+            I&apos;m Liz. I started with a degree in Clinical Psychology and ended up in IT.
+            Turns out computers are easier to fix.
+          </p>
+          <p>
+            After nearly two decades in corporate tech, I quit and bought a one-way ticket to Thailand.
             Life had other plans. Five years later I&apos;m going anyway — this time with a business
             I built before I left.
           </p>
