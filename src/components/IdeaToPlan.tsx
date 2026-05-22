@@ -1,7 +1,12 @@
 import { Lightbulb, FileText, Rocket, X, CheckCircle, AlertCircle, Loader } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyKYlcau9zr2-WnicGANWbxfJ01X0MeDsf_UsO0XCovSI7pYfJRixMp2-koVx8RJrh7/exec';
+
+const STRIPE_LINKS: Record<string, string> = {
+  Starter: 'https://buy.stripe.com/bJe5kEeeT5wUb1R8Rcb7y00',
+  Growth: 'https://buy.stripe.com/7sY5kEb2HaRe8TJ4AWb7y01',
+};
 
 type FormData = {
   fullName: string;
@@ -100,6 +105,18 @@ export default function IdeaToPlan() {
   const [form, setForm] = useState<FormData>(initialForm);
   const [status, setStatus] = useState<SubmitStatus>('idle');
   const [errorMsg, setErrorMsg] = useState('');
+  const [paid, setPaid] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const paidTier = params.get('paid');
+    if (paidTier) {
+      setPaid(true);
+      window.history.replaceState(null, '', window.location.pathname);
+      const section = document.getElementById('idea-to-plan');
+      if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, []);
 
   const steps = [
     {
@@ -145,8 +162,13 @@ export default function IdeaToPlan() {
         body: JSON.stringify(form),
       });
 
-      setStatus('success');
-      setForm(initialForm);
+      const stripeUrl = STRIPE_LINKS[form.planType];
+      if (stripeUrl) {
+        window.location.href = stripeUrl;
+      } else {
+        setStatus('success');
+        setForm(initialForm);
+      }
     } catch (err: unknown) {
       console.error(err);
       setErrorMsg('Something went wrong. Please try again or email us directly.');
@@ -263,20 +285,30 @@ export default function IdeaToPlan() {
           </div>
 
           <div className="text-center">
-            <p className="text-gray-500 mb-6 text-sm">Payment collected at booking. Rush orders confirmed before charge.</p>
-            <button
-              onClick={() => {
-                setForm((prev) => ({
-                  ...prev,
-                  planType: prev.planType === 'Visa / Immigration' ? 'Starter' : prev.planType,
-                  planGoal: prev.planGoal === 'visa' ? '' : prev.planGoal,
-                }));
-                setShowForm(true);
-              }}
-              className="px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg"
-            >
-              Share Your Idea
-            </button>
+            {paid ? (
+              <div className="bg-emerald-50 border border-emerald-200 rounded-2xl p-8 max-w-xl mx-auto">
+                <CheckCircle className="w-16 h-16 text-emerald-500 mx-auto mb-4" />
+                <h3 className="text-2xl font-bold text-emerald-900 mb-3">Payment received!</h3>
+                <p className="text-gray-600 mb-2">Your plan is in the queue. We&apos;ll be in touch within 48 hours to confirm details and next steps.</p>
+                <p className="text-gray-500 text-sm">Check your inbox — and spam, just in case.</p>
+              </div>
+            ) : (
+              <>
+                <button
+                  onClick={() => {
+                    setForm((prev) => ({
+                      ...prev,
+                      planType: prev.planType === 'Visa / Immigration' ? 'Starter' : prev.planType,
+                      planGoal: prev.planGoal === 'visa' ? '' : prev.planGoal,
+                    }));
+                    setShowForm(true);
+                  }}
+                  className="px-10 py-4 bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-semibold rounded-lg transition-all transform hover:scale-105 shadow-lg"
+                >
+                  Share Your Idea
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -623,11 +655,11 @@ export default function IdeaToPlan() {
                       className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-400 text-white text-lg font-semibold rounded-lg transition-all shadow-md flex items-center justify-center gap-2">
                       {status === 'loading' ? (
                         <><Loader className="w-5 h-5 animate-spin" />Sending...</>
-                      ) : 'Submit My Idea'}
+                      ) : 'Submit & Continue to Payment'}
                     </button>
 
                     <p className="text-center text-xs text-gray-400">
-                      Payment collected at booking. Rush orders confirmed before charge.
+                      You&apos;ll be redirected to Stripe to complete payment after submitting.
                     </p>
                   </form>
                 </>
