@@ -181,10 +181,82 @@ function handleIdeaToPlanCTA(event: React.MouseEvent<HTMLAnchorElement>) {
   });
 }
 
-/** Slug for “Day 0: The Decision to Leap” — used for ordering / deep links */
+/** Slug for "Day 0: The Decision to Leap" — used for ordering / deep links */
 export const DAY_ZERO_SLUG = 'day-0-the-decision-to-leap';
 
 export const posts: Post[] = [
+  {
+    id: 8,
+    slug: 'never-leave-home-without-wet-wipes',
+    title: '#1 Travel Tip: NEVER Leave Home Without Wet Wipes',
+    date: 'May 24, 2026',
+    readTime: '3 min read',
+    excerpt:
+      'Three countries. Three bathrooms. Three versions of "figure it out." And in every single one, a pack of wet wipes would have changed my life.',
+    image: images.wetWipes,
+    heroFit: 'contain',
+    content: ({ onTakeLeapClick } = {}) => (
+      <PostContent>
+        <p>I was in the middle of a night market in Taiwan when it hit.</p>
+        <p>Not inspiration. Not culture shock. The street food.</p>
+        <p>
+          My stomach made a decision before my brain could weigh in. I found the nearest public
+          bathroom, pushed open the door, and saw it. A hole in the ground. No toilet paper. No bum
+          gun. No nothing.
+        </p>
+        <p>
+          Just me and a squat toilet in a crowded night market with zero negotiating power.
+        </p>
+        <p>
+          I had wet wipes which I had left back at the hotel, because we &quot;weren&apos;t going to
+          be gone long.&quot;
+        </p>
+        <p>I went home immediately and showered.</p>
+
+        <p>
+          Then there was Thailand. Different country, different surprise. I walked into the bathroom
+          and found two buckets of water with plastic scoops sitting next to the toilet. No flush
+          handle. No paper. No instructions.
+        </p>
+
+        <blockquote className="border-l-4 border-orange-500 pl-5 py-1 my-8 not-prose">
+          <p className="text-xl italic text-gray-800">
+            I stood there like I was solving a puzzle with no picture on the box.
+          </p>
+        </blockquote>
+
+        <p>
+          Bali? Another hole in the ground. At this point I wasn&apos;t even surprised. Just
+          disappointed in myself for still not having wet wipes in my bag.
+        </p>
+        <p>
+          Three countries. Three bathrooms. Three versions of &quot;figure it out.&quot; And in every
+          single one, a pack of wet wipes would have changed my life.
+        </p>
+        <p>
+          So here it is. The number one travel tip nobody puts in the guidebook.
+        </p>
+        <p>
+          Never leave home without wet wipes. Not the hotel. Not the restaurant. Not the night
+          market. Nowhere.
+        </p>
+        <p>Your stomach does not care about your plans.</p>
+
+        <div className="border-t border-gray-200 pt-6 mt-10">
+          <p className="text-sm text-gray-400 font-sans mb-1">
+            Ready to build the business that funds your leap?
+          </p>
+          <a
+            href="#work-with-me"
+            onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
+            className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
+          >
+            Take the Leap &rarr;
+          </a>
+        </div>
+      </PostContent>
+    ),
+  },
   {
     id: 7,
     slug: 'the-ending-never-goes-as-planned',
@@ -377,7 +449,7 @@ export const posts: Post[] = [
             onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
             className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
           >
-            Take the Leap →
+            Take the Leap &rarr;
           </a>
         </div>
       </PostContent>
@@ -419,7 +491,7 @@ export const posts: Post[] = [
 
         <div className="border-t border-gray-200 pt-6 mt-10">
           <p className="text-sm text-gray-400 font-sans mb-1">Ready to build the business that funds your leap?</p>
-          <a href="#work-with-me" onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)} className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity">Take the Leap →</a>
+          <a href="#work-with-me" onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)} className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity">Take the Leap &rarr;</a>
         </div>
       </PostContent>
     ),
@@ -459,7 +531,7 @@ export const posts: Post[] = [
             onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
             className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
           >
-            Take the Leap →
+            Take the Leap &rarr;
           </a>
         </div>
       </PostContent>
@@ -536,7 +608,7 @@ export const posts: Post[] = [
             onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
             className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
           >
-            Take the Leap →
+            Take the Leap &rarr;
           </a>
         </div>
       </PostContent>
@@ -625,7 +697,7 @@ export const posts: Post[] = [
             onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
             className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
           >
-            Take the Leap →
+            Take the Leap &rarr;
           </a>
         </div>
       </PostContent>

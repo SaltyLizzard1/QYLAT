@@ -8,6 +8,7 @@ export const images = {
   about: import.meta.env.VITE_IMG_ABOUT,
   aboutBeach: import.meta.env.VITE_IMG_ABOUT_BEACH,
   hero: import.meta.env.VITE_IMG_HERO,
+  wetWipes: import.meta.env.VITE_IMG_WET_WIPES,
   /** Fixed `public/` path so preview and production match the repo (Vercel env overrides are easy to miss). */
   logo: '/logo-removebg.png?v=2',
   bini: import.meta.env.VITE_IMG_BINI,
