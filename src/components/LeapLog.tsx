@@ -2,12 +2,44 @@ import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import PostCard from './PostCard';
 import SectionDivider from './SectionDivider';
-import { posts } from '../data/posts';
+import { posts, type Post } from '../data/posts';
+import { useSanityPosts, type SanityPost } from '../lib/useSanityPosts';
+import { SanityPostContent } from '../lib/SanityPostContent';
 import {
   postHeroObjectFitClass,
   postHeroObjectPositionClass,
   postHeroObjectPositionStyle,
 } from '../utils/postHeroImage';
+import Comments from './Comments';
+
+/** Convert a Sanity post into the shape PostCard expects */
+function sanityToPost(sp: SanityPost): Post {
+  return {
+    id: 9000 + Math.abs(hashCode(sp._id)),
+    slug: sp.slug,
+    title: sp.title,
+    date: sp.publishedAt
+      ? new Date(sp.publishedAt).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })
+      : '',
+    excerpt: sp.excerpt || '',
+    image: sp.heroImageUrl || '',
+    heroFit: 'cover',
+    postType: sp.postType,
+    content: ({ onTakeLeapClick } = {}) => <SanityPostContent post={sp} onTakeLeapClick={onTakeLeapClick} />,
+  };
+}
+
+function hashCode(s: string): number {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) {
+    h = (Math.imul(31, h) + s.charCodeAt(i)) | 0;
+  }
+  return h;
+}
 
 export default function LeapLog() {
   const { slug: slugParam } = useParams<{ slug?: string }>();
@@ -15,27 +47,32 @@ export default function LeapLog() {
   const modalScrollRef = useRef<HTMLDivElement>(null);
   const modalHeaderRef = useRef<HTMLElement>(null);
 
-  const postsNewestFirst = useMemo(
-    () =>
-      [...posts].sort((a, b) => {
-        const tb = new Date(b.date).getTime();
-        const ta = new Date(a.date).getTime();
-        const byDate = tb - ta;
-        if (byDate !== 0) return byDate;
-        return b.id - a.id;
-      }),
-    []
-  );
+  const { posts: sanityPosts } = useSanityPosts();
+
+  const allPosts = useMemo(() => {
+    const converted = sanityPosts.map(sanityToPost);
+    const hardcoded = [...posts];
+    // Deduplicate by slug — Sanity wins if slug matches
+    const slugSet = new Set(converted.map((p) => p.slug));
+    const filtered = hardcoded.filter((p) => !slugSet.has(p.slug));
+    return [...converted, ...filtered].sort((a, b) => {
+      const tb = new Date(b.date).getTime();
+      const ta = new Date(a.date).getTime();
+      const byDate = tb - ta;
+      if (byDate !== 0) return byDate;
+      return b.id - a.id;
+    });
+  }, [sanityPosts]);
 
   const activePost = slugParam
-    ? posts.find((p) => p.slug === slugParam && p.content)
+    ? allPosts.find((p) => p.slug === slugParam && p.content)
     : undefined;
 
   useEffect(() => {
     if (!slugParam) return;
-    const ok = posts.some((p) => p.slug === slugParam && p.content);
+    const ok = allPosts.some((p) => p.slug === slugParam && p.content);
     if (!ok) navigate('/', { replace: true });
-  }, [slugParam, navigate]);
+  }, [slugParam, navigate, allPosts]);
 
   useEffect(() => {
     if (!slugParam) return;
@@ -54,15 +91,6 @@ export default function LeapLog() {
 
   const closePost = useCallback(() => {
     navigate('/', { replace: true });
-  }, [navigate]);
-
-  const goToIdeaToPlan = useCallback(() => {
-    navigate('/', { replace: true });
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        document.getElementById('idea-to-plan')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
-    });
   }, [navigate]);
 
   useEffect(() => {
@@ -111,13 +139,13 @@ export default function LeapLog() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8 mb-8">
-          {postsNewestFirst.map((post) => (
+          {allPosts.map((post) => (
             <PostCard key={post.id} post={post} onOpenPost={openPost} />
           ))}
         </div>
       </div>
 
-      {/* Full post — modal (not inline below the list) */}
+      {/* Full post — modal */}
       {activePost?.content && (
         <div
           ref={modalScrollRef}
@@ -174,7 +202,8 @@ export default function LeapLog() {
             </header>
 
             <article className="border-t border-gray-100 px-6 py-6 sm:px-8 md:px-10 md:py-10">
-              {activePost.content({ onTakeLeapClick: closePost, onIdeaToPlanClick: goToIdeaToPlan })}
+              {activePost.content({ onTakeLeapClick: closePost })}
+              <Comments pageTitle={activePost.title} />
             </article>
           </div>
         </div>

@@ -8,6 +8,7 @@ export interface Post {
   date: string;
   excerpt: string;
   image: string;
+  postType?: 'blog' | 'discussion' | 'photo-essay';
   /**
    * CSS `object-position` for the Leap Log card and modal hero.
    * Examples: `"center 30%"`, `"52% center"`. Omit to use per-image defaults.
@@ -171,15 +172,23 @@ function handleTakeLeapCTA(
   });
 }
 
-function handleIdeaToPlanCTA(event: React.MouseEvent<HTMLAnchorElement>) {
-  event.preventDefault();
-  requestAnimationFrame(() => {
-    const ideaToPlanSection = document.getElementById('idea-to-plan');
-    if (ideaToPlanSection) {
-      ideaToPlanSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
+function WorkWithMeCTA({ onTakeLeapClick }: { onTakeLeapClick?: () => void }) {
+  return (
+    <div className="mt-12 text-center">
+      <p className="text-2xl md:text-3xl font-extrabold text-emerald-900 tracking-tight mb-6">
+        Ready to take the leap?
+      </p>
+      <a
+        href="#work-with-me"
+        onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
+        className="inline-block bg-orange-500 hover:bg-orange-600 text-white text-lg font-semibold px-8 py-4 rounded-full transition-all transform hover:scale-105 shadow-lg"
+      >
+        Work With Me
+      </a>
+    </div>
+  );
 }
+
 
 /** Slug for "Day 0: The Decision to Leap" — used for ordering / deep links */
 export const DAY_ZERO_SLUG = 'day-0-the-decision-to-leap';
@@ -197,6 +206,15 @@ export const posts: Post[] = [
     heroFit: 'contain',
     content: ({ onTakeLeapClick } = {}) => (
       <PostContent>
+        <figure className="not-prose mb-8 -mt-2">
+          <img
+            src="/images/bathroom-travel-tip.jpg"
+            alt="Bathroom travel tip"
+            className="rounded-xl max-w-sm w-full mx-auto block"
+            loading="eager"
+          />
+        </figure>
+
         <p>I was in the middle of a night market in Taiwan when it hit.</p>
         <p>Not inspiration. Not culture shock. The street food.</p>
         <p>
@@ -204,15 +222,12 @@ export const posts: Post[] = [
           bathroom, pushed open the door, and saw it. A hole in the ground. No toilet paper. No bum
           gun. No nothing.
         </p>
-        <p>
-          Just me and a squat toilet in a crowded night market with zero negotiating power.
-        </p>
+        <p>Just me and a squat toilet in a crowded night market with zero negotiating power.</p>
         <p>
           I had wet wipes which I had left back at the hotel, because we &quot;weren&apos;t going to
           be gone long.&quot;
         </p>
         <p>I went home immediately and showered.</p>
-
         <p>
           Then there was Thailand. Different country, different surprise. I walked into the bathroom
           and found two buckets of water with plastic scoops sitting next to the toilet. No flush
@@ -233,27 +248,71 @@ export const posts: Post[] = [
           Three countries. Three bathrooms. Three versions of &quot;figure it out.&quot; And in every
           single one, a pack of wet wipes would have changed my life.
         </p>
+
+        <p className="font-bold text-gray-900 mt-8 mb-2">Then I Saw This Sign</p>
+
+        <figure className="not-prose my-6">
+          <img
+            src="/images/the-other-normal.jpg"
+            alt="Do not stand on toilet sign"
+            className="rounded-xl max-w-sm w-full mx-auto block"
+            loading="lazy"
+          />
+        </figure>
+
+        <p>Do not stand on toilet. In English and Mandarin. With diagrams.</p>
         <p>
-          So here it is. The number one travel tip nobody puts in the guidebook.
+          That is when it hit me. I was confused by their bathrooms. They are confused by ours. The
+          squat toilet is the default for most of the world. The Western toilet is the foreign one.
+          Nobody teaches any of us how the other side works.
         </p>
+        <p>So here is what I wish someone had told me before I stood there clueless.</p>
+
+        <p className="font-bold text-gray-900 mt-8 mb-2">The Bum Gun</p>
+        <p>
+          That small sprayer mounted on the wall next to the toilet. It looks like a kitchen sink
+          sprayer and it works the same way. Stay seated. Point it where it needs to go. Squeeze the
+          handle gently. The pressure is stronger than you expect, so start light. Pat dry with toilet
+          paper or wet wipes if available. That is it. Once you get past the initial shock of cold
+          water, it is actually cleaner than paper alone.
+        </p>
+
+        <p className="font-bold text-gray-900 mt-8 mb-2">The Bucket and Scoop</p>
+        <p>
+          This is the manual version of a flush. The bucket holds clean water. The small scoop or
+          bowl is for two things. First, use it to pour water for personal cleaning, the same job as
+          the bum gun but by hand. Second, when you are done, scoop water from the bucket and pour it
+          directly into the toilet bowl to flush. Two or three scoops usually does it. Do not dump the
+          entire bucket. Other people need it too.
+        </p>
+
+        <p className="font-bold text-gray-900 mt-8 mb-2">The Squat Toilet</p>
+        <p>
+          Face the hood or raised end of the toilet. Plant your feet on the textured footpads on
+          either side. Squat all the way down. That is the position. If there is a bum gun, use it.
+          If there is a bucket and scoop, use that. If there is neither, this is where your wet wipes
+          save your life. Do not put them in the toilet. Most plumbing in Southeast Asia cannot handle
+          it. Use the bin next to the toilet.
+        </p>
+
+        <blockquote className="border-l-4 border-orange-500 pl-5 py-1 my-8 not-prose">
+          <p className="text-xl italic text-gray-800">
+            These systems are not broken. They are not primitive. You are just the visitor who never
+            learned how they work.
+          </p>
+        </blockquote>
+
+        <p>So here it is. The number one travel tip nobody puts in the guidebook.</p>
         <p>
           Never leave home without wet wipes. Not the hotel. Not the restaurant. Not the night
           market. Nowhere.
         </p>
-        <p>Your stomach does not care about your plans.</p>
+        <p>
+          But also learn the local bathroom before you need it. Your stomach does not care about your
+          plans. And neither does the plumbing.
+        </p>
 
-        <div className="border-t border-gray-200 pt-6 mt-10">
-          <p className="text-sm text-gray-400 font-sans mb-1">
-            Ready to build the business that funds your leap?
-          </p>
-          <a
-            href="#work-with-me"
-            onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
-            className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
-          >
-            Take the Leap &rarr;
-          </a>
-        </div>
+        <WorkWithMeCTA onTakeLeapClick={onTakeLeapClick} />
       </PostContent>
     ),
   },
@@ -440,18 +499,7 @@ export const posts: Post[] = [
         <p>It doesn&apos;t mean stop. It means you are close.</p>
         <p>Keep going.</p>
 
-        <div className="border-t border-gray-200 pt-6 mt-10">
-          <p className="text-sm text-gray-400 font-sans mb-1">
-            Ready to build the business that funds your leap?
-          </p>
-          <a
-            href="#work-with-me"
-            onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
-            className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
-          >
-            Take the Leap &rarr;
-          </a>
-        </div>
+        <WorkWithMeCTA onTakeLeapClick={onTakeLeapClick} />
       </PostContent>
     ),
   },
@@ -462,7 +510,8 @@ export const posts: Post[] = [
     date: 'February 2, 2026',
     excerpt:
       'Not a highlight reel. The real one. From autopilot in Florida to a one-way ticket to Thailand — and what happened when the world hit pause.',
-    image: import.meta.env.VITE_IMG_DAY0,
+    image: '/images/quit-your-life-and-travel.jpg',
+    heroPosition: 'center top',
     content: ({ onTakeLeapClick } = {}) => (
       <PostContent>
         <p className="text-sm text-emerald-700 uppercase tracking-widest font-sans mb-6">
@@ -489,10 +538,7 @@ export const posts: Post[] = [
         <p>Fear doesn&apos;t go away. You just stop letting it drive.</p>
         <p>Welcome to the leap. I&apos;m glad you&apos;re here.</p>
 
-        <div className="border-t border-gray-200 pt-6 mt-10">
-          <p className="text-sm text-gray-400 font-sans mb-1">Ready to build the business that funds your leap?</p>
-          <a href="#work-with-me" onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)} className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity">Take the Leap &rarr;</a>
-        </div>
+        <WorkWithMeCTA onTakeLeapClick={onTakeLeapClick} />
       </PostContent>
     ),
   },
@@ -522,18 +568,7 @@ export const posts: Post[] = [
         <SixtyDayPlanTableCollapsible />
         <p>Five years taught me what actually matters. I rebuilt. I came back stronger.</p>
         <p>And I would do every single bit of it again to get back to that feeling of being truly alive.</p>
-        <div className="border-t border-gray-200 pt-6 mt-10">
-          <p className="text-sm text-gray-400 font-sans mb-1">
-            Ready to build the business that funds your leap?
-          </p>
-          <a
-            href="#work-with-me"
-            onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
-            className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
-          >
-            Take the Leap &rarr;
-          </a>
-        </div>
+        <WorkWithMeCTA onTakeLeapClick={onTakeLeapClick} />
       </PostContent>
     ),
   },
@@ -599,18 +634,7 @@ export const posts: Post[] = [
           </p>
         </blockquote>
 
-        <div className="border-t border-gray-200 pt-6 mt-10">
-          <p className="text-sm text-gray-400 font-sans mb-1">
-            Ready to build the business that funds your leap?
-          </p>
-          <a
-            href="#work-with-me"
-            onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
-            className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
-          >
-            Take the Leap &rarr;
-          </a>
-        </div>
+        <WorkWithMeCTA onTakeLeapClick={onTakeLeapClick} />
       </PostContent>
     ),
   },
@@ -688,18 +712,7 @@ export const posts: Post[] = [
         </p>
         <p>So does everything else.</p>
 
-        <div className="border-t border-gray-200 pt-6 mt-10">
-          <p className="text-sm text-gray-400 font-sans mb-1">
-            Ready to build the business that funds your leap?
-          </p>
-          <a
-            href="#work-with-me"
-            onClick={(event) => handleTakeLeapCTA(event, onTakeLeapClick)}
-            className="text-sm font-sans font-medium text-orange-600 tracking-wide hover:opacity-70 transition-opacity"
-          >
-            Take the Leap &rarr;
-          </a>
-        </div>
+        <WorkWithMeCTA onTakeLeapClick={onTakeLeapClick} />
       </PostContent>
     ),
   },

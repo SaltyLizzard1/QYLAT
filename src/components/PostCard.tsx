@@ -34,9 +34,14 @@ export default function PostCard({ post, onOpenPost }: PostCardProps) {
           </button>
         )}
         <div className="p-6 flex flex-col flex-1">
-          <div className="text-sm text-gray-500 font-medium">
+          <div className="flex items-center gap-2 text-sm text-gray-500 font-medium">
             <time>{post.date}</time>
             {post.readTime ? <span> · {post.readTime}</span> : null}
+            {post.postType === 'discussion' && (
+              <span className="ml-auto inline-flex items-center gap-1 rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-semibold text-emerald-800">
+                💬 Discussion
+              </span>
+            )}
           </div>
           <h3 className="mt-2 text-xl font-semibold text-gray-900 group-hover:text-orange-600 transition-colors">
             {post.title}
@@ -48,7 +53,7 @@ export default function PostCard({ post, onOpenPost }: PostCardProps) {
               onClick={() => onOpenPost(post.slug)}
               className="mt-4 inline-block text-orange-600 hover:text-orange-800 font-medium"
             >
-              Read the full leap →
+              {post.postType === 'discussion' ? 'Join the discussion →' : 'Read the full leap →'}
             </button>
           ) : (
             <span className="mt-4 inline-block text-gray-400 font-medium">Coming soon</span>

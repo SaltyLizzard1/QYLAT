@@ -2,9 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://quityourlifeandtravel.com/</loc>
-    <lastmod>2026-05-16</lastmod>
+    <lastmod>2026-05-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://quityourlifeandtravel.com/leap/exploring-thai-botanicals-my-journey-your-stories-wanted</loc>
+    <lastmod>2026-05-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://quityourlifeandtravel.com/leap/never-leave-home-without-wet-wipes</loc>
+    <lastmod>2026-05-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://quityourlifeandtravel.com/leap/the-ending-never-goes-as-planned</loc>
@@ -39,12 +51,6 @@
   <url>
     <loc>https://quityourlifeandtravel.com/leap/day-0-the-decision-to-leap</loc>
     <lastmod>2026-02-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://quityourlifeandtravel.com/leap/never-leave-home-without-wet-wipes</loc>
-    <lastmod>2026-05-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
