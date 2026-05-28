@@ -1,22 +1,42 @@
 import { useState } from 'react';
 
 type Props = {
-  /** Extra classes on the outer wrapper */
   className?: string;
-  /** Light = About card; dark = emerald footer */
   variant?: 'light' | 'dark';
 };
 
+type Status = 'idle' | 'loading' | 'success' | 'error';
+
 export default function NewsletterSignup({ className = '', variant = 'light' }: Props) {
   const [email, setEmail] = useState('');
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Email submitted:', email);
-    setEmail('');
-  };
+  const [status, setStatus] = useState<Status>('idle');
 
   const isDark = variant === 'dark';
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus('loading');
+
+    try {
+      const res = await fetch(
+        `https://api.kit.com/v4/forms/${import.meta.env.VITE_KIT_FORM_ID}/subscribers`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Kit-Api-Key': import.meta.env.VITE_KIT_API_KEY,
+          },
+          body: JSON.stringify({ email_address: email }),
+        }
+      );
+
+      if (!res.ok) throw new Error('Subscribe failed');
+      setStatus('success');
+      setEmail('');
+    } catch {
+      setStatus('error');
+    }
+  };
 
   return (
     <div className={className} id={isDark ? 'newsletter' : undefined}>
@@ -26,26 +46,39 @@ export default function NewsletterSignup({ className = '', variant = 'light' }: 
       <p className={`mb-4 leading-relaxed ${isDark ? 'text-emerald-100' : 'text-gray-600'}`}>
         Get weekly inspiration, practical tips, and the courage to take the leap.
       </p>
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
-          className={
-            isDark
-              ? 'flex-1 min-w-0 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500'
-              : 'flex-1 min-w-0 px-4 py-3 rounded-lg text-gray-900 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500'
-          }
-          required
-        />
-        <button
-          type="submit"
-          className="px-6 py-3 bg-orange-500 hover:bg-orange-600 rounded-lg font-semibold text-white transition-colors shrink-0"
-        >
-          Subscribe
-        </button>
-      </form>
+
+      {status === 'success' ? (
+        <p className={`font-semibold ${isDark ? 'text-orange-300' : 'text-emerald-700'}`}>
+          You're in! Check your inbox to confirm.
+        </p>
+      ) : (
+        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Enter your email"
+            required
+            disabled={status === 'loading'}
+            className={
+              isDark
+                ? 'flex-1 min-w-0 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 disabled:opacity-60'
+                : 'flex-1 min-w-0 px-4 py-3 rounded-lg text-gray-900 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-60'
+            }
+          />
+          <button
+            type="submit"
+            disabled={status === 'loading'}
+            className="px-6 py-3 bg-orange-500 hover:bg-orange-600 rounded-lg font-semibold text-white transition-colors shrink-0 disabled:opacity-60"
+          >
+            {status === 'loading' ? 'Subscribing…' : 'Subscribe'}
+          </button>
+        </form>
+      )}
+
+      {status === 'error' && (
+        <p className="mt-2 text-sm text-red-500">Something went wrong — please try again.</p>
+      )}
     </div>
   );
 }

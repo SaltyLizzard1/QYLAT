@@ -510,10 +510,18 @@ export const posts: Post[] = [
     date: 'February 2, 2026',
     excerpt:
       'Not a highlight reel. The real one. From autopilot in Florida to a one-way ticket to Thailand — and what happened when the world hit pause.',
-    image: '/images/quit-your-life-and-travel.jpg',
-    heroPosition: 'center top',
+    image: import.meta.env.VITE_IMG_DAY0,
     content: ({ onTakeLeapClick } = {}) => (
       <PostContent>
+        <figure className="not-prose mb-8 -mt-2">
+          <img
+            src="/images/quit-your-life-and-travel.jpg"
+            alt="51% of U.S. employees have cried at the office — news headline"
+            className="rounded-xl max-w-sm w-full mx-auto block"
+            loading="eager"
+          />
+        </figure>
+
         <p className="text-sm text-emerald-700 uppercase tracking-widest font-sans mb-6">
           Not a highlight reel. The real one.
         </p>
