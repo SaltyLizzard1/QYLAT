@@ -55,7 +55,10 @@ export default function LeapLog() {
     // Deduplicate by slug — Sanity wins if slug matches
     const slugSet = new Set(converted.map((p) => p.slug));
     const filtered = hardcoded.filter((p) => !slugSet.has(p.slug));
+    const PINNED = 'how-to-move-to-thailand-in-60-days';
     return [...converted, ...filtered].sort((a, b) => {
+      if (a.slug === PINNED) return -1;
+      if (b.slug === PINNED) return 1;
       const tb = new Date(b.date).getTime();
       const ta = new Date(a.date).getTime();
       const byDate = tb - ta;
