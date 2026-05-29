@@ -1,6 +1,22 @@
+import { useEffect, useRef } from 'react';
 import { Instagram, Mail } from 'lucide-react';
-import NewsletterSignup from './NewsletterSignup';
 import { scrollToSectionById } from '../utils/scrollToSection';
+
+function KitEmbed() {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const host = ref.current;
+    if (!host) return;
+    host.innerHTML = '';
+    const script = document.createElement('script');
+    script.async = true;
+    script.dataset.uid = '8d474f67f9';
+    script.src = 'https://quit-your-life-and-travel.kit.com/8d474f67f9/index.js';
+    host.appendChild(script);
+    return () => { host.innerHTML = ''; };
+  }, []);
+  return <div ref={ref} />;
+}
 
 export default function Footer() {
   const scrollToSection = (id: string) => scrollToSectionById(id);
@@ -55,7 +71,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <NewsletterSignup variant="dark" />
+          <KitEmbed />
         </div>
 
         <div className="border-t border-emerald-700 pt-8">

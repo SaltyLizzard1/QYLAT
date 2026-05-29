@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { images } from '../config/images';
+import { scrollToSectionById } from '../utils/scrollToSection';
 
 export default function Hero() {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -42,6 +43,7 @@ export default function Hero() {
           <div className="flex justify-center">
             <a
               href="#the-leap-log"
+              onClick={(e) => { e.preventDefault(); scrollToSectionById('the-leap-log'); }}
               className="rounded-xl bg-emerald-600 px-8 py-3.5 text-base font-semibold text-white shadow-xl transition-transform hover:scale-[1.02] hover:bg-emerald-700 hover:shadow-2xl sm:min-w-[11rem] sm:px-10 sm:py-4 sm:text-lg"
             >
               Read the Leap Log

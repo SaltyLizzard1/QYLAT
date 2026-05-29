@@ -29,15 +29,6 @@ export default function About() {
           </p>
           <p>If you&apos;re thinking about making your own leap, you&apos;re in the right place.</p>
         </div>
-        <p className="mt-6 text-center text-sm text-gray-500">
-          <a
-            href="#newsletter"
-            className="font-medium text-emerald-700 underline decoration-emerald-300 underline-offset-2 hover:text-emerald-900"
-          >
-            Join the newsletter
-          </a>{' '}
-          — form is right below in the footer.
-        </p>
       </div>
 
       {/* Beach / full-length photo — re-enable when you want it above the footer
