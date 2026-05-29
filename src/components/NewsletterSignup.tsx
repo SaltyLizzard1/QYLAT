@@ -1,15 +1,17 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   className?: string;
   variant?: 'light' | 'dark';
 };
 
-type Status = 'idle' | 'loading' | 'success' | 'error';
+type Status = 'idle' | 'loading' | 'error';
 
 export default function NewsletterSignup({ className = '', variant = 'light' }: Props) {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<Status>('idle');
+  const navigate = useNavigate();
 
   const isDark = variant === 'dark';
 
@@ -31,8 +33,7 @@ export default function NewsletterSignup({ className = '', variant = 'light' }: 
       );
 
       if (!res.ok) throw new Error('Subscribe failed');
-      setStatus('success');
-      setEmail('');
+      navigate('/thank-you');
     } catch {
       setStatus('error');
     }
@@ -47,34 +48,28 @@ export default function NewsletterSignup({ className = '', variant = 'light' }: 
         Get weekly inspiration, practical tips, and the courage to take the leap.
       </p>
 
-      {status === 'success' ? (
-        <p className={`font-semibold ${isDark ? 'text-orange-300' : 'text-emerald-700'}`}>
-          You're in! Check your inbox to confirm.
-        </p>
-      ) : (
-        <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter your email"
-            required
-            disabled={status === 'loading'}
-            className={
-              isDark
-                ? 'flex-1 min-w-0 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 disabled:opacity-60'
-                : 'flex-1 min-w-0 px-4 py-3 rounded-lg text-gray-900 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-60'
-            }
-          />
-          <button
-            type="submit"
-            disabled={status === 'loading'}
-            className="px-6 py-3 bg-orange-500 hover:bg-orange-600 rounded-lg font-semibold text-white transition-colors shrink-0 disabled:opacity-60"
-          >
-            {status === 'loading' ? 'Subscribing…' : 'Subscribe'}
-          </button>
-        </form>
-      )}
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-2">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+          required
+          disabled={status === 'loading'}
+          className={
+            isDark
+              ? 'flex-1 min-w-0 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-500 disabled:opacity-60'
+              : 'flex-1 min-w-0 px-4 py-3 rounded-lg text-gray-900 border border-gray-200 focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-60'
+          }
+        />
+        <button
+          type="submit"
+          disabled={status === 'loading'}
+          className="px-6 py-3 bg-orange-500 hover:bg-orange-600 rounded-lg font-semibold text-white transition-colors shrink-0 disabled:opacity-60"
+        >
+          {status === 'loading' ? 'Subscribing…' : 'Subscribe'}
+        </button>
+      </form>
 
       {status === 'error' && (
         <p className="mt-2 text-sm text-red-500">Something went wrong — please try again.</p>
